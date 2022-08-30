@@ -18,13 +18,13 @@ terraform {
       version = "4.29.0"
     }
 
-    # see https://registry.terraform.io/providers/hashicorp/tfe/0.36.0/
+    # see https://registry.terraform.io/providers/hashicorp/tfe/0.36.1/
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.36.0"
+      version = "0.36.1"
     }
   }
 
   # see https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version
-  required_version = ">= 1.2.7"
+  required_version = ">= 1.2.8"
 }
