@@ -80,11 +80,13 @@ resource "tfe_workspace" "repositories" {
     var.tags.type_provision,
   ]
 
-  # vcs_repo {
-  #   branch = "main"
-  #   identifier         = local.repository_slugs.repositories
-  #   oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
-  # }
+  # `repositories` is a special workspace, in that it cannot retrieve data from `data.tfe_outputs.repositories`
+  # as this would cause a circular dependency; to account for this, `vcs_repo.identifier` has to be set manually
+ vcs_repo {
+   branch = "main"
+   identifier         = "workloads/github-organization"
+   oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
+ }
 }
 
 ## may be imported like so: `terraform import tfe_workspace.services_configuration workloads/services-configuration`
