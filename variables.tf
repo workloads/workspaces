@@ -60,10 +60,23 @@ variable "project_identifier" {
   #  }
 }
 
+variable "snyk_runtask_hmac_key" {
+  type        = string
+  description = "HMAC Key for Snyk Run Task integration."
+}
+
+variable "snyk_runtask_org" {
+  type        = string
+  description = "URL for Snyk Run Task integration."
+}
+
+variable "snyk_runtask_url" {
+  type        = string
+  description = "URL for Snyk Run Task integration."
+}
+
 variable "tags" {
-  #  type = object({
-  #
-  #  })
+  type = map(any)
 
   description = "Object containing pre-defined Tags."
 
