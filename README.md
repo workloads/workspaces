@@ -4,12 +4,16 @@
 
 ## Table of Contents
 
-- [Terraform Cloud Workspace: `workspaces`](#terraform-cloud-workspace-workspaces)
-  - [Table of Contents](#table-of-contents)
-  - [Requirements](#requirements)
-  - [Usage](#usage)
-  - [Author Information](#author-information)
-  - [License](#license)
+<!-- TOC -->
+* [Terraform Cloud Workspace: `workspaces`](#terraform-cloud-workspace--workspaces)
+  * [Table of Contents](#table-of-contents)
+  * [Requirements](#requirements)
+  * [Usage](#usage)
+    * [Inputs](#inputs)
+    * [Outputs](#outputs)
+  * [Author Information](#author-information)
+  * [License](#license)
+<!-- TOC -->
 
 ## Requirements
 
@@ -66,6 +70,10 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | variable_set_urls | Variable Set URLs. |
 | workspace_urls | Workspace URLs. |
 <!-- END_TF_DOCS -->
+
+## Notes
+
+Terraform state may contain sensitive data. This workspaces uses [Terraform Cloud](https://www.terraform.io/cloud-docs) for remote state storage, ensuring that state (and the data contained within) is always encrypted at rest.
 
 ## Author Information
 
