@@ -7,6 +7,7 @@ resource "tfe_workspace" "dns" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
+  file_triggers_enabled         = true
   structured_run_output_enabled = true
   terraform_version             = var.tfe_workspace_terraform_version
 
@@ -18,10 +19,11 @@ resource "tfe_workspace" "dns" {
     var.tags.type_provision,
   ]
 
-  #  vcs_repo {
-  #    identifier     = var.tfe_workspace_vcs_repos.nomad_agents
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs.dns
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.networking workloads/networking`
@@ -33,6 +35,7 @@ resource "tfe_workspace" "networking" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
+  file_triggers_enabled         = true
   structured_run_output_enabled = true
   terraform_version             = var.tfe_workspace_terraform_version
 
@@ -43,21 +46,23 @@ resource "tfe_workspace" "networking" {
     var.tags.type_provision,
   ]
 
-  #  vcs_repo {
-  #    identifier     = var.tfe_workspace_vcs_repos.nomad_agents
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs.networking
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.repositories workloads/repositories`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "repositories" {
-  name               = "repositories"
-  organization       = tfe_organization.main.name
-  description        = "GitHub Configuration for ${var.project_identifier}"
-  allow_destroy_plan = var.tfe_workspace_allow_destroy_plan
-  auto_apply         = var.tfe_workspace_auto_apply
-  execution_mode     = "remote"
+  name                  = "repositories"
+  organization          = tfe_organization.main.name
+  description           = "GitHub Configuration for ${var.project_identifier}"
+  allow_destroy_plan    = var.tfe_workspace_allow_destroy_plan
+  auto_apply            = var.tfe_workspace_auto_apply
+  execution_mode        = "remote"
+  file_triggers_enabled = true
 
   # `repositories` provides a list of GitHub Slugs as outputs that serve
   # as input for `vcs_repo` connections for other `tfe_workspace` resources.
@@ -75,11 +80,11 @@ resource "tfe_workspace" "repositories" {
     var.tags.type_provision,
   ]
 
-  #    vcs_repo {
-  #      identifier         = var.tfe_workspace_vcs_repos.repositories
-  #      ingress_submodules = false
-  #      oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
-  #    }
+  # vcs_repo {
+  #   branch = "main"
+  #   identifier         = local.repository_slugs.repositories
+  #   oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
+  # }
 }
 
 ## may be imported like so: `terraform import tfe_workspace.services_configuration workloads/services-configuration`
@@ -91,6 +96,7 @@ resource "tfe_workspace" "repositories" {
 #  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
 #  auto_apply                    = var.tfe_workspace_auto_apply
 #  execution_mode                = "remote"
+#  file_triggers_enabled         = true
 #  structured_run_output_enabled = true
 #  terraform_version             = var.tfe_workspace_terraform_version
 #
@@ -102,8 +108,8 @@ resource "tfe_workspace" "repositories" {
 #  ]
 #
 #  #    vcs_repo {
+# branch = "main"
 #  #      identifier         = var.tfe_workspace_vcs_repos.nomad_agents
-#  #      ingress_submodules = false
 #  #      oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
 #  #    }
 #}
@@ -143,6 +149,7 @@ resource "tfe_workspace" "website" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
+  file_triggers_enabled         = true
   structured_run_output_enabled = true
   terraform_version             = var.tfe_workspace_terraform_version
 
@@ -155,10 +162,11 @@ resource "tfe_workspace" "website" {
     var.tags.type_run,
   ]
 
-  #  vcs_repo {
-  #    identifier     = var.tfe_workspace_vcs_repos.nomad_agents
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs.website
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # TODO: explicitly disable Drift Detection
