@@ -52,6 +52,5 @@ terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, des
 	op \
 		run \
 			--env-file="$(op_env_file)" \
-			--no-masking \
 			-- \
 			terraform $(command) $(args)
