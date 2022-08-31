@@ -114,31 +114,31 @@ resource "tfe_workspace" "repositories" {
 #  #    }
 #}
 #
-## may be imported like so: `terraform import tfe_workspace.services_deployment workloads/services-deployment`
-## see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
-#resource "tfe_workspace" "services_deployment" {
-#  name                          = "services-deployment"
-#  organization                  = tfe_organization.main.name
-#  description                   = "Services Deployment for ${var.project_identifier}"
-#  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-#  auto_apply                    = var.tfe_workspace_auto_apply
-#  execution_mode                = "remote"
-#  structured_run_output_enabled = true
-#  terraform_version             = var.tfe_workspace_terraform_version
-#
-#  tag_names = [
-#    var.tags.exec_remote,
-#    "${var.tags.region_prefix}:${var.management_region_aws}",
-#    var.tags.service_aws,
-#    var.tags.type_secure,
-#  ]
-#
-#  #    vcs_repo {
-#  #      identifier         = var.tfe_workspace_vcs_repos.nomad_agents
-#  #      ingress_submodules = false
-#  #      oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
-#  #    }
-#}
+# may be imported like so: `terraform import tfe_workspace.services_deployment workloads/services-deployment`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "services_deployment" {
+  name                          = "services-deployment"
+  organization                  = tfe_organization.main.name
+  description                   = "Services Deployment for ${var.project_identifier}"
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
+  execution_mode                = "remote"
+  structured_run_output_enabled = true
+  terraform_version             = var.tfe_workspace_terraform_version
+
+  tag_names = [
+    var.tags.exec_remote,
+    "${var.tags.region_prefix}:${var.management_region_aws}",
+    var.tags.service_aws,
+    var.tags.type_secure,
+  ]
+
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs["services-deployment"]
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
+}
 
 # may be imported like so: `terraform import tfe_workspace.website workloads/website`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
