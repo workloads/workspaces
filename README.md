@@ -70,6 +70,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 | Name | Description |
 |------|-------------|
+| github_urls | GitHub URLs. |
 | variable_set_urls | Variable Set URLs. |
 | workspace_urls | Workspace URLs. |
 <!-- END_TF_DOCS -->

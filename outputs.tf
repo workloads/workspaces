@@ -22,3 +22,12 @@ output "workspace_urls" {
     #"${local.base_url}/workspaces/${tfe_workspace.services_configuration.name}",
   ]
 }
+
+output "github_urls" {
+  description = "GitHub URLs."
+
+  value = [
+    "https://github.com/organizations/${var.github_owner}/settings/secrets/actions",
+  ]
+}
+
