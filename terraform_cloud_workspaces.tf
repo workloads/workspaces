@@ -3,7 +3,7 @@
 resource "tfe_workspace" "dns" {
   name                          = "dns"
   organization                  = tfe_organization.main.name
-  description                   = "DNS Configuration for ${var.project_identifier}"
+  description                   = "DNS Configuration for ${var.project_identifier}."
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
@@ -31,7 +31,7 @@ resource "tfe_workspace" "dns" {
 resource "tfe_workspace" "networking" {
   name                          = "networking"
   organization                  = tfe_organization.main.name
-  description                   = "Networking Configuration for ${var.project_identifier}"
+  description                   = "Networking Configuration for ${var.project_identifier}."
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
@@ -58,7 +58,7 @@ resource "tfe_workspace" "networking" {
 resource "tfe_workspace" "repositories" {
   name                  = "repositories"
   organization          = tfe_organization.main.name
-  description           = "GitHub Configuration for ${var.project_identifier}"
+  description           = "GitHub Configuration for ${var.project_identifier}."
   allow_destroy_plan    = var.tfe_workspace_allow_destroy_plan
   auto_apply            = var.tfe_workspace_auto_apply
   execution_mode        = "remote"
@@ -94,7 +94,7 @@ resource "tfe_workspace" "repositories" {
 #resource "tfe_workspace" "services_configuration" {
 #  name                          = "services-configuration"
 #  organization                  = tfe_organization.main.name
-#  description                   = "Services Configuration for ${var.project_identifier}"
+#  description                   = "Services Configuration for ${var.project_identifier}."
 #  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
 #  auto_apply                    = var.tfe_workspace_auto_apply
 #  execution_mode                = "remote"
@@ -121,7 +121,7 @@ resource "tfe_workspace" "repositories" {
 resource "tfe_workspace" "services_deployment" {
   name                          = "services-deployment"
   organization                  = tfe_organization.main.name
-  description                   = "Services Deployment for ${var.project_identifier}"
+  description                   = "Services Deployment for ${var.project_identifier}."
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
@@ -147,7 +147,7 @@ resource "tfe_workspace" "services_deployment" {
 resource "tfe_workspace" "website" {
   name                          = "website"
   organization                  = tfe_organization.main.name
-  description                   = "Website for ${var.project_identifier}"
+  description                   = "Website for ${var.project_identifier}."
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
@@ -177,7 +177,7 @@ resource "tfe_workspace" "website" {
 resource "tfe_workspace" "workspaces" {
   name                          = "workspaces"
   organization                  = tfe_organization.main.name
-  description                   = "Terraform Cloud Configuration for ${var.project_identifier}"
+  description                   = "Terraform Cloud Configuration for ${var.project_identifier}."
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "local"
