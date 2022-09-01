@@ -83,7 +83,7 @@ module "variable_set_hcp_credentials_contributor" {
   workspace_ids = [
     tfe_workspace.workspaces.id,
     tfe_workspace.networking.id,
-    #tfe_workspace.services_deployment.id,
+    tfe_workspace.services_deployment.id,
     #tfe_workspace.services_configuration.id,
   ]
 }
