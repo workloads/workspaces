@@ -15,13 +15,13 @@ terraform {
     # see https://registry.terraform.io/providers/integrations/github/4.31.0/
     github = {
       source  = "integrations/github"
-      version = "4.31.0"
+      version = ">= 4.31.0, < 5.0.0"
     }
 
     # see https://registry.terraform.io/providers/hashicorp/tfe/0.36.1/
     tfe = {
       source  = "hashicorp/tfe"
-      version = "0.36.1"
+      version = ">= 0.36.1, < 1.0.0"
     }
   }
 
