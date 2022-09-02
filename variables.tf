@@ -1,3 +1,13 @@
+variable "gandi_key" {
+  type        = string
+  description = "This is the Gandi API Key."
+}
+
+variable "gandi_sharing_id" {
+  type        = string
+  description = "This is the Gandi Sharing ID."
+}
+
 variable "github_owner" {
   type        = string
   description = "This is the target GitHub organization or individual user account to manage."
@@ -181,6 +191,27 @@ locals {
       key         = "tfe_organization"
       value       = tfe_organization.main.name
       description = "Terraform Cloud Organization Name."
+    }
+  ]
+
+  # Gandi-specific Configuration Variables
+  gandi_configuration = [
+    {
+      key         = "gandi_key"
+      value       = var.github_owner
+      description = "Gandi API Key."
+      sensitive   = true
+    }, {
+      key = "gandi_sharing_id"
+
+      # ⚠️ Using `nonsensitive` on a sensitive value will persist the sensitive value in your Terraform State.
+      # see https://www.terraform.io/language/functions/nonsensitive
+      value       = var.gandi_sharing_id
+      description = "Gandi Sharing ID."
+
+      # ⚠️ Set value as sensitive (despite marking it as non-sensitive earlier). This ensures that the token
+      # does not display directly in this Terraform Cloud Workspace's Variables section.
+      sensitive = true
     }
   ]
 

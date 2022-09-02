@@ -1,16 +1,31 @@
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
+resource "tfe_variable_set" "gandi" {
+  name         = "gandi"
+  description  = "Gandi-specific Variables."
+  global       = false
   organization = tfe_organization.main.name
 }
 
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set
+resource "tfe_workspace_variable_set" "gandi" {
+  variable_set_id = tfe_variable_set.gandi.id
+  workspace_id    = tfe_workspace.dns.id
+}
+
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
+resource "tfe_variable" "gandi_configuration" {
   # see https://www.terraform.io/docs/language/meta-arguments/for_each.html
   for_each = {
+  for item in local.gandi_configuration :
+  item.key => item
   }
 
   key             = each.key
   value           = each.value.value
   category        = "terraform"
   description     = each.value.description
+  sensitive       = each.value.sensitive
+  variable_set_id = tfe_variable_set.gandi.id
 }
 
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set

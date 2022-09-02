@@ -44,6 +44,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 | Name | Description | Type | Required |
 |------|-------------|------|:--------:|
+| gandi_key | This is the Gandi API Key. | `string` | yes |
+| gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
 | github_owner | This is the target GitHub organization or individual user account to manage. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |
 | hcp_contributor_id | HashiCorp Cloud Platform ID for `contributor` Role. | `string` | yes |
