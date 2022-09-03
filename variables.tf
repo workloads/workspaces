@@ -71,8 +71,8 @@ variable "project_identifier" {
   # `project_identifier` is widely used across this TFC Organization to identify
   # Terraform Cloud and HashiCorp Cloud Platform resources, so certain limits apply.
   validation {
-    condition     = length(var.project_identifier) >= 3 && length(var.project_identifier) <= 36
-    error_message = "`project_identifier` must be at least 3 and at most 36 characters."
+    condition     = length(var.project_identifier) >= 3 && length(var.project_identifier) <= 24
+    error_message = "`project_identifier` must be at least 3 and at most 24 characters."
   }
 
   # TODO: fix validation
@@ -149,9 +149,9 @@ variable "tfe_organization_owners" {
   type        = list(string)
   description = "List of Email Addresses of Terraform Cloud Organization Owners."
   default = [
-    "dstrickland@hashicorp.com",             # Derek Strickland
-    "kerim@hashicorp.com",                   # Kerim Satirli
-    "k.satirli+tfc-workloads-bot@gmail.com", # Service Account
+    "dstrickland@hashicorp.com", # Derek Strickland
+    "kerim@hashicorp.com",       # Kerim Satirli
+    "team@workloads.io",         # Service Account
   ]
 }
 
