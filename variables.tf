@@ -240,9 +240,27 @@ locals {
     }
   ]
 
-      # ⚠️ Set value as sensitive (despite marking it as non-sensitive earlier). This ensures that the token
-      # does not display directly in this Terraform Cloud Workspace's Variables section.
-      sensitive = true
+  # Project-specific Configuration Variables
+  project_configuration = [
+    {
+      key         = "project_identifier"
+      category    = "terraform"
+      value       = var.project_identifier
+      description = "Human-readable Project Identifier."
+      sensitive   = false
+      }, {
+      key         = "management_region_aws"
+      category    = "terraform"
+      value       = var.management_region_aws
+      description = "AWS-specific Management Region Identifier."
+      sensitive   = false
+      }, {
+      key         = "tfe_organization"
+      category    = "terraform"
+      value       = tfe_organization.main.name
+      description = "Terraform Cloud Organization Name."
+      sensitive   = false
     }
   ]
+
 }
