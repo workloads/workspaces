@@ -1,84 +1,59 @@
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
-resource "tfe_variable_set" "gandi" {
-  name         = "gandi"
-  description  = "Gandi-specific Variables."
-  global       = false
+module "datadog_variable_set" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "datadog"
+  description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys for more information."
   organization = tfe_organization.main.name
+
+  workspace_ids = [
+    # needed for HCP Vault Audit and Metrics Logging
+    tfe_workspace.services_deployment.id
+  ]
+
+  variables = local.datadog_configuration
 }
 
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set
-resource "tfe_workspace_variable_set" "gandi" {
-  variable_set_id = tfe_variable_set.gandi.id
-  workspace_id    = tfe_workspace.dns.id
+module "gandi_variable_set" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "gandi"
+  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${var.project_identifier}/security for more information."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
+    tfe_workspace.dns.id
+  ]
+
+  variables = local.gandi_configuration
 }
 
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "gandi_configuration" {
-  # see https://www.terraform.io/docs/language/meta-arguments/for_each.html
-  for_each = {
-  for item in local.gandi_configuration :
-  item.key => item
-  }
+module "github_variable_set" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  key             = each.key
-  value           = each.value.value
-  category        = "terraform"
-  description     = each.value.description
-  sensitive       = each.value.sensitive
-  variable_set_id = tfe_variable_set.gandi.id
-}
-
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set
-resource "tfe_workspace_variable_set" "github" {
-  variable_set_id = tfe_variable_set.github.id
-  workspace_id    = tfe_workspace.repositories.id
-}
-
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
-resource "tfe_variable_set" "github" {
   name         = "github"
   description  = "GitHub-specific Variables."
-  global       = false
   organization = tfe_organization.main.name
+
+  workspace_ids = [
+    # needed for GitHub Organization management
+    tfe_workspace.repositories.id,
+
+    # needed for GitHub API data retrieval
+    tfe_workspace.website.id,
+  ]
+
+  variables = local.github_configuration
 }
 
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "github_configuration" {
-  # see https://www.terraform.io/docs/language/meta-arguments/for_each.html
-  for_each = {
-    for item in local.github_configuration :
-    item.key => item
-  }
+module "project_variable_set" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  key             = each.key
-  value           = each.value.value
-  category        = "terraform"
-  description     = each.value.description
-  sensitive       = each.value.sensitive
-  variable_set_id = tfe_variable_set.github.id
-}
-
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
-resource "tfe_variable_set" "project" {
-  name         = "project"
-  description  = "Project-specific Variables."
-  global       = true
-  organization = tfe_organization.main.name
-}
-
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "project_configuration" {
-  # see https://www.terraform.io/docs/language/meta-arguments/for_each.html
-  for_each = {
-  for item in local.project_configuration :
-  item.key => item
-  }
-
-  key             = each.key
-  value           = each.value.value
-  category        = "terraform"
-  description     = each.value.description
-  variable_set_id = tfe_variable_set.project.id
+  name          = "project"
+  description   = "Project-specific Variables."
+  global        = true
+  organization  = tfe_organization.main.name
+  workspace_ids = []
+  variables     = local.project_configuration
 }
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.

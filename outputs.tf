@@ -6,8 +6,10 @@ output "variable_set_urls" {
   description = "Variable Set URLs."
 
   value = [
-    "${local.base_url}/settings/varsets/${tfe_variable_set.project.id}",
-    "${local.base_url}/settings/varsets/${tfe_variable_set.github.id}",
+    "${local.base_url}/settings/varsets/${module.datadog_variable_set.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.gandi_variable_set.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.github_variable_set.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.project_variable_set.tfe_variable_set.id}",
     module.variable_set_hcp_credentials_contributor.variable_set_url,
     module.variable_set_hcp_credentials_viewer.variable_set_url
   ]

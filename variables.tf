@@ -189,20 +189,20 @@ variable "tfe_workspace_vcs_repos" {
 }
 
 locals {
-  # Project-specific Configuration Variables
-  project_configuration = [
+  # Datadog-specific Configuration Variables
+  datadog_configuration = [
     {
-      key         = "project_identifier"
-      value       = var.project_identifier
-      description = "Human-readable Project Identifier."
+      key         = "api_key"
+      category    = "terraform"
+      value       = var.datadog_api_key
+      description = "Datadog API Key."
+      sensitive   = true
       }, {
-      key         = "management_region_aws"
-      value       = var.management_region_aws
-      description = "AWS-specific Management Region Identifier."
-      }, {
-      key         = "tfe_organization"
-      value       = tfe_organization.main.name
-      description = "Terraform Cloud Organization Name."
+      key         = "app_key"
+      category    = "terraform"
+      value       = var.datadog_app_key
+      description = "Datadog App Key."
+      sensitive   = true
     }
   ]
 
@@ -210,20 +210,16 @@ locals {
   gandi_configuration = [
     {
       key         = "gandi_key"
-      value       = var.github_owner
+      category    = "terraform"
+      value       = var.gandi_key
       description = "Gandi API Key."
       sensitive   = true
-    }, {
-      key = "gandi_sharing_id"
-
-      # ⚠️ Using `nonsensitive` on a sensitive value will persist the sensitive value in your Terraform State.
-      # see https://www.terraform.io/language/functions/nonsensitive
+      }, {
+      key         = "gandi_sharing_id"
+      category    = "terraform"
       value       = var.gandi_sharing_id
       description = "Gandi Sharing ID."
-
-      # ⚠️ Set value as sensitive (despite marking it as non-sensitive earlier). This ensures that the token
-      # does not display directly in this Terraform Cloud Workspace's Variables section.
-      sensitive = true
+      sensitive   = true
     }
   ]
 
@@ -231,16 +227,18 @@ locals {
   github_configuration = [
     {
       key         = "github_owner"
+      category    = "terraform"
       value       = var.github_owner
       description = "GitHub Organization."
       sensitive   = false
       }, {
-      key = "github_token"
-
-      # ⚠️ Using `nonsensitive` on a sensitive value will persist the sensitive value in your Terraform State.
-      # see https://www.terraform.io/language/functions/nonsensitive
-      value       = nonsensitive(var.github_token)
+      key         = "github_token"
+      category    = "terraform"
+      value       = var.github_token
       description = "GitHub Access Token."
+      sensitive   = true
+    }
+  ]
 
       # ⚠️ Set value as sensitive (despite marking it as non-sensitive earlier). This ensures that the token
       # does not display directly in this Terraform Cloud Workspace's Variables section.
