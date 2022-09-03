@@ -1,3 +1,15 @@
+variable "datadog_api_key" {
+  type        = string
+  description = "Datadog API key."
+  sensitive   = true
+}
+
+variable "datadog_app_key" {
+  type        = string
+  description = "Datadog App key."
+  sensitive   = true
+}
+
 variable "gandi_key" {
   type        = string
   description = "This is the Gandi API Key."
