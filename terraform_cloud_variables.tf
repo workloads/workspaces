@@ -1,4 +1,4 @@
-module "datadog_variable_set" {
+module "datadog_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "datadog"
@@ -13,7 +13,7 @@ module "datadog_variable_set" {
   variables = local.datadog_configuration
 }
 
-module "gandi_variable_set" {
+module "gandi_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "gandi"
@@ -27,7 +27,7 @@ module "gandi_variable_set" {
   variables = local.gandi_configuration
 }
 
-module "github_variable_set" {
+module "github_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "github"
@@ -45,7 +45,7 @@ module "github_variable_set" {
   variables = local.github_configuration
 }
 
-module "project_variable_set" {
+module "project_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name          = "project"
@@ -57,20 +57,26 @@ module "project_variable_set" {
 }
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "tfe_token" {
-  for_each = toset([
+module "terraform_cloud_variables" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "Terraform Cloud Token"
+  description  = "Terraform Cloud API Token."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
     tfe_workspace.networking.id,
     #tfe_workspace.services_deployment.id,
-  ])
+  ]
 
-  key          = "TFE_TOKEN"
-  value        = tfe_organization_token.organization.token
-  category     = "env"
-  description  = "Terraform Cloud Organization Token."
-  sensitive    = true
-  workspace_id = each.key
-
+  variables = [
+    {
+      key         = "TFE_TOKEN"
+      category    = "env"
+      value       = tfe_organization_token.organization.token
+      description = "Terraform Cloud Organization Token."
+      sensitive   = true
+  }]
 }
 
 module "variable_set_hcp_credentials_contributor" {
