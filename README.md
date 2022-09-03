@@ -45,6 +45,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | Name | Description | Type | Required |
 |------|-------------|------|:--------:|
 | datadog_api_key | Datadog API key. | `string` | yes |
+| datadog_api_url | Datadog API URL. | `string` | yes |
+| datadog_api_zone | Datadog API Zone. | `string` | yes |
 | datadog_app_key | Datadog App key. | `string` | yes |
 | gandi_key | This is the Gandi API Key. | `string` | yes |
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |

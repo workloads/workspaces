@@ -4,6 +4,18 @@ variable "datadog_api_key" {
   sensitive   = true
 }
 
+# see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#api_url
+variable "datadog_api_url" {
+  type        = string
+  description = "Datadog API URL."
+}
+
+# see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#api_url
+variable "datadog_api_zone" {
+  type        = string
+  description = "Datadog API Zone."
+}
+
 variable "datadog_app_key" {
   type        = string
   description = "Datadog App key."
@@ -197,6 +209,18 @@ locals {
       value       = var.datadog_api_key
       description = "Datadog API Key."
       sensitive   = true
+      }, {
+      key         = "api_url"
+      category    = "terraform"
+      value       = var.datadog_api_url
+      description = "Datadog API URL."
+      sensitive   = false
+      }, {
+      key         = "api_zone"
+      category    = "terraform"
+      value       = var.datadog_api_zone
+      description = "Datadog API Zone."
+      sensitive   = false
       }, {
       key         = "app_key"
       category    = "terraform"
