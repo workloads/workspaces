@@ -190,7 +190,7 @@ variable "tfe_workspace_vcs_repos" {
 
 locals {
   # Datadog-specific Configuration Variables
-  datadog_configuration = [
+  datadog_variables = [
     {
       key         = "api_key"
       category    = "terraform"
@@ -207,7 +207,7 @@ locals {
   ]
 
   # Gandi-specific Configuration Variables
-  gandi_configuration = [
+  gandi_variables = [
     {
       key         = "gandi_key"
       category    = "terraform"
@@ -224,7 +224,7 @@ locals {
   ]
 
   # GitHub-specific Configuration Variables
-  github_configuration = [
+  github_variables = [
     {
       key         = "github_owner"
       category    = "terraform"
@@ -240,8 +240,42 @@ locals {
     }
   ]
 
+  # HCP-specific Configuration Variables for `contributor` users
+  hcp_contributor_variables = [
+    {
+      key         = "HCP_CLIENT_ID"
+      category    = "env"
+      value       = var.hcp_contributor_id
+      description = "OAuth2 Client ID for API operations."
+      sensitive   = true
+      }, {
+      key         = "HCP_CLIENT_SECRET"
+      category    = "env"
+      value       = var.hcp_contributor_secret
+      description = "OAuth2 Client Secret for API operations."
+      sensitive   = true
+    }
+  ]
+
+  # HCP-specific Configuration Variables for `viewer` users
+  hcp_viewer_variables = [
+    {
+      key         = "HCP_CLIENT_ID"
+      category    = "env"
+      value       = var.hcp_viewer_id
+      description = "OAuth2 Client ID for API operations."
+      sensitive   = true
+      }, {
+      key         = "HCP_CLIENT_SECRET"
+      category    = "env"
+      value       = var.hcp_viewer_secret
+      description = "OAuth2 Client Secret for API operations."
+      sensitive   = true
+    }
+  ]
+
   # Project-specific Configuration Variables
-  project_configuration = [
+  project_variables = [
     {
       key         = "project_identifier"
       category    = "terraform"

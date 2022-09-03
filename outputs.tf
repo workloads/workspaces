@@ -9,10 +9,10 @@ output "variable_set_urls" {
     "${local.base_url}/settings/varsets/${module.datadog_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.gandi_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.github_variables.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.hcp_contributor_variables.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.hcp_viewer_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.project_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.terraform_cloud_variables.tfe_variable_set.id}",
-    module.variable_set_hcp_credentials_contributor.variable_set_url,
-    module.variable_set_hcp_credentials_viewer.variable_set_url
   ]
 }
 

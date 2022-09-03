@@ -10,7 +10,7 @@ module "datadog_variables" {
     tfe_workspace.services_deployment.id
   ]
 
-  variables = local.datadog_configuration
+  variables = local.datadog_variables
 }
 
 module "gandi_variables" {
@@ -24,7 +24,7 @@ module "gandi_variables" {
     tfe_workspace.dns.id
   ]
 
-  variables = local.gandi_configuration
+  variables = local.gandi_variables
 }
 
 module "github_variables" {
@@ -42,7 +42,39 @@ module "github_variables" {
     tfe_workspace.website.id,
   ]
 
-  variables = local.github_configuration
+  variables = local.github_variables
+}
+
+module "hcp_contributor_variables" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "HashiCorp Cloud Platform Credentials (type: `contributor`)"
+  description  = "HashiCorp Cloud Platform-specific Variables for `contributor` users."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
+    tfe_workspace.workspaces.id,
+    tfe_workspace.networking.id,
+    tfe_workspace.services_deployment.id,
+    #tfe_workspace.services_configuration.id,
+  ]
+
+  variables = local.hcp_contributor_variables
+}
+
+module "hcp_viewer_variables" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "HashiCorp Cloud Platform Credentials (type: `viewer`)"
+  description  = "HashiCorp Cloud Platform-specific Variables for `viewer` users."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
+    # needed for HCP Vault configuration
+    #tfe_workspace.services_configuration.id,
+  ]
+
+  variables = local.hcp_viewer_variables
 }
 
 module "project_variables" {
@@ -53,7 +85,7 @@ module "project_variables" {
   global        = true
   organization  = tfe_organization.main.name
   workspace_ids = []
-  variables     = local.project_configuration
+  variables     = local.project_variables
 }
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
@@ -77,41 +109,4 @@ module "terraform_cloud_variables" {
       description = "Terraform Cloud Organization Token."
       sensitive   = true
   }]
-}
-
-module "variable_set_hcp_credentials_contributor" {
-  # TODO: update to Registry URL
-  source = "git@github.com:ksatirli/terraform-tfe-variable-set-hcp-credentials.git?ref=adds-code"
-
-  credentials = {
-    client_id     = var.hcp_contributor_id
-    client_secret = var.hcp_contributor_secret
-  }
-
-  organization = tfe_organization.main.name
-  type         = "contributor"
-
-  workspace_ids = [
-    tfe_workspace.workspaces.id,
-    tfe_workspace.networking.id,
-    tfe_workspace.services_deployment.id,
-    #tfe_workspace.services_configuration.id,
-  ]
-}
-
-module "variable_set_hcp_credentials_viewer" {
-  # TODO: update to Registry URL
-  source = "git@github.com:ksatirli/terraform-tfe-variable-set-hcp-credentials.git?ref=adds-code"
-
-  credentials = {
-    client_id     = var.hcp_viewer_id
-    client_secret = var.hcp_viewer_secret
-  }
-
-  organization = tfe_organization.main.name
-  type         = "viewer"
-
-  workspace_ids = [
-    #tfe_workspace.services_configuration.id,
-  ]
 }
