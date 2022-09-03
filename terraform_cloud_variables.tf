@@ -1,7 +1,7 @@
 module "datadog_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name         = "datadog"
+  name         = "Datadog"
   description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys for more information."
   organization = tfe_organization.main.name
 
@@ -16,7 +16,7 @@ module "datadog_variables" {
 module "gandi_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name         = "gandi"
+  name         = "Gandi.net"
   description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${var.project_identifier}/security for more information."
   organization = tfe_organization.main.name
 
@@ -30,7 +30,7 @@ module "gandi_variables" {
 module "github_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name         = "github"
+  name         = "GitHub (${var.github_owner})"
   description  = "GitHub-specific Variables."
   organization = tfe_organization.main.name
 
@@ -48,7 +48,7 @@ module "github_variables" {
 module "project_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name          = "project"
+  name          = "Project ${var.project_identifier}"
   description   = "Project-specific Variables."
   global        = true
   organization  = tfe_organization.main.name
@@ -60,7 +60,7 @@ module "project_variables" {
 module "terraform_cloud_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name         = "Terraform Cloud Token"
+  name         = "Terraform Cloud"
   description  = "Terraform Cloud API Token."
   organization = tfe_organization.main.name
 
