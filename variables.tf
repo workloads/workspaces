@@ -309,7 +309,7 @@ locals {
       secret_name     = "SNYK_ORG"
       visibility      = "all"
       plaintext_value = var.snyk_org
-    }, {
+      }, {
       secret_name     = "SNYK_TOKEN"
       visibility      = "all"
       plaintext_value = var.snyk_token
