@@ -1,38 +1,25 @@
 ---
-name: "Code Quality: Super-Linter"
+
+name: "Documentation: Link Checker"
 
 # yamllint disable-line rule:truthy
 on:
-  push:
+  pull_request:
 
 jobs:
-  superlinter:
-    name: Super-Linter
+  markdown:
+    name: Markdown
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
+          fetch-depth: 1
 
-      - name: Lint Code with Super-Linter
-        uses: github/super-linter@v4
-        env:
-          # see https://github.com/github/super-linter#environment-variables
-          VALIDATE_ALL_CODEBASE: true
-          CSS_FILE_NAME: ".stylelintrc.json"
-          DEFAULT_BRANCH: "main"
-          DISABLE_ERRORS: false
-          MARKDOWN_CONFIG_FILE: ".markdown-lint.yml"
-          MULTI_STATUS: true
-          SUPPRESS_POSSUM: true
-          TERRAFORM_TFLINT_CONFIG_FILE: ".tflint.hcl"
-          VALIDATE_BASH: true
-          VALIDATE_CSS: true
-          VALIDATE_HTML: true
-          VALIDATE_JSON: true
-          VALIDATE_MARKDOWN: true
-          VALIDATE_SHELL_SHFMT: true
-          VALIDATE_TERRAFORM: true
-          VALIDATE_YAML: true
+      - name: Check Links in Markdown files
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          check-modified-files-only: "no"
+          config-file: ".markdown-link-check.json"
+          file-extension: ".md"
+          use-verbose-mode: "yes"
