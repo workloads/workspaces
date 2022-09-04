@@ -24,6 +24,7 @@ jobs:
           CSS_FILE_NAME: ".stylelintrc.json"
           DEFAULT_BRANCH: "main"
           DISABLE_ERRORS: false
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MARKDOWN_CONFIG_FILE: ".markdown-lint.yml"
           MULTI_STATUS: true
           SUPPRESS_POSSUM: true
