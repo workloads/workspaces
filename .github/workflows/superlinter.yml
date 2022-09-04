@@ -1,6 +1,7 @@
 ---
 name: "Code Quality: Super-Linter"
 
+# yamllint disable-line rule:truthy
 on:
   push:
 
@@ -18,13 +19,20 @@ jobs:
       - name: Lint Code with Super-Linter
         uses: github/super-linter@v4
         env:
+          # see https://github.com/github/super-linter#environment-variables
           VALIDATE_ALL_CODEBASE: true
           CSS_FILE_NAME: ".stylelintrc.json"
           DEFAULT_BRANCH: "main"
           DISABLE_ERRORS: false
+          MARKDOWN_CONFIG_FILE: ".markdown-lint.yml"
+          MULTI_STATUS: true
+          SUPPRESS_POSSUM: true
           TERRAFORM_TFLINT_CONFIG_FILE: ".tflint.hcl"
           VALIDATE_BASH: true
+          VALIDATE_CSS: true
           VALIDATE_HTML: true
           VALIDATE_JSON: true
-          VALIDATE_MD: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_SHELL_SHFMT: true
           VALIDATE_TERRAFORM: true
+          VALIDATE_YAML: true
