@@ -1,6 +1,7 @@
 ---
 name: "Code Quality: Terraform"
 
+# yamllint disable-line rule:truthy
 on:
   push:
 
