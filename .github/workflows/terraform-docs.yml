@@ -1,6 +1,7 @@
 ---
 name: "Documentation: terraform-docs"
 
+# yamllint disable-line rule:truthy
 on:
   push:
 
