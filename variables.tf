@@ -94,6 +94,11 @@ variable "project_identifier" {
   #  }
 }
 
+variable "snyk_org" {
+  type        = string
+  description = "Snyk Organization Name."
+}
+
 variable "snyk_runtask_hmac_key" {
   type        = string
   description = "HMAC Key for Snyk Run Task integration."
@@ -109,9 +114,13 @@ variable "snyk_runtask_url" {
   description = "URL for Snyk Run Task integration."
 }
 
-variable "tags" {
-  type = map(any)
+variable "snyk_token" {
+  type        = string
+  description = "Snyk API Auth Token."
+}
 
+variable "tags" {
+  type        = map(any)
   description = "Object containing pre-defined Tags."
 
   default = {
@@ -201,7 +210,6 @@ variable "tfe_workspace_vcs_repos" {
 }
 
 locals {
-  # Datadog-specific Configuration Variables
   datadog_variables = [
     {
       key         = "api_key"
@@ -230,7 +238,6 @@ locals {
     }
   ]
 
-  # Gandi-specific Configuration Variables
   gandi_variables = [
     {
       key         = "gandi_key"
@@ -247,7 +254,6 @@ locals {
     }
   ]
 
-  # GitHub-specific Configuration Variables
   github_variables = [
     {
       key         = "github_owner"
@@ -298,7 +304,18 @@ locals {
     }
   ]
 
-  # Project-specific Configuration Variables
+  snyk_action_secrets = [
+    {
+      secret_name     = "SNYK_ORG"
+      visibility      = "all"
+      plaintext_value = var.snyk_org
+    }, {
+      secret_name     = "SNYK_TOKEN"
+      visibility      = "all"
+      plaintext_value = var.snyk_token
+    }
+  ]
+
   project_variables = [
     {
       key         = "project_identifier"
@@ -320,5 +337,4 @@ locals {
       sensitive   = false
     }
   ]
-
 }
