@@ -30,7 +30,7 @@ module "gandi_variables" {
 module "github_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name         = "GitHub (org: `${var.github_owner}`)"
+  name         = "GitHub (Org: `${var.github_owner}`)"
   description  = "GitHub-specific Variables."
   organization = tfe_organization.main.name
 

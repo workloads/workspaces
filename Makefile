@@ -6,7 +6,6 @@ SHELL         := sh
 .ONESHELL     :
 .SHELLFLAGS   := -eu -c
 
-# Makefile configuration
 color_off    = $(shell tput sgr0)
 color_bright = $(shell tput bold)
 op_env_file  = terraform.op.env
