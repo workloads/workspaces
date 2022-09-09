@@ -19,7 +19,7 @@
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in) credentials.
 * Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.2.8` or [newer](https://www.terraform.io/downloads).
+* Terraform `1.2.9` or [newer](https://www.terraform.io/downloads).
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/).
 * (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo).
 
