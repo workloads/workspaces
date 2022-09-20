@@ -8,6 +8,7 @@ SHELL         := sh
 
 color_off    = $(shell tput sgr0)
 color_bright = $(shell tput bold)
+op_account   = workloads.1password.com
 op_env_file  = terraform.op.env
 args         =
 
@@ -37,6 +38,7 @@ print-secrets: # Prints sanitized environment variables (requires the `envo` CLI
 # see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
+		  --account="$(op_account)"
 			--env-file="$(op_env_file)" \
 			--no-masking \
 			-- \
@@ -50,6 +52,7 @@ terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, des
 
 	op \
 		run \
+			--account="$(op_account)" \
 			--env-file="$(op_env_file)" \
 			-- \
 			terraform $(command) $(args)
