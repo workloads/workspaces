@@ -26,5 +26,5 @@ terraform {
   }
 
   # see https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version
-  required_version = ">= 1.2.9"
+  required_version = ">= 1.3.0"
 }
