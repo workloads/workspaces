@@ -64,6 +64,23 @@ module "github_variables" {
   variables = local.github_variables
 }
 
+module "hcp_network_ids" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "HashiCorp Cloud Platform Network IDs"
+  description  = "HashiCorp Cloud Platform Network IDs."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
+    # needed for HCP Vault deployment
+    tfe_workspace.services_deployment.id,
+  ]
+
+  # empty set; Variable Set will be populated by `networking` Workspace
+  variables = []
+}
+
 module "hcp_contributor_variables" {
   # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"

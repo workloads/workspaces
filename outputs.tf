@@ -6,9 +6,11 @@ output "variable_set_urls" {
   description = "Variable Set URLs."
 
   value = [
+    "${local.base_url}/settings/varsets/${module.aws_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.datadog_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.gandi_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.github_variables.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.hcp_network_ids.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.hcp_contributor_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.hcp_viewer_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.project_variables.tfe_variable_set.id}",
