@@ -1,6 +1,7 @@
+# see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#api_key
 variable "datadog_api_key" {
   type        = string
-  description = "Datadog API key."
+  description = "Datadog API Key."
   sensitive   = true
 }
 
@@ -16,9 +17,10 @@ variable "datadog_api_zone" {
   description = "Datadog API Zone."
 }
 
+# see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#app_key
 variable "datadog_app_key" {
   type        = string
-  description = "Datadog App key."
+  description = "Datadog App Key."
   sensitive   = true
 }
 
@@ -87,11 +89,10 @@ variable "project_identifier" {
     error_message = "`project_identifier` must be at least 3 and at most 24 characters."
   }
 
-  # TODO: fix validation
-  #  validation {
-  #    condition = length(regexall("[., ]+", var.project_identifier)) != 0
-  #    error_message = "`project_identifier` must not contain commas, periods, or spaces."
-  #  }
+  validation {
+    condition = length(regexall("[., ]+", var.project_identifier)) == 0
+    error_message = "`project_identifier` must not contain commas, periods, or spaces."
+  }
 }
 
 variable "snyk_org" {
@@ -136,6 +137,7 @@ variable "tags" {
     service_gcp     = "service:googlecloud"
     service_github  = "service:github"
     service_datadog = "service:datadog"
+    service_snyk    = "service:snyk"
 
     # Infrastructure Geo-Deployment Zones
     region_global = "region:global"
@@ -210,27 +212,37 @@ variable "tfe_workspace_vcs_repos" {
 }
 
 locals {
+  aws_variables = [
+    {
+      key         = "management_region_aws"
+      category    = "terraform"
+      value       = var.management_region_aws
+      description = "AWS-specific Management Region Identifier."
+      sensitive   = false
+    }
+  ]
+
   datadog_variables = [
     {
-      key         = "api_key"
+      key         = "datadog_api_key"
       category    = "terraform"
       value       = var.datadog_api_key
       description = "Datadog API Key."
       sensitive   = true
       }, {
-      key         = "api_url"
+      key         = "datadog_api_url"
       category    = "terraform"
       value       = var.datadog_api_url
       description = "Datadog API URL."
       sensitive   = false
       }, {
-      key         = "api_zone"
+      key         = "datadog_api_zone"
       category    = "terraform"
       value       = var.datadog_api_zone
       description = "Datadog API Zone."
       sensitive   = false
       }, {
-      key         = "app_key"
+      key         = "datadog_app_key"
       category    = "terraform"
       value       = var.datadog_app_key
       description = "Datadog App Key."
@@ -322,18 +334,6 @@ locals {
       category    = "terraform"
       value       = var.project_identifier
       description = "Human-readable Project Identifier."
-      sensitive   = false
-      }, {
-      key         = "management_region_aws"
-      category    = "terraform"
-      value       = var.management_region_aws
-      description = "AWS-specific Management Region Identifier."
-      sensitive   = false
-      }, {
-      key         = "tfe_organization"
-      category    = "terraform"
-      value       = tfe_organization.main.name
-      description = "Terraform Cloud Organization Name."
       sensitive   = false
     }
   ]

@@ -1,3 +1,18 @@
+module "aws_variables" {
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name          = "AWS"
+  description   = "AWS-specific Variables."
+  organization  = tfe_organization.main.name
+
+  workspace_ids = [
+    tfe_workspace.dns.id,
+    tfe_workspace.networking.id,
+  ]
+
+  variables     = local.aws_variables
+}
+
 module "datadog_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
@@ -82,9 +97,14 @@ module "project_variables" {
 
   name          = "Project"
   description   = "Project-specific Variables."
-  global        = true
   organization  = tfe_organization.main.name
-  workspace_ids = []
+
+  workspace_ids = [
+    tfe_workspace.dns.id,
+    tfe_workspace.networking.id,
+    tfe_workspace.services_deployment.id,
+  ]
+
   variables     = local.project_variables
 }
 
@@ -102,6 +122,13 @@ module "terraform_cloud_variables" {
   ]
 
   variables = [
+    {
+      key         = "tfe_organization"
+      category    = "terraform"
+      value       = tfe_organization.main.name
+      description = "Terraform Cloud Organization Name."
+      sensitive   = false
+    },
     {
       key         = "TFE_TOKEN"
       category    = "env"
