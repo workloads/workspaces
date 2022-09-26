@@ -90,7 +90,7 @@ variable "project_identifier" {
   }
 
   validation {
-    condition = length(regexall("[., ]+", var.project_identifier)) == 0
+    condition     = length(regexall("[., ]+", var.project_identifier)) == 0
     error_message = "`project_identifier` must not contain commas, periods, or spaces."
   }
 }

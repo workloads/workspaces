@@ -1,16 +1,16 @@
 module "aws_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name          = "AWS"
-  description   = "AWS-specific Variables."
-  organization  = tfe_organization.main.name
+  name         = "AWS"
+  description  = "AWS-specific Variables."
+  organization = tfe_organization.main.name
 
   workspace_ids = [
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
   ]
 
-  variables     = local.aws_variables
+  variables = local.aws_variables
 }
 
 module "datadog_variables" {
@@ -95,9 +95,9 @@ module "hcp_viewer_variables" {
 module "project_variables" {
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
-  name          = "Project"
-  description   = "Project-specific Variables."
-  organization  = tfe_organization.main.name
+  name         = "Project"
+  description  = "Project-specific Variables."
+  organization = tfe_organization.main.name
 
   workspace_ids = [
     tfe_workspace.dns.id,
@@ -105,7 +105,7 @@ module "project_variables" {
     tfe_workspace.services_deployment.id,
   ]
 
-  variables     = local.project_variables
+  variables = local.project_variables
 }
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
