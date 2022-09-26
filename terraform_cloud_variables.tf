@@ -1,4 +1,5 @@
 module "aws_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "AWS"
@@ -14,6 +15,7 @@ module "aws_variables" {
 }
 
 module "datadog_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "Datadog"
@@ -29,6 +31,7 @@ module "datadog_variables" {
 }
 
 module "gandi_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "Gandi.net"
@@ -43,6 +46,7 @@ module "gandi_variables" {
 }
 
 module "github_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "GitHub (Org: `${var.github_owner}`)"
@@ -61,6 +65,7 @@ module "github_variables" {
 }
 
 module "hcp_contributor_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "HashiCorp Cloud Platform Credentials (type: `contributor`)"
@@ -78,6 +83,7 @@ module "hcp_contributor_variables" {
 }
 
 module "hcp_viewer_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "HashiCorp Cloud Platform Credentials (type: `viewer`)"
@@ -93,6 +99,7 @@ module "hcp_viewer_variables" {
 }
 
 module "project_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "Project"
@@ -110,6 +117,7 @@ module "project_variables" {
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
 module "terraform_cloud_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
 
   name         = "Terraform Cloud"
