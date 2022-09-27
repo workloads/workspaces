@@ -9,7 +9,7 @@ resource "tfe_organization" "main" {
 
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership
 resource "tfe_organization_membership" "owners" {
-  # see https://www.terraform.io/docs/language/meta-arguments/for_each.html
+  # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
   for_each = toset(var.tfe_organization_owners)
 
   organization = tfe_organization.main.name
