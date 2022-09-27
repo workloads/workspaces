@@ -52,6 +52,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
 | github_owner | This is the target GitHub organization or individual user account to manage. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |
+| hcp_boundary_admin_password | HCP Boundary Cluster Admin Password. | `string` | yes |
+| hcp_boundary_admin_username | HCP Boundary Cluster Admin Username. | `string` | yes |
 | hcp_contributor_id | HashiCorp Cloud Platform ID for `contributor` Role. | `string` | yes |
 | hcp_contributor_secret | HashiCorp Cloud Platform Secret for `contributor` Role. | `string` | yes |
 | hcp_viewer_id | HashiCorp Cloud Platform ID for `viewer` Role. | `string` | yes |

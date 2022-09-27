@@ -64,6 +64,21 @@ module "github_variables" {
   variables = local.github_variables
 }
 
+module "hcp_boundary_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
+  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+
+  name         = "Boundary"
+  description  = "HCP Boundary-specific Variables."
+  organization = tfe_organization.main.name
+
+  workspace_ids = [
+    tfe_workspace.services_deployment.id,
+  ]
+
+  variables = local.hcp_boundary_variables
+}
+
 module "hcp_network_ids" {
   # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
   source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"

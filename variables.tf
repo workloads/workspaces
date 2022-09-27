@@ -45,6 +45,19 @@ variable "github_token" {
   sensitive   = true
 }
 
+# see https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/boundary_cluster#username
+variable "hcp_boundary_admin_username" {
+  type        = string
+  description = "HCP Boundary Cluster Admin Username."
+}
+
+# see https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/boundary_cluster#password
+variable "hcp_boundary_admin_password" {
+  type        = string
+  description = "HCP Boundary Cluster Admin Password."
+  sensitive   = true
+}
+
 # see https://cloud.hashicorp.com/docs/hcp/access-control/service-principals
 variable "hcp_contributor_id" {
   type        = string
@@ -278,6 +291,23 @@ locals {
       category    = "terraform"
       value       = var.github_token
       description = "GitHub Access Token."
+      sensitive   = true
+    }
+  ]
+
+  # HCP Boundary-specific Configuration Variables for Cluster lifecycle management
+  hcp_boundary_variables = [
+    {
+      key         = "hcp_boundary_admin_username"
+      category    = "terraform"
+      value       = var.hcp_boundary_admin_username
+      description = "HCP Boundary Cluster Admin Username."
+      sensitive   = false
+      }, {
+      key         = "hcp_boundary_admin_password"
+      category    = "terraform"
+      value       = var.hcp_boundary_admin_password
+      description = "HCP Boundary Cluster Admin Password."
       sensitive   = true
     }
   ]
