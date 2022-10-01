@@ -1,57 +1,64 @@
 module "aws_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "AWS"
   description  = "AWS-specific Variables."
+  name         = "AWS"
   organization = tfe_organization.main.name
+
+  variables = local.aws_variables
 
   workspace_ids = [
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
   ]
 
-  variables = local.aws_variables
 }
 
 module "datadog_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "Datadog"
   description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys for more information."
+  name         = "Datadog"
   organization = tfe_organization.main.name
+
+  variables = local.datadog_variables
 
   workspace_ids = [
     # needed for HCP Vault Audit and Metrics Logging
     tfe_workspace.services_deployment.id
   ]
-
-  variables = local.datadog_variables
 }
 
 module "gandi_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "Gandi.net"
   description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${var.project_identifier}/security for more information."
+  name         = "Gandi.net"
   organization = tfe_organization.main.name
+
+  variables = local.gandi_variables
 
   workspace_ids = [
     tfe_workspace.dns.id
   ]
-
-  variables = local.gandi_variables
 }
 
 module "github_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "GitHub (Org: `${var.github_owner}`)"
   description  = "GitHub-specific Variables."
+  name         = "GitHub (Org: `${var.github_owner}`)"
   organization = tfe_organization.main.name
+
+  variables = local.github_variables
 
   workspace_ids = [
     # needed for GitHub Organization management
@@ -60,49 +67,52 @@ module "github_variables" {
     # needed for GitHub API data retrieval
     tfe_workspace.website.id,
   ]
-
-  variables = local.github_variables
 }
 
 module "hcp_boundary_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "Boundary"
   description  = "HCP Boundary-specific Variables."
+  name         = "Boundary"
   organization = tfe_organization.main.name
+
+  variables = local.hcp_boundary_variables
 
   workspace_ids = [
     tfe_workspace.services_deployment.id,
   ]
-
-  variables = local.hcp_boundary_variables
 }
 
 module "hcp_network_ids" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "HashiCorp Cloud Platform Network IDs"
   description  = "HashiCorp Cloud Platform Network IDs."
+  name         = "HashiCorp Cloud Platform Network IDs"
   organization = tfe_organization.main.name
+
+  # empty set; Variable Set will be populated by `networking` Workspace
+  variables = []
 
   workspace_ids = [
     # needed for HCP Vault deployment
     tfe_workspace.services_deployment.id,
   ]
-
-  # empty set; Variable Set will be populated by `networking` Workspace
-  variables = []
 }
 
 module "hcp_contributor_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "HashiCorp Cloud Platform Credentials (type: `contributor`)"
   description  = "HashiCorp Cloud Platform-specific Variables for `contributor` users."
+  name         = "HashiCorp Cloud Platform Credentials (type: `contributor`)"
   organization = tfe_organization.main.name
+
+  variables = local.hcp_contributor_variables
 
   workspace_ids = [
     tfe_workspace.workspaces.id,
@@ -110,56 +120,52 @@ module "hcp_contributor_variables" {
     tfe_workspace.services_deployment.id,
     #tfe_workspace.services_configuration.id,
   ]
-
-  variables = local.hcp_contributor_variables
 }
 
 module "hcp_viewer_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "HashiCorp Cloud Platform Credentials (type: `viewer`)"
   description  = "HashiCorp Cloud Platform-specific Variables for `viewer` users."
+  name         = "HashiCorp Cloud Platform Credentials (type: `viewer`)"
   organization = tfe_organization.main.name
+
+  variables = local.hcp_viewer_variables
 
   workspace_ids = [
     # needed for HCP Vault configuration
     #tfe_workspace.services_configuration.id,
   ]
-
-  variables = local.hcp_viewer_variables
 }
 
 module "project_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/route53-keybase-domain-proof/aws/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "Project"
   description  = "Project-specific Variables."
+  name         = "Project"
   organization = tfe_organization.main.name
+
+  variables = local.project_variables
 
   workspace_ids = [
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
     tfe_workspace.services_deployment.id,
   ]
-
-  variables = local.project_variables
 }
 
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
 module "terraform_cloud_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
-  source = "github.com/ksatirli/terraform-tfe-variable-set?ref=adds-code"
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
 
-  name         = "Terraform Cloud"
   description  = "Terraform Cloud API Token."
+  name         = "Terraform Cloud"
   organization = tfe_organization.main.name
-
-  workspace_ids = [
-    tfe_workspace.networking.id,
-    #tfe_workspace.services_deployment.id,
-  ]
 
   variables = [
     {
@@ -175,5 +181,10 @@ module "terraform_cloud_variables" {
       value       = tfe_organization_token.organization.token
       description = "Terraform Cloud Organization Token."
       sensitive   = true
-  }]
+    }]
+
+  workspace_ids = [
+    tfe_workspace.networking.id,
+    #tfe_workspace.services_deployment.id,
+  ]
 }
