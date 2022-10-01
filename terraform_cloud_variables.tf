@@ -181,7 +181,7 @@ module "terraform_cloud_variables" {
       value       = tfe_organization_token.organization.token
       description = "Terraform Cloud Organization Token."
       sensitive   = true
-    }]
+  }]
 
   workspace_ids = [
     tfe_workspace.networking.id,
