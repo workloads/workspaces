@@ -25,7 +25,7 @@ output "workspace_urls" {
     "${local.base_url}/workspaces/${tfe_workspace.dns.name}",
     "${local.base_url}/workspaces/${tfe_workspace.networking.name}",
     "${local.base_url}/workspaces/${tfe_workspace.repositories.name}",
-    #"${local.base_url}/workspaces/${tfe_workspace.services_configuration.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.services_configuration.name}",
     "${local.base_url}/workspaces/${tfe_workspace.services_deployment.name}",
     "${local.base_url}/workspaces/${tfe_workspace.website.name}",
     "${local.base_url}/workspaces/${tfe_workspace.workspaces.name}",
