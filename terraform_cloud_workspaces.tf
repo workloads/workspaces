@@ -1,8 +1,8 @@
 # may be imported like so: `terraform import tfe_workspace.dns workloads/dns`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "dns" {
-  assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "DNS Configuration for ${var.project_identifier}."
   execution_mode                = "remote"
@@ -31,8 +31,8 @@ resource "tfe_workspace" "dns" {
 # may be imported like so: `terraform import tfe_workspace.networking workloads/networking`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "networking" {
-  assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Networking Configuration for ${var.project_identifier}."
   execution_mode                = "remote"
@@ -61,6 +61,7 @@ resource "tfe_workspace" "networking" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "repositories" {
   allow_destroy_plan    = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled   = true
   auto_apply            = var.tfe_workspace_auto_apply
   description           = "GitHub Configuration for ${var.project_identifier}."
   execution_mode        = "remote"
