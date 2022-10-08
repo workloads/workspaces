@@ -212,7 +212,7 @@ variable "tfe_workspace_auto_apply" {
 variable "tfe_workspace_terraform_version" {
   type        = string
   description = "The version of Terraform to use for this workspace. "
-  default     = "1.3.0"
+  default     = "1.3.2"
 }
 
 variable "tfe_workspace_vcs_repos" {
