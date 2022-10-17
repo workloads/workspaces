@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # see https://github.com/actions/checkout
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
 
+      # see https://github.com/hashicorp/setup-terraform
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
           terraform_version: ${{ secrets.TERRAFORM_VERSION }}

@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # see https://github.com/actions/checkout
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
+      # see https://github.com/terraform-docs/gh-actions
       - name: Render documentation for repository and push changes back to branch
         uses: terraform-docs/gh-actions@v1.0.0
         with:
