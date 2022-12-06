@@ -185,9 +185,8 @@ variable "tfe_organization_owners" {
   type        = list(string)
   description = "List of Email Addresses of Terraform Cloud Organization Owners."
   default = [
-    "dstrickland@hashicorp.com", # Derek Strickland
-    "kerim@hashicorp.com",       # Kerim Satirli
-    "team@workloads.io",         # Service Account
+    "kerim@hashicorp.com", # Kerim Satirli
+    "team@workloads.io",   # Service Account
   ]
 }
 
