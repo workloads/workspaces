@@ -59,6 +59,36 @@ resource "tfe_workspace" "networking" {
   #  }
 }
 
+# may be imported like so: `terraform import tfe_workspace.regional_workspaces workloads/regional_workspaces`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "regional_workspaces" {
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
+  auto_apply                    = var.tfe_workspace_auto_apply
+  description                   = "Regional Workspaces Configuration for ${var.project_identifier}."
+  execution_mode                = "remote"
+  file_triggers_enabled         = true
+  name                          = "regional-workspaces"
+  organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.management.id
+  structured_run_output_enabled = true
+
+  tag_names = [
+    var.tags.exec_remote,
+    "${var.tags.region_prefix}:${var.management_region_aws}",
+    var.tags.service_aws,
+    var.tags.type_provision,
+  ]
+
+  terraform_version = var.tfe_workspace_terraform_version
+
+  #  vcs_repo {
+  #    branch         = "main"
+  #    identifier     = local.repository_slugs.networking
+  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #  }
+}
+
 # may be imported like so: `terraform import tfe_workspace.repositories workloads/repositories`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "repositories" {
