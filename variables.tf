@@ -241,15 +241,6 @@ variable "tfe_workspace_terraform_version" {
   default     = "1.3.6"
 }
 
-variable "tfe_workspace_vcs_repos" {
-  type        = map(string)
-  description = "Map of VCS Repository Slugs."
-
-  default = {
-    nomad_agents = "ksatirli/tfc-demo"
-  }
-}
-
 locals {
   aws_variables = [
     {

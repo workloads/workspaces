@@ -22,6 +22,7 @@ resource "tfe_workspace" "dns" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
+  # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
   #    identifier     = local.repository_slugs.dns
@@ -52,6 +53,7 @@ resource "tfe_workspace" "networking" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
+  # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
   #    identifier     = local.repository_slugs.networking
@@ -82,6 +84,7 @@ resource "tfe_workspace" "regional_workspaces" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
+  # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
   #    identifier     = local.repository_slugs.networking
@@ -149,12 +152,6 @@ resource "tfe_workspace" "services_configuration" {
     var.tags.service_aws,
     var.tags.type_secure,
   ]
-
-  #    vcs_repo {
-  #      branch = "main"
-  #      identifier         = var.tfe_workspace_vcs_repos.nomad_agents
-  #      oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
-  #    }
 }
 
 # may be imported like so: `terraform import tfe_workspace.services_deployment workloads/services-deployment`
@@ -179,6 +176,7 @@ resource "tfe_workspace" "services_deployment" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
+  # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
   #    identifier     = local.repository_slugs["services-deployment"]
@@ -210,6 +208,7 @@ resource "tfe_workspace" "website" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
+  # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
   #    identifier     = local.repository_slugs.website
