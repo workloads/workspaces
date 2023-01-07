@@ -84,6 +84,22 @@ variable "hcp_viewer_secret" {
   sensitive   = true
 }
 
+variable "infracost_org" {
+  type        = string
+  description = "Infracost Organization Identifier."
+}
+
+variable "infracost_runtask_hmac_key" {
+  type        = string
+  description = "HMAC Key for Infracost Run Task integration."
+  sensitive   = true
+}
+
+variable "infracost_runtask_url" {
+  type        = string
+  description = "URL for Infracost Run Task integration."
+}
+
 variable "management_region_aws" {
   type        = string
   description = "AWS-specific `Management` Region Identifier."
