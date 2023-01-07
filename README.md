@@ -76,7 +76,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | tfe_project_names | Object containing TFE Project Names. | <pre>object({<br>    management = string<br>    regional   = string<br>  })</pre> | no |
 | tfe_workspace_allow_destroy_plan | Whether destroy plans can be queued on the workspace. | `bool` | no |
 | tfe_workspace_auto_apply | Whether to automatically apply changes when a Terraform plan is successful. | `bool` | no |
-| tfe_workspace_terraform_version | The version of Terraform to use for this workspace. | `string` | no |
+| tfe_workspace_terraform_version | Terraform version to use for this Workspace. | `string` | no |
 | tfe_workspace_vcs_repos | Map of VCS Repository Slugs. | `map(string)` | no |
 
 ### Outputs
