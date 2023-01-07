@@ -204,3 +204,12 @@ module "terraform_cloud_variables" {
     #tfe_workspace.services_deployment.id,
   ]
 }
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
+resource "tfe_variable" "regional_workspaces_terraform_version" {
+  key          = "terraform_version"
+  value        = var.tfe_workspace_terraform_version
+  category     = "terraform"
+  description  = "Terraform version to use for Regional Workspaces."
+  workspace_id = tfe_workspace.regional_workspaces.id
+}
