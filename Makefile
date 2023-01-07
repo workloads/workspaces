@@ -38,7 +38,7 @@ print-secrets: # Prints sanitized environment variables (requires the `envo` CLI
 # see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
-		  --account="$(op_account)"
+		  --account="$(op_account)" \
 			--env-file="$(op_env_file)" \
 			--no-masking \
 			-- \
