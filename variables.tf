@@ -116,11 +116,7 @@ variable "snyk_org" {
 variable "snyk_runtask_hmac_key" {
   type        = string
   description = "HMAC Key for Snyk Run Task integration."
-}
-
-variable "snyk_runtask_org" {
-  type        = string
-  description = "URL for Snyk Run Task integration."
+  sensitive   = true
 }
 
 variable "snyk_runtask_url" {
@@ -131,6 +127,7 @@ variable "snyk_runtask_url" {
 variable "snyk_token" {
   type        = string
   description = "Snyk API Auth Token."
+  sensitive   = true
 }
 
 variable "tags" {

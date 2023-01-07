@@ -60,7 +60,6 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | hcp_viewer_secret | HashiCorp Cloud Platform Secret for `viewer` Role. | `string` | yes |
 | snyk_org | Snyk Organization Name. | `string` | yes |
 | snyk_runtask_hmac_key | HMAC Key for Snyk Run Task integration. | `string` | yes |
-| snyk_runtask_org | URL for Snyk Run Task integration. | `string` | yes |
 | snyk_runtask_url | URL for Snyk Run Task integration. | `string` | yes |
 | snyk_token | Snyk API Auth Token. | `string` | yes |
 | tfe_oauth_client_id | VCS Provider oAuth Client Identifier. | `string` | yes |
