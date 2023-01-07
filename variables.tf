@@ -359,6 +359,16 @@ locals {
     }
   ]
 
+  project_variables = [
+    {
+      key         = "project_identifier"
+      category    = "terraform"
+      value       = var.project_identifier
+      description = "Human-readable Project Identifier."
+      sensitive   = false
+    }
+  ]
+
   snyk_action_secrets = [
     {
       secret_name     = "SNYK_ORG"
@@ -371,13 +381,14 @@ locals {
     }
   ]
 
-  project_variables = [
+  # Terraform Cloud-specific oAuth Variables for VCS Repository Connections
+  tfe_oauth_variables = [
     {
-      key         = "project_identifier"
+      key         = "tfe_oauth_client_id"
       category    = "terraform"
-      value       = var.project_identifier
-      description = "Human-readable Project Identifier."
-      sensitive   = false
+      value       = data.tfe_oauth_client.client.oauth_token_id
+      description = "Terraform Cloud OAuth Client Token ID."
+      sensitive   = true
     }
   ]
 }

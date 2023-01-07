@@ -157,6 +157,22 @@ module "project_variables" {
   ]
 }
 
+module "terraform_cloud_oauth_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Terraform Cloud-specific OAuth Variables."
+  name         = "Terraform Cloud OAuth"
+  organization = tfe_organization.main.name
+
+  variables = local.tfe_oauth_variables
+
+  workspace_ids = [
+    tfe_workspace.regional_workspaces.id
+  ]
+}
+
 # assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
 module "terraform_cloud_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
