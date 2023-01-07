@@ -9,6 +9,7 @@ resource "tfe_workspace" "dns" {
   file_triggers_enabled         = true
   name                          = "dns"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.management.id
   structured_run_output_enabled = true
 
   tag_names = [
@@ -39,6 +40,7 @@ resource "tfe_workspace" "networking" {
   file_triggers_enabled         = true
   name                          = "networking"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.management.id
   structured_run_output_enabled = true
 
   tag_names = [
@@ -68,6 +70,7 @@ resource "tfe_workspace" "repositories" {
   file_triggers_enabled = true
   name                  = "repositories"
   organization          = tfe_organization.main.name
+  project_id            = tfe_project.management.id
 
   # `repositories` provides a list of GitHub Slugs as outputs that serve
   # as input for `vcs_repo` connections for other `tfe_workspace` resources.
@@ -99,7 +102,6 @@ resource "tfe_workspace" "repositories" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_configuration" {
   name                          = "services-configuration"
-  organization                  = tfe_organization.main.name
   description                   = "Services Configuration for ${var.project_identifier}."
   assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
@@ -107,6 +109,8 @@ resource "tfe_workspace" "services_configuration" {
   execution_mode                = "remote"
   file_triggers_enabled         = true
   structured_run_output_enabled = true
+  project_id                    = tfe_project.management.id
+  organization                  = tfe_organization.main.name
   terraform_version             = var.tfe_workspace_terraform_version
 
   tag_names = [

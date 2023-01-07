@@ -196,6 +196,20 @@ variable "tfe_organization_token_force_regenerate" {
   default     = false
 }
 
+variable "tfe_project_names" {
+  type = object({
+    management = string
+    regional   = string
+  })
+
+  description = "Object containing TFE Project Names."
+
+  default = {
+    management = "Management"
+    regional   = "Regional Workspaces"
+  }
+}
+
 variable "tfe_workspace_allow_destroy_plan" {
   type        = bool
   description = "Whether destroy plans can be queued on the workspace."
