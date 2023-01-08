@@ -212,14 +212,12 @@ variable "tfe_organization_token_force_regenerate" {
 variable "tfe_project_names" {
   type = object({
     management = string
-    regional   = string
   })
 
   description = "Object containing TFE Project Names."
 
   default = {
     management = "Management"
-    regional   = "Regional Workspaces"
   }
 }
 
