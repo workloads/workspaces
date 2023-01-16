@@ -180,7 +180,7 @@ variable "tags" {
 
 variable "tfe_oauth_client_id" {
   type        = string
-  description = "VCS Provider oAuth Client Identifier."
+  description = "VCS Provider OAuth Client Identifier."
   sensitive   = true
 }
 

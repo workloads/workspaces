@@ -65,7 +65,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | snyk_runtask_hmac_key | HMAC Key for Snyk Run Task integration. | `string` | yes |
 | snyk_runtask_url | URL for Snyk Run Task integration. | `string` | yes |
 | snyk_token | Snyk API Auth Token. | `string` | yes |
-| tfe_oauth_client_id | VCS Provider oAuth Client Identifier. | `string` | yes |
+| tfe_oauth_client_id | VCS Provider OAuth Client Identifier. | `string` | yes |
 | tfe_organization_email | Admin email address. | `string` | yes |
 | tfe_organization_name | Name of the organization. | `string` | yes |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
