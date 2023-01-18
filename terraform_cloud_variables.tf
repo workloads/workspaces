@@ -13,7 +13,6 @@ module "aws_variables" {
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
   ]
-
 }
 
 module "datadog_variables" {
@@ -206,6 +205,7 @@ module "terraform_cloud_variables" {
   ]
 }
 
+# set Regional Workspaces-specific version of Terraform
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
 resource "tfe_variable" "regional_workspaces_terraform_version" {
   key          = "terraform_version"
