@@ -1,0 +1,25 @@
+---
+version: 2
+
+# see https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+updates:
+
+  # ensure GitHub Action Workflow files are up-to-date for `main`
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    assignees:
+      - "workloads/maintainers"
+    open-pull-requests-limit: 1
+    target-branch: main
+
+  # ensure Terraform Provider versions are up-to-date for `main`
+  - package-ecosystem: terraform
+    directory: "/"
+    schedule:
+      interval: weekly
+    assignees:
+      - "workloads/maintainers"
+    open-pull-requests-limit: 1
+    target-branch: main
