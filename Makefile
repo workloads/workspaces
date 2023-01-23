@@ -65,4 +65,4 @@ import: # Injects secrets from 1Password into a `terraform` {plan, apply, destro
 			--account="$(op_account)" \
 			--env-file="$(op_env_file)" \
 			-- \
-			terraform import "<Terraform Resource Identifier>" "<Remote API identifier>"
+			terraform import '<Terraform Resource Identifier>' '<Remote API identifier>'

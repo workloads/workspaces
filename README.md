@@ -8,9 +8,11 @@
 * [Terraform Cloud Workspace: `workspaces`](#terraform-cloud-workspace--workspaces)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
+  * [Diagrams](#diagrams)
   * [Usage](#usage)
     * [Inputs](#inputs)
     * [Outputs](#outputs)
+  * [Notes](#notes)
   * [Author Information](#author-information)
   * [License](#license)
 <!-- TOC -->
@@ -22,6 +24,46 @@
 * Terraform `1.3.0` or [newer](https://www.terraform.io/downloads).
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/).
 * (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo).
+
+## Diagrams
+
+This section contains an overview of (simplified) diagrams, describing the physical connections of the _Edge Case_.
+All diagrams are expressed in [Mermaid](https://mermaid.js.org) syntax.
+
+### Terraform Cloud Workspace Structure
+
+This diagram describes the [Terraform Cloud Workspaces](https://developer.hashicorp.com/terraform/cloud-docs/workspaces) structure:
+
+```mermaid
+flowchart LR
+    subgraph local["local execution"]
+        direction LR
+
+        makefile["Makefile"]
+        opcli["1Password CLI `op`"]
+        click opcli "https://developer.1password.com/docs/cli/" "1Password CLI `op`"
+
+        terraform["local Terraform process (with Remote State)"]
+
+        %% actual connections
+        makefile -.- opcli -.- terraform
+    end
+
+    subgraph remote["remote, in Terraform Cloud"]
+        direction LR
+
+        %% actual connections
+        terraform --> github-organization["TFC Workspace `repositories`"]
+        terraform --> dns["TFC Workspace `dns`"]
+        terraform --> networking["TFC Workspace `networking`"]
+        terraform --> services-configuration["TFC Workspace `services-configuration`"]
+        terraform --> services-deployment["TFC Workspace `services-deployment`"]
+        terraform --> regional-workspaces["TFC Workspace `regional-workspaces`"]
+        terraform --> website["TFC Workspace `website`"]
+        terraform --> workspaces["TFC Workspace `workspaces`"]
+        terraform --> users["TFC Workspace `users`"]
+    end
+```
 
 ## Usage
 
