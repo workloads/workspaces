@@ -123,6 +123,24 @@ module "hcp_contributor_variables" {
   ]
 }
 
+module "hcp_vault_aws_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "HCP Vault-specific Variables."
+  name         = "Vault"
+  organization = tfe_organization.main.name
+
+  # this value is set in `workloads/services-deployment` as it is not yet known
+  variables = []
+
+  workspace_ids = [
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
+
 module "hcp_viewer_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
