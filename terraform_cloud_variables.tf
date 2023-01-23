@@ -12,6 +12,7 @@ module "aws_variables" {
   workspace_ids = [
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
+    tfe_workspace.regional_workspaces.id,
   ]
 }
 
