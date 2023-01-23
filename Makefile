@@ -56,3 +56,13 @@ terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, des
 			--env-file="$(op_env_file)" \
 			-- \
 			terraform $(command) $(args)
+
+.SILENT .PHONY: import
+import: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
+# see https://developer.1password.com/docs/cli/reference/commands/run
+	op \
+		run \
+			--account="$(op_account)" \
+			--env-file="$(op_env_file)" \
+			-- \
+			terraform import "<Terraform Resource Identifier>" "<Remote API identifier>"
