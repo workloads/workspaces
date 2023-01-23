@@ -82,6 +82,7 @@ module "hcp_boundary_variables" {
 
   workspace_ids = [
     tfe_workspace.services_deployment.id,
+    tfe_workspace.services_configuration.id,
   ]
 }
 
@@ -118,7 +119,7 @@ module "hcp_contributor_variables" {
     tfe_workspace.workspaces.id,
     tfe_workspace.networking.id,
     tfe_workspace.services_deployment.id,
-    #tfe_workspace.services_configuration.id,
+    tfe_workspace.services_configuration.id,
   ]
 }
 
@@ -134,8 +135,6 @@ module "hcp_viewer_variables" {
   variables = local.hcp_viewer_variables
 
   workspace_ids = [
-    # needed for HCP Vault configuration
-    #tfe_workspace.services_configuration.id,
   ]
 }
 
