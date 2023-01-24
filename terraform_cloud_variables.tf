@@ -81,8 +81,11 @@ module "hcp_boundary_variables" {
   variables = local.hcp_boundary_variables
 
   workspace_ids = [
-    tfe_workspace.services_deployment.id,
+    # needed for HCP Boundary and Vault configuration
     tfe_workspace.services_configuration.id,
+
+    # needed for HCP Boundary and Vault deployment
+    tfe_workspace.services_deployment.id,
   ]
 }
 
@@ -99,7 +102,7 @@ module "hcp_network_ids" {
   variables = []
 
   workspace_ids = [
-    # needed for HCP Vault deployment
+    # needed for HCP Boundary and Vault deployment
     tfe_workspace.services_deployment.id,
   ]
 }
@@ -117,9 +120,15 @@ module "hcp_contributor_variables" {
 
   workspace_ids = [
     tfe_workspace.workspaces.id,
+
+    # needed for HVN provisioning
     tfe_workspace.networking.id,
-    tfe_workspace.services_deployment.id,
+
+    # needed for HCP Boundary and Vault configuration
     tfe_workspace.services_configuration.id,
+
+    # needed for HCP Boundary and Vault deployment
+    tfe_workspace.services_deployment.id,
   ]
 }
 
@@ -136,6 +145,7 @@ module "hcp_vault_aws_variables" {
   variables = []
 
   workspace_ids = [
+    # needed for HCP Vault configuration
     tfe_workspace.services_configuration.id,
   ]
 }
@@ -152,8 +162,7 @@ module "hcp_viewer_variables" {
 
   variables = local.hcp_viewer_variables
 
-  workspace_ids = [
-  ]
+  workspace_ids = []
 }
 
 module "project_variables" {
@@ -170,6 +179,7 @@ module "project_variables" {
   workspace_ids = [
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
+    tfe_workspace.services_configuration.id,
     tfe_workspace.services_deployment.id,
   ]
 }
@@ -186,6 +196,7 @@ module "terraform_cloud_oauth_variables" {
   variables = local.tfe_oauth_variables
 
   workspace_ids = [
+    # needed for Terraform Cloud VCS Repository configuration
     tfe_workspace.regional_workspaces.id
   ]
 }
@@ -217,8 +228,13 @@ module "terraform_cloud_variables" {
   }]
 
   workspace_ids = [
+    # needed for HCP HVN configuration
     tfe_workspace.networking.id,
+
+    # needed for Regional Workspace lifecycle management
     tfe_workspace.regional_workspaces.id,
+
+    # needed for updating of Terraform Cloud Variable Sets
     tfe_workspace.services_deployment.id,
   ]
 }
