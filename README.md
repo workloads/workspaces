@@ -112,7 +112,6 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | tfe_organization_name | Name of the organization. | `string` | yes |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
 | project_identifier | Human-readable Project Identifier. | `string` | no |
-| tags | Object containing pre-defined Tags. | `map(any)` | no |
 | tags | Object containing pre-defined Tags. | `map(string)` | no |
 | tfe_organization_owners | List of Email Addresses of Terraform Cloud Organization Owners. | `list(string)` | no |
 | tfe_organization_token_force_regenerate | Whether to forcefully regenerate and replace TFE Organization Token. | `bool` | no |
