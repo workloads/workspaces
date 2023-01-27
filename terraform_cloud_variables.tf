@@ -38,7 +38,7 @@ module "gandi_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${var.project_identifier}/security for more information."
+  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${tfe_organization.main.name}/security for more information."
   name         = "Gandi.net"
   organization = tfe_organization.main.name
 
@@ -54,7 +54,7 @@ module "github_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "GitHub-specific Variables."
+  description  = "GitHub-specific Variables. See https://github.com/${var.github_owner}."
   name         = "GitHub (Org: `${var.github_owner}`)"
   organization = tfe_organization.main.name
 
@@ -207,7 +207,7 @@ module "terraform_cloud_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Terraform Cloud API Token."
+  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens"
   name         = "Terraform Cloud"
   organization = tfe_organization.main.name
 
