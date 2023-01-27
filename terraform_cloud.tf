@@ -4,8 +4,8 @@ resource "tfe_organization" "main" {
   collaborator_auth_policy = "two_factor_mandatory"
   email                    = var.tfe_organization_email
   name                     = var.tfe_organization_name
-  session_remember_minutes = 10080
-  session_timeout_minutes  = 10080
+  session_remember_minutes = 20160 # 14 days
+  session_timeout_minutes  = 10080 # 7 days
 }
 
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership
