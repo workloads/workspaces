@@ -21,7 +21,7 @@
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in) credentials.
 * Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.3.0` or [newer](https://www.terraform.io/downloads).
+* Terraform `1.3.0` or [newer](https://developer.hashicorp.com/terraform/downloads).
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/).
 * (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo).
 
@@ -132,7 +132,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 ## Notes
 
-Terraform state may contain [sensitive data](https://www.terraform.io/language/state/sensitive-data). This workspaces uses [Terraform Cloud](https://www.terraform.io/cloud-docs) to safely store state, and encrypt the data at rest.
+Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspaces uses [Terraform Cloud](https://www.terraform.io/cloud-docs) to safely store state, and encrypt the data at rest.
 
 ## Author Information
 
