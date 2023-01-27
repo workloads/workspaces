@@ -110,6 +110,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | tfe_oauth_client_id | VCS Provider OAuth Client Identifier. | `string` | yes |
 | tfe_organization_email | Admin email address. | `string` | yes |
 | tfe_organization_name | Name of the organization. | `string` | yes |
+| csp_configuration | Project-wide List of Cloud Service Providers (CSPs). | <pre>list(object({<br>    name    = string<br>    prefix  = string<br>    enabled = bool<br>  }))</pre> | no |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
 | project_identifier | Human-readable Project Identifier. | `string` | no |
 | tags | Object containing pre-defined Tags. | `map(string)` | no |

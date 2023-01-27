@@ -254,3 +254,35 @@ resource "tfe_variable" "regional_workspaces_terraform_version" {
   description  = "Terraform version to use for Regional Workspaces."
   workspace_id = tfe_workspace.regional_workspaces.id
 }
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
+resource "tfe_variable_set" "csp_configuration" {
+  name         = "Cloud Service Providers"
+  description  = "Cloud Service Providers (CSP) Configuration."
+  organization = tfe_organization.main.name
+}
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace_variable_set
+resource "tfe_workspace_variable_set" "csp_configuration" {
+  for_each = toset([
+    # needed for HCP Boundary Projects
+    tfe_workspace.services_configuration.id,
+
+    # needed for CSP configuration
+    tfe_workspace.regional_workspaces.id,
+  ])
+
+  variable_set_id = tfe_variable_set.csp_configuration.id
+  workspace_id    = each.key
+}
+
+# add CSP data  Workspaces-specific version of Terraform
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
+resource "tfe_variable" "csp_configuration" {
+  key             = "csp_configuration"
+  value           = jsonencode(var.csp_configuration)
+  category        = "terraform"
+  description     = "Project-wide List of Cloud Service Providers (CSPs)."
+  sensitive       = false
+  variable_set_id = tfe_variable_set.csp_configuration.id
+}

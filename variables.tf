@@ -124,6 +124,40 @@ variable "project_identifier" {
   }
 }
 
+variable "csp_configuration" {
+  type = list(object({
+    name    = string
+    prefix  = string
+    enabled = bool
+  }))
+
+  description = "Project-wide List of Cloud Service Providers (CSPs)."
+
+  default = [
+    {
+      name    = "AWS Web Services"
+      prefix  = "aws"
+      enabled = true
+      }, {
+      name    = "Microsoft Azure"
+      prefix  = "az"
+      enabled = false
+      }, {
+      name    = "Digital Ocean"
+      prefix  = "do"
+      enabled = false
+      }, {
+      name    = "Google Cloud Platform"
+      prefix  = "gcp"
+      enabled = false
+      }, {
+      name    = "Scaleway"
+      prefix  = "scw"
+      enabled = false
+    }
+  ]
+}
+
 variable "snyk_org" {
   type        = string
   description = "Snyk Organization Name."
