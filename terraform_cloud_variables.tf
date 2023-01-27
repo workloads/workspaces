@@ -10,8 +10,13 @@ module "aws_variables" {
   variables = local.aws_variables
 
   workspace_ids = [
+    # needed for Route 53 configuration
     tfe_workspace.dns.id,
+
+    # needed for VPC and HVN configuration
     tfe_workspace.networking.id,
+
+    # needed for Regional Workspace deployments
     tfe_workspace.regional_workspaces.id,
   ]
 }
@@ -29,7 +34,7 @@ module "datadog_variables" {
 
   workspace_ids = [
     # needed for HCP Vault Audit and Metrics Logging
-    tfe_workspace.services_deployment.id
+    tfe_workspace.services_deployment.id,
   ]
 }
 
@@ -45,7 +50,8 @@ module "gandi_variables" {
   variables = local.gandi_variables
 
   workspace_ids = [
-    tfe_workspace.dns.id
+    # needed for DNS NS configuration
+    tfe_workspace.dns.id,
   ]
 }
 
@@ -197,7 +203,7 @@ module "terraform_cloud_oauth_variables" {
 
   workspace_ids = [
     # needed for Terraform Cloud VCS Repository configuration
-    tfe_workspace.regional_workspaces.id
+    tfe_workspace.regional_workspaces.id,
   ]
 }
 
