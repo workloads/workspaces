@@ -74,7 +74,7 @@ module "hcp_boundary_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Boundary-specific Variables."
+  description  = "HCP Boundary-specific Variables. See https://portal.cloud.hashicorp.com/services/boundary/clusters/list for more information."
   name         = "Boundary"
   organization = tfe_organization.main.name
 
@@ -137,7 +137,7 @@ module "hcp_vault_aws_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Vault-specific Variables."
+  description  = "HCP Vault-specific Variables. See https://portal.cloud.hashicorp.com/services/vault/clusters for more information."
   name         = "Vault"
   organization = tfe_organization.main.name
 
