@@ -147,7 +147,7 @@ variable "snyk_token" {
 }
 
 variable "tags" {
-  type        = map(any)
+  type        = map(string)
   description = "Object containing pre-defined Tags."
 
   default = {

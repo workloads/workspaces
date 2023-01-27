@@ -4,7 +4,7 @@ resource "tfe_workspace" "dns" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
-  description                   = "DNS Configuration for ${var.project_identifier}."
+  description                   = "DNS Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
   file_triggers_enabled         = true
   name                          = "dns"
@@ -36,7 +36,7 @@ resource "tfe_workspace" "networking" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
-  description                   = "Networking Configuration for ${var.project_identifier}."
+  description                   = "Networking Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
   file_triggers_enabled         = true
   name                          = "networking"
@@ -67,7 +67,7 @@ resource "tfe_workspace" "regional_workspaces" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
-  description                   = "Regional Workspaces Configuration for ${var.project_identifier}."
+  description                   = "Regional Workspaces Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
   file_triggers_enabled         = true
   name                          = "regional-workspaces"
@@ -98,7 +98,7 @@ resource "tfe_workspace" "repositories" {
   allow_destroy_plan    = var.tfe_workspace_allow_destroy_plan
   assessments_enabled   = true
   auto_apply            = var.tfe_workspace_auto_apply
-  description           = "GitHub Configuration for ${var.project_identifier}."
+  description           = "GitHub Configuration for `${var.project_identifier}`."
   execution_mode        = "remote"
   file_triggers_enabled = true
   name                  = "repositories"
@@ -135,7 +135,7 @@ resource "tfe_workspace" "repositories" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_configuration" {
   name                          = "services-configuration"
-  description                   = "Services Configuration for ${var.project_identifier}."
+  description                   = "Services Configuration for `${var.project_identifier}`."
   assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
@@ -160,7 +160,7 @@ resource "tfe_workspace" "services_deployment" {
   assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  description                   = "Services Deployment for ${var.project_identifier}."
+  description                   = "Services Deployment for `${var.project_identifier}`."
   execution_mode                = "remote"
   file_triggers_enabled         = true
   name                          = "services-deployment"
@@ -190,9 +190,9 @@ resource "tfe_workspace" "website" {
   assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  execution_mode                = "remote"
+  execution_mode                = "local"
   file_triggers_enabled         = true
-  description                   = "Website for ${var.project_identifier}."
+  description                   = "Website for `${var.project_identifier}`."
   name                          = "website"
   organization                  = tfe_organization.main.name
   structured_run_output_enabled = true
@@ -223,7 +223,7 @@ resource "tfe_workspace" "workspaces" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "local"
-  description                   = "Terraform Cloud Configuration for ${var.project_identifier}."
+  description                   = "Terraform Cloud Configuration for `${var.project_identifier}`."
   file_triggers_enabled         = false
   name                          = "workspaces"
   organization                  = tfe_organization.main.name
