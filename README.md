@@ -19,7 +19,7 @@
 
 ## Requirements
 
-* HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in) credentials.
+* HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in).
 * Terraform Cloud [Account](https://app.terraform.io/session)
 * Terraform `1.3.0` or [newer](https://developer.hashicorp.com/terraform/downloads).
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/).
