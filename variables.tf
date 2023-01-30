@@ -282,7 +282,7 @@ locals {
       value       = var.management_region_aws
       description = "AWS-specific Management Region Identifier."
       sensitive   = false
-    }
+    },
   ]
 
   datadog_variables = [
@@ -310,7 +310,7 @@ locals {
       value       = var.datadog_app_key
       description = "Datadog App Key."
       sensitive   = true
-    }
+    },
   ]
 
   gandi_variables = [
@@ -326,7 +326,7 @@ locals {
       value       = var.gandi_sharing_id
       description = "Gandi Sharing ID."
       sensitive   = true
-    }
+    },
   ]
 
   github_variables = [
@@ -342,7 +342,7 @@ locals {
       value       = var.github_token
       description = "GitHub Access Token."
       sensitive   = true
-    }
+    },
   ]
 
   # HCP Boundary-specific Configuration Variables for Cluster lifecycle management
@@ -359,7 +359,7 @@ locals {
       value       = var.hcp_boundary_admin_password
       description = "HCP Boundary Cluster Admin Password."
       sensitive   = true
-    }
+    },
   ]
 
   # HCP-specific Configuration Variables for `contributor` users
@@ -376,7 +376,7 @@ locals {
       value       = var.hcp_contributor_secret
       description = "OAuth2 Client Secret for API operations."
       sensitive   = true
-    }
+    },
   ]
 
   # HCP-specific Configuration Variables for `viewer` users
@@ -393,7 +393,7 @@ locals {
       value       = var.hcp_viewer_secret
       description = "OAuth2 Client Secret for API operations."
       sensitive   = true
-    }
+    },
   ]
 
   project_variables = [
@@ -403,7 +403,7 @@ locals {
       value       = var.project_identifier
       description = "Human-readable Project Identifier."
       sensitive   = false
-    }
+    },
   ]
 
   snyk_action_secrets = [
@@ -415,7 +415,7 @@ locals {
       secret_name     = "SNYK_TOKEN"
       visibility      = "all"
       plaintext_value = var.snyk_token
-    }
+    },
   ]
 
   # Terraform Cloud-specific oAuth Variables for VCS Repository Connections
@@ -426,6 +426,6 @@ locals {
       value       = data.tfe_oauth_client.client.oauth_token_id
       description = "Terraform Cloud OAuth Client Token ID."
       sensitive   = true
-    }
+    },
   ]
 }
