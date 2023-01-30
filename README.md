@@ -86,6 +86,9 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 | Name | Description | Type | Required |
 |------|-------------|------|:--------:|
+| auth0_client_id | Auth0 Client ID. | `string` | yes |
+| auth0_client_secret | Auth0 Client Secret. | `string` | yes |
+| auth0_domain | Auth0 Domain Name. | `string` | yes |
 | datadog_api_key | Datadog API Key. | `string` | yes |
 | datadog_api_url | Datadog API URL. | `string` | yes |
 | datadog_api_zone | Datadog API Zone. | `string` | yes |

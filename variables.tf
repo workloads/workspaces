@@ -1,3 +1,22 @@
+
+# see https://registry.terraform.io/providers/auth0/auth0/latest/docs#client_id
+variable "auth0_client_id" {
+  type        = string
+  description = "Auth0 Client ID."
+}
+
+# see https://registry.terraform.io/providers/auth0/auth0/latest/docs#client_secret
+variable "auth0_client_secret" {
+  type        = string
+  description = "Auth0 Client Secret."
+}
+
+# see https://registry.terraform.io/providers/auth0/auth0/latest/docs#domain
+variable "auth0_domain" {
+  type        = string
+  description = "Auth0 Domain Name."
+}
+
 # see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#api_key
 variable "datadog_api_key" {
   type        = string
@@ -281,6 +300,28 @@ locals {
       category    = "terraform"
       value       = var.management_region_aws
       description = "AWS-specific Management Region Identifier."
+      sensitive   = false
+    },
+  ]
+
+  auth0_variables = [
+    {
+      key         = "auth0_client_id"
+      category    = "terraform"
+      value       = var.auth0_client_id
+      description = "Auth0 Client ID."
+      sensitive   = true
+      }, {
+      key         = "auth0_client_secret"
+      category    = "terraform"
+      value       = var.auth0_client_secret
+      description = "Auth0 Client Secret."
+      sensitive   = true
+      }, {
+      key         = "auth0_domain"
+      category    = "terraform"
+      value       = var.auth0_domain
+      description = "Auth0 Domain Name."
       sensitive   = false
     },
   ]

@@ -21,6 +21,23 @@ module "aws_variables" {
   ]
 }
 
+module "auth0_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Auth0-specific Variables. See https://manage.auth0.com/dashboard/ for more information."
+  name         = "Auth0"
+  organization = tfe_organization.main.name
+
+  variables = local.auth0_variables
+
+  workspace_ids = [
+    # needed for Auth0 Configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "datadog_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
