@@ -135,7 +135,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 ## Notes
 
-Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspaces uses [Terraform Cloud](https://www.terraform.io/cloud-docs) to safely store state, and encrypt the data at rest.
+Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspaces uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
 
 ## Author Information
 
