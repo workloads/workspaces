@@ -12,10 +12,10 @@ terraform {
 
   # see https://developer.hashicorp.com/terraform/language/settings#specifying-provider-requirements
   required_providers {
-    # see https://registry.terraform.io/providers/integrations/github/5.16.0/
+    # see https://registry.terraform.io/providers/integrations/github/5.17.0/
     github = {
       source  = "integrations/github"
-      version = ">= 5.16.0, < 6.0.0"
+      version = ">= 5.17.0, < 6.0.0"
     }
 
     # see https://registry.terraform.io/providers/hashicorp/tfe/0.42.0/
