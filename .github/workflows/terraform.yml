@@ -16,23 +16,23 @@ jobs:
     steps:
       # see https://github.com/actions/checkout
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: "actions/checkout@v3"
         with:
           fetch-depth: 1
 
       # see https://github.com/hashicorp/setup-terraform
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: "hashicorp/setup-terraform@v2"
         with:
           terraform_wrapper: false
-          terraform_version: ${{ secrets.TERRAFORM_VERSION }}
+          terraform_version: "${{ secrets.TERRAFORM_VERSION }}"
 
-      - name: Initialize Terraform for Module
+      - name: Initialize Terraform
         run: terraform init
         env:
           working-dir: "./"
 
-      - name: Format Terraform code for Module
+      - name: Format Terraform Code
         run: terraform fmt -check -recursive
         env:
           working-dir: "./"
