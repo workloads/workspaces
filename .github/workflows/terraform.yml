@@ -16,13 +16,13 @@ jobs:
     steps:
       # see https://github.com/actions/checkout
       - name: Checkout Repository
-        uses: "actions/checkout@v3"
+        uses: "checkout@v3.5.0"
         with:
           fetch-depth: 1
 
       # see https://github.com/hashicorp/setup-terraform
       - name: Set up Terraform
-        uses: "hashicorp/setup-terraform@v2"
+        uses: "setup-terraform@v2.0.3"
         with:
           terraform_wrapper: false
           terraform_version: "${{ vars.TERRAFORM_VERSION }}"
