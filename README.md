@@ -1,14 +1,15 @@
-# Terraform Cloud Workspace: `workspaces`
+# Terraform Cloud Workspace `workspaces`
 
 > This directory manages the lifecycle of (other) Terraform Cloud Workspace configurations for [@workloads](https://github.com/workloads).
 
 ## Table of Contents
 
 <!-- TOC -->
-* [Terraform Cloud Workspace: `workspaces`](#terraform-cloud-workspace--workspaces)
+* [Terraform Cloud Workspace `workspaces`](#terraform-cloud-workspace-workspaces)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
   * [Diagrams](#diagrams)
+    * [Terraform Cloud Workspace Structure](#terraform-cloud-workspace-structure)
   * [Usage](#usage)
     * [Inputs](#inputs)
     * [Outputs](#outputs)
