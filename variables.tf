@@ -185,7 +185,7 @@ variable "okta_org_name" {
 variable "okta_api_token" {
   type        = string
   description = "Okta API Token."
-  sensitive = true
+  sensitive   = true
 }
 
 variable "snyk_org" {
