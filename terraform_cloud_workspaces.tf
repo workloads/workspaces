@@ -190,7 +190,7 @@ resource "tfe_workspace" "users" {
   assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  execution_mode                = "local"
+  execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "User Directory Management for `${var.project_identifier}`."
   name                          = "users"
@@ -198,7 +198,7 @@ resource "tfe_workspace" "users" {
   structured_run_output_enabled = true
 
   tag_names = [
-    var.tags.exec_local,
+    var.tags.exec_remote,
     var.tags.region_global,
     var.tags.service_okta,
     var.tags.type_provision,
