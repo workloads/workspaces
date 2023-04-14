@@ -1,18 +1,25 @@
+# The `owners` team is a pre-existing resource and must be imported before it can be used through the `tfe` provider.
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team
 resource "tfe_team" "owners" {
   name         = "owners"
   organization = var.tfe_organization_name
-  visibility   = "organization"
 
+  # owners are generally kept secret as they present an attack vector
+  visibility   = "secret"
+
+  # see https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions
   organization_access {
     manage_policies         = true
     manage_policy_overrides = true
     manage_workspaces       = true
     manage_vcs_settings     = true
     manage_providers        = true
-    manage_modules          = false
+    manage_modules          = true
     manage_run_tasks        = true
     manage_projects         = true
+
+    read_projects   = true
+    read_workspaces = true
   }
 }
 
