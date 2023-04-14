@@ -20,7 +20,7 @@ jobs:
           ref: "${{ github.event.pull_request.head.ref }}"
           fetch-depth: 1
 
-      # see https://github.com/terraform-docs/gh-actions
+      # see https://github.com/terraform-docs/gh-actions/releases/tag/v1.0.0
       - name: Render documentation for repository and push changes back to branch
         uses: "gh-actions@v1.0.0" # v1.0.0
         with:
