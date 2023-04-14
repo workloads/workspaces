@@ -216,6 +216,7 @@ variable "tags" {
     service_gcp     = "service:googlecloud"
     service_github  = "service:github"
     service_datadog = "service:datadog"
+    service_okta    = "service:okta"
     service_snyk    = "service:snyk"
 
     # Infrastructure Geo-Deployment Zones
