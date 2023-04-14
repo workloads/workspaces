@@ -18,6 +18,9 @@ module "aws_variables" {
 
     # needed for Regional Workspace deployments
     tfe_workspace.regional_workspaces.id,
+
+    # needed for AWS IAM configuration
+    tfe_workspace.users.id,
   ]
 }
 
@@ -204,6 +207,7 @@ module "project_variables" {
     tfe_workspace.networking.id,
     tfe_workspace.services_configuration.id,
     tfe_workspace.services_deployment.id,
+    tfe_workspace.users.id,
   ]
 }
 
