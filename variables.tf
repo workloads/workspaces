@@ -177,6 +177,17 @@ variable "csp_configuration" {
   ]
 }
 
+variable "okta_org_name" {
+  type        = string
+  description = "Okta Organization Name."
+}
+
+variable "okta_api_token" {
+  type        = string
+  description = "Okta API Token."
+  sensitive = true
+}
+
 variable "snyk_org" {
   type        = string
   description = "Snyk Organization Name."
@@ -434,6 +445,23 @@ locals {
       category    = "env"
       value       = var.hcp_viewer_secret
       description = "OAuth2 Client Secret for API operations."
+      sensitive   = true
+    },
+  ]
+
+  okta_variables = [
+    {
+      key         = "okta_org_name"
+      category    = "terraform"
+      value       = var.okta_org_name
+      description = "Okta Organization Name."
+      sensitive   = false
+    },
+    {
+      key         = "okta_api_token"
+      category    = "terraform"
+      value       = var.okta_api_token
+      description = "Okta API Token."
       sensitive   = true
     },
   ]

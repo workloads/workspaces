@@ -207,6 +207,23 @@ module "project_variables" {
   ]
 }
 
+module "okta_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Okta-specific Variables."
+  name         = "Okta"
+  organization = tfe_organization.main.name
+
+  variables = local.okta_variables
+
+  workspace_ids = [
+    # needed for Okta configuration
+    tfe_workspace.users.id,
+  ]
+}
+
 module "terraform_cloud_oauth_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
