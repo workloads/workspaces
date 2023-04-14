@@ -107,6 +107,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | infracost_org | Infracost Organization Identifier. | `string` | yes |
 | infracost_runtask_hmac_key | HMAC Key for Infracost Run Task integration. | `string` | yes |
 | infracost_runtask_url | URL for Infracost Run Task integration. | `string` | yes |
+| okta_api_token | Okta API Token. | `string` | yes |
+| okta_org_name | Okta Organization Name. | `string` | yes |
 | snyk_org | Snyk Organization Name. | `string` | yes |
 | snyk_runtask_hmac_key | HMAC Key for Snyk Run Task integration. | `string` | yes |
 | snyk_runtask_url | URL for Snyk Run Task integration. | `string` | yes |
