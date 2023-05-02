@@ -1,25 +1,32 @@
-# Make configuration
-MAKEFLAGS      = --no-builtin-rules --silent --warn-undefined-variables
-SHELL         := sh
+# Makefile for Terraform Cloud Workspaces Seeding
 
-.DEFAULT_GOAL := help
-.ONESHELL     :
+# see https://www.gnu.org/software/make/manual/html_node/Options_002fRecursion.html
+MAKEFLAGS      = --no-builtin-rules --silent --warn-undefined-variables
+
+# see https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html
+SHELL         := sh
 .SHELLFLAGS   := -eu -c
 
-color_off    = $(shell tput sgr0)
-color_bright = $(shell tput bold)
-op_account   = workloads.1password.com
-op_env_file  = terraform.op.env
-args         =
+# see https://www.gnu.org/software/make/manual/html_node/Goals.html
+.DEFAULT_GOAL := help
+
+# see https://www.gnu.org/software/make/manual/html_node/One-Shell.html
+.ONESHELL     :
+
+COLOR_OFF    = $(shell tput sgr0)
+COLOR_BRIGHT = $(shell tput bold)
+OP_ACCOUNT   = workloads.1password.com
+OP_ENV_FILE  = terraform.op.env
+ARGS         =
 
 define missing_command
 	$(error Missing command for `terraform`. Specify with `make terraform command=plan`)
 endef
 
 .SILENT .PHONY: help
-help: # Displays this help text
+help: # Displays a list of all Make Targets
 	$(info )
-	$(info $(color_bright)TERRAFORM SEED WORKSPACE$(color_off))
+	$(info $(COLOR_BRIGHT)TERRAFORM SEED WORKSPACE$(COLOR_OFF))
 	grep \
 		--context=0 \
 		--devices=skip \
@@ -38,8 +45,8 @@ print-secrets: # Prints sanitized environment variables (requires the `envo` CLI
 # see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
-		  --account="$(op_account)" \
-			--env-file="$(op_env_file)" \
+		  --account="$(OP_ACCOUNT)" \
+			--env-file="$(OP_ENV_FILE)" \
 			--no-masking \
 			-- \
 			envo --truncLength=3 | \
@@ -52,17 +59,17 @@ terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, des
 
 	op \
 		run \
-			--account="$(op_account)" \
-			--env-file="$(op_env_file)" \
+			--account="$(OP_ACCOUNT)" \
+			--env-file="$(OP_ENV_FILE)" \
 			-- \
-			terraform $(command) $(args)
+			terraform $(command) $(ARGS)
 
 .SILENT .PHONY: import
 import: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
 # see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
-			--account="$(op_account)" \
-			--env-file="$(op_env_file)" \
+			--account="$(OP_ACCOUNT)" \
+			--env-file="$(OP_ENV_FILE)" \
 			-- \
 			terraform import '<Terraform Resource Identifier>' '<Remote API identifier>'
