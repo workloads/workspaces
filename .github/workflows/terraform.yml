@@ -2,6 +2,7 @@
 # see https://github.com/workloads/github-organization/blob/main/templates/workflows/terraform.tftpl.yml
 
 ---
+
 name: "Code Quality: Terraform"
 
 # yamllint disable-line rule:truthy
