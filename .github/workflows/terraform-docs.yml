@@ -2,6 +2,7 @@
 # see https://github.com/workloads/github-organization/blob/main/templates/workflows/terraform-docs.tftpl.yml
 
 ---
+
 name: "Documentation: terraform-docs"
 
 # yamllint disable-line rule:truthy
