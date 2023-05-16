@@ -12,6 +12,10 @@ on:
 jobs:
   terraform:
     name: Terraform
+
+    # only run if workflows are enabled
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+
     runs-on: ubuntu-latest
 
     steps:
