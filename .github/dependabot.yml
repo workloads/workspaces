@@ -7,7 +7,6 @@ version: 2
 
 # see https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 updates:
-
   # ensure GitHub Action Workflow files are up-to-date for `main`
   - package-ecosystem: github-actions
     directory: "/"
