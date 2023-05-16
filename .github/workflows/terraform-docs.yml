@@ -16,6 +16,21 @@ jobs:
     # only run if workflows are enabled
     if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
 
+    permissions:
+      actions: none
+      checks: none
+      contents: write
+      deployments: none
+      id-token: none
+      issues: none
+      discussions: none
+      packages: none
+      pages: none
+      pull-requests: read
+      repository-projects: none
+      security-events: none
+      statuses: none
+
     runs-on: ubuntu-latest
 
     steps:
