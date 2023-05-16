@@ -16,6 +16,7 @@ jobs:
     # only run if workflows are enabled
     if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
 
+    # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
     permissions:
       actions: none
       checks: none
