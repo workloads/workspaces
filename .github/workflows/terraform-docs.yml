@@ -11,6 +11,11 @@ on:
 
 jobs:
   docs:
+    name: Terraform Docs
+
+    # only run if workflows are enabled
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+
     runs-on: ubuntu-latest
 
     steps:
