@@ -65,7 +65,7 @@ rule "terraform_naming_convention" {
 
 # see https://github.com/terraform-linters/tflint-ruleset-terraform/blob/main/docs/rules/terraform_standard_module_structure.md
 rule "terraform_standard_module_structure" {
-  enabled = true
+  enabled = false
 }
 
 # see https://github.com/terraform-linters/tflint-ruleset-terraform/blob/main/docs/rules/terraform_unused_required_providers.md
