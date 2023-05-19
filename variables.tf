@@ -189,6 +189,23 @@ variable "okta_api_token" {
   sensitive   = true
 }
 
+variable "pagerduty_key_readwrite" {
+  type        = string
+  description = "PagerDuty Read-Write Key."
+  sensitive   = true
+}
+
+variable "pagerduty_key_readonly" {
+  type        = string
+  description = "PagerDuty Read-Only Key."
+  sensitive   = true
+}
+
+variable "pagerduty_subdomain" {
+  type        = string
+  description = "PagerDuty Subdomain"
+}
+
 variable "snyk_org" {
   type        = string
   description = "Snyk Organization Name."
@@ -469,6 +486,30 @@ locals {
       value       = var.okta_api_token
       description = "Okta API Token."
       sensitive   = true
+    },
+  ]
+
+  pagerduty_variables = [
+    {
+      key         = "key_rw"
+      category    = "terraform"
+      value       = var.pagerduty_key_readwrite
+      description = "PagerDuty Read-Write Key."
+      sensitive   = true
+    },
+    {
+      key         = "key_ro"
+      category    = "terraform"
+      value       = var.pagerduty_key_readonly
+      description = "PagerDuty Read-Only Key."
+      sensitive   = true
+    },
+    {
+      key         = "subdomain"
+      category    = "terraform"
+      value       = var.pagerduty_subdomain
+      description = "PagerDuty Subdomain."
+      sensitive   = false
     },
   ]
 

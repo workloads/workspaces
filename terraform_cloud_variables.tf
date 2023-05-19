@@ -228,6 +228,22 @@ module "okta_variables" {
   ]
 }
 
+module "pagerduty_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "PagerDuty-specific Variables."
+  name         = "PagerDuty"
+  organization = tfe_organization.main.name
+
+  variables = local.pagerduty_variables
+
+  workspace_ids = [
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "terraform_cloud_oauth_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"

@@ -108,6 +108,9 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | infracost_runtask_url | URL for Infracost Run Task integration. | `string` | yes |
 | okta_api_token | Okta API Token. | `string` | yes |
 | okta_org_name | Okta Organization Name. | `string` | yes |
+| pagerduty_readonly_key | PagerDuty Read-Only Key. | `string` | yes |
+| pagerduty_readwrite_key | PagerDuty Read-Write Key. | `string` | yes |
+| pagerduty_subdomain | PagerDuty Subdomain | `string` | yes |
 | snyk_runtask_hmac_key | HMAC Key for Snyk Run Task integration. | `string` | yes |
 | snyk_runtask_url | URL for Snyk Run Task integration. | `string` | yes |
 | snyk_token | Snyk API Auth Token. | `string` | yes |

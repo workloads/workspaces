@@ -17,6 +17,7 @@ output "variable_set_urls" {
     "${local.base_url}/settings/varsets/${module.hcp_vault_aws_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.hcp_viewer_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.okta_variables.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.pagerduty_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.project_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.terraform_cloud_oauth_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.terraform_cloud_variables.tfe_variable_set.id}",
