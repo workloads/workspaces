@@ -221,6 +221,17 @@ variable "csp_configuration" {
   ]
 }
 
+variable "mondoo_space_id" {
+  type = string
+  description = "Mondoo Space Identifier."
+}
+
+variable "mondoo_credential" {
+  type = string
+  description = "Mondoo Credential."
+  sensitive = true
+}
+
 variable "okta_org_name" {
   type        = string
   description = "Okta Organization Name."
@@ -568,6 +579,37 @@ locals {
       category    = "env"
       value       = var.hcp_viewer_secret
       description = "OAuth2 Client Secret for API operations."
+      sensitive   = true
+    },
+  ]
+
+  mondoo_variables = [
+    {
+      key         = "mondoo_space_id"
+      category    = "terraform"
+      value       = var.mondoo_space_id
+      description = "Mondoo Space Identifier."
+      sensitive   = false
+    },
+    {
+      key         = "mondoo_credential"
+      category    = "terraform"
+      value       = var.mondoo_credential
+      description = "Mondoo Credential."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_write_token"
+      category    = "terraform"
+      value       = var.docker_read_write_token
+      description = "Docker Hub Read / Write Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_token"
+      category    = "terraform"
+      value       = var.docker_read_token
+      description = "Docker Hub Read Token."
       sensitive   = true
     },
   ]

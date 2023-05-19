@@ -240,6 +240,22 @@ module "hcp_viewer_variables" {
   workspace_ids = []
 }
 
+module "mondoo_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Mondoo-specific Variables. See https://console.mondoo.com/space/overview."
+  name         = "Mondoo"
+  organization = tfe_organization.main.name
+
+  variables = local.mondoo_variables
+
+  workspace_ids = [
+    # TODO
+  ]
+}
+
 module "okta_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
