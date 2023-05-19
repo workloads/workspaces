@@ -247,6 +247,66 @@ resource "tfe_workspace" "website" {
   #  }
 }
 
+# may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "web_assets" {
+  assessments_enabled           = true
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
+  execution_mode                = "local"
+  file_triggers_enabled         = true
+  description                   = "Web Assets for `${var.project_identifier}`."
+  name                          = "web-assets"
+  organization                  = tfe_organization.main.name
+  structured_run_output_enabled = true
+
+  tag_names = [
+    var.tags.exec_local,
+    "${var.tags.region_prefix}:${var.management_region_aws}",
+    var.tags.service_aws,
+    var.tags.type_provision,
+  ]
+
+  terraform_version = var.tfe_workspace_terraform_version
+
+  # TODO: re-enable when appropriate
+  #  vcs_repo {
+  #    branch         = "main"
+  #    identifier     = local.repository_slugs.web_assets
+  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #  }
+}
+
+# may be imported like so: `terraform import tfe_workspace.web_redirects workloads/web_redirects`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "web_redirects" {
+  assessments_enabled           = true
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
+  execution_mode                = "local"
+  file_triggers_enabled         = true
+  description                   = "Short URLs for `${var.project_identifier}`."
+  name                          = "web-redirects"
+  organization                  = tfe_organization.main.name
+  structured_run_output_enabled = true
+
+  tag_names = [
+    var.tags.exec_local,
+    "${var.tags.region_prefix}:${var.management_region_aws}",
+    var.tags.service_aws,
+    var.tags.type_provision,
+  ]
+
+  terraform_version = var.tfe_workspace_terraform_version
+
+  # TODO: re-enable when appropriate
+  #  vcs_repo {
+  #    branch         = "main"
+  #    identifier     = local.repository_slugs.web_redirects
+  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #  }
+}
+
 # may be imported like so: `terraform import tfe_workspace.workspaces workloads/workspaces`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "workspaces" {

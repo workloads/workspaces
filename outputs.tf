@@ -33,6 +33,8 @@ output "workspace_urls" {
     "${local.base_url}/workspaces/${tfe_workspace.services_configuration.name}",
     "${local.base_url}/workspaces/${tfe_workspace.services_deployment.name}",
     "${local.base_url}/workspaces/${tfe_workspace.website.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.web_assets.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.web_redirects.name}",
     "${local.base_url}/workspaces/${tfe_workspace.workspaces.name}",
   ]
 }
