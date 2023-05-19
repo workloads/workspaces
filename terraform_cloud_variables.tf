@@ -58,6 +58,39 @@ module "datadog_variables" {
   ]
 }
 
+module "discord_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Discord-specific Variables. See https://discord.com/developers/applications."
+  name         = "Discord"
+  organization = tfe_organization.main.name
+
+  variables = local.discord_variables
+
+  workspace_ids = [
+    # needed for Discord configuration
+    #tfe_workspace.community.id,
+  ]
+}
+
+module "docker_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Docker-specific Variables. See https://hub.docker.com/settings/general."
+  name         = "Docker"
+  organization = tfe_organization.main.name
+
+  variables = local.docker_variables
+
+  workspace_ids = [
+    # TODO
+  ]
+}
+
 module "gandi_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"

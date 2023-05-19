@@ -94,8 +94,13 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | datadog_api_url | Datadog API URL. | `string` | yes |
 | datadog_api_zone | Datadog API Zone. | `string` | yes |
 | datadog_app_key | Datadog App Key. | `string` | yes |
+| discord_token | Discord API Token. | `string` | yes |
+| docker_read_token | Docker Hub Read Token. | `string` | yes |
+| docker_read_write_delete_token | Docker Hub Read / Write / Delete Token. | `string` | yes |
+| docker_read_write_token | Docker Hub Read / Write Token. | `string` | yes |
 | gandi_key | This is the Gandi API Key. | `string` | yes |
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
+| gitguardian_token | GitGuardian Service Account Token. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |
 | hcp_boundary_admin_password | HCP Boundary Cluster Admin Password. | `string` | yes |
 | hcp_boundary_admin_username | HCP Boundary Cluster Admin Username. | `string` | yes |
@@ -108,8 +113,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | infracost_runtask_url | URL for Infracost Run Task integration. | `string` | yes |
 | okta_api_token | Okta API Token. | `string` | yes |
 | okta_org_name | Okta Organization Name. | `string` | yes |
-| pagerduty_readonly_key | PagerDuty Read-Only Key. | `string` | yes |
-| pagerduty_readwrite_key | PagerDuty Read-Write Key. | `string` | yes |
+| pagerduty_key_read | PagerDuty Read-Only Key. | `string` | yes |
+| pagerduty_key_readwrite | PagerDuty Read-Write Key. | `string` | yes |
 | pagerduty_subdomain | PagerDuty Subdomain | `string` | yes |
 | snyk_runtask_hmac_key | HMAC Key for Snyk Run Task integration. | `string` | yes |
 | snyk_runtask_url | URL for Snyk Run Task integration. | `string` | yes |
@@ -117,6 +122,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | tfe_oauth_client_id | VCS Provider OAuth Client Identifier. | `string` | yes |
 | tfe_organization_email | Admin email address. | `string` | yes |
 | csp_configuration | Project-wide List of Cloud Service Providers (CSPs). | <pre>list(object({<br>    name    = string<br>    prefix  = string<br>    enabled = bool<br>  }))</pre> | no |
+| docker_username | Docker Hub Username. | `string` | no |
+| gitguardian_user | GitGuardian Service Account User. | `string` | no |
 | github_owner | This is the target GitHub organization or individual user account to manage. | `string` | no |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
 | project_identifier | Human-readable Project Identifier. | `string` | no |

@@ -43,6 +43,37 @@ variable "datadog_app_key" {
   sensitive   = true
 }
 
+variable "discord_token" {
+  type        = string
+  description = "Discord API Token."
+  sensitive   = true
+}
+
+variable "docker_username" {
+  type        = string
+  description = "Docker Hub Username."
+  default     = "workloadsbot"
+}
+
+variable "docker_read_write_delete_token" {
+  type        = string
+  description = "Docker Hub Read / Write / Delete Token."
+  sensitive   = true
+}
+
+variable "docker_read_write_token" {
+  type        = string
+  description = "Docker Hub Read / Write Token."
+  sensitive   = true
+}
+
+variable "docker_read_token" {
+  type        = string
+  description = "Docker Hub Read Token."
+  sensitive   = true
+}
+
+
 variable "gandi_key" {
   type        = string
   description = "This is the Gandi API Key."
@@ -207,7 +238,7 @@ variable "pagerduty_key_readwrite" {
   sensitive   = true
 }
 
-variable "pagerduty_key_readonly" {
+variable "pagerduty_key_read" {
   type        = string
   description = "PagerDuty Read-Only Key."
   sensitive   = true
@@ -401,6 +432,47 @@ locals {
     },
   ]
 
+  discord_variables = [
+    {
+      key         = "discord_token"
+      category    = "terraform"
+      value       = var.discord_token
+      description = "Discord API Token."
+      sensitive   = true
+    },
+  ]
+
+  docker_variables = [
+    {
+      key         = "docker_username"
+      category    = "terraform"
+      value       = var.docker_username
+      description = "Docker Hub Username."
+      sensitive   = false
+    },
+    {
+      key         = "docker_read_write_delete_token"
+      category    = "terraform"
+      value       = var.docker_read_write_delete_token
+      description = "Docker Hub Read / Write / Delete Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_write_token"
+      category    = "terraform"
+      value       = var.docker_read_write_token
+      description = "Docker Hub Read / Write Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_token"
+      category    = "terraform"
+      value       = var.docker_read_token
+      description = "Docker Hub Read Token."
+      sensitive   = true
+    },
+  ]
+
   gandi_variables = [
     {
       key         = "gandi_key"
@@ -528,7 +600,7 @@ locals {
     {
       key         = "key_ro"
       category    = "terraform"
-      value       = var.pagerduty_key_readonly
+      value       = var.pagerduty_key_read
       description = "PagerDuty Read-Only Key."
       sensitive   = true
     },
