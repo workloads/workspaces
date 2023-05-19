@@ -56,6 +56,7 @@ variable "gandi_sharing_id" {
 variable "github_owner" {
   type        = string
   description = "This is the target GitHub organization or individual user account to manage."
+  default     = "workloads"
 }
 
 variable "github_token" {
@@ -191,6 +192,7 @@ variable "okta_api_token" {
 variable "snyk_org" {
   type        = string
   description = "Snyk Organization Name."
+  default     = "workloads"
 }
 
 variable "snyk_runtask_hmac_key" {
@@ -257,6 +259,7 @@ variable "tfe_organization_email" {
 variable "tfe_organization_name" {
   type        = string
   description = "Name of the organization."
+  default     = "workloads"
 }
 
 variable "tfe_organization_owners" {
