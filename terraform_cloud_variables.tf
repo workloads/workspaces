@@ -3,7 +3,7 @@ module "auth0_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Auth0-specific Variables. See https://manage.auth0.com/dashboard/ for more information."
+  description  = "Auth0-specific Variables. See https://manage.auth0.com/dashboard/."
   name         = "Auth0"
   organization = tfe_organization.main.name
 
@@ -46,7 +46,7 @@ module "datadog_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys for more information."
+  description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys."
   name         = "Datadog"
   organization = tfe_organization.main.name
 
@@ -63,7 +63,7 @@ module "gandi_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${tfe_organization.main.name}/security for more information."
+  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${tfe_organization.main.name}/security."
   name         = "Gandi.net"
   organization = tfe_organization.main.name
 
@@ -117,7 +117,7 @@ module "hcp_boundary_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Boundary-specific Variables. See https://portal.cloud.hashicorp.com/services/boundary/clusters/list for more information."
+  description  = "HCP Boundary-specific Variables. See https://portal.cloud.hashicorp.com/services/boundary/clusters/list."
   name         = "Boundary"
   organization = tfe_organization.main.name
 
@@ -180,7 +180,7 @@ module "hcp_vault_aws_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Vault-specific Variables. See https://portal.cloud.hashicorp.com/services/vault/clusters for more information."
+  description  = "HCP Vault-specific Variables. See https://portal.cloud.hashicorp.com/services/vault/clusters."
   name         = "Vault"
   organization = tfe_organization.main.name
 
@@ -293,7 +293,7 @@ module "terraform_cloud_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens"
+  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens."
   name         = "Terraform Cloud"
   organization = tfe_organization.main.name
 
