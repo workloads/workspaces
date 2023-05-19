@@ -190,6 +190,23 @@ module "hcp_viewer_variables" {
   workspace_ids = []
 }
 
+module "okta_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Okta-specific Variables."
+  name         = "Okta"
+  organization = tfe_organization.main.name
+
+  variables = local.okta_variables
+
+  workspace_ids = [
+    # needed for Okta configuration
+    tfe_workspace.users.id,
+  ]
+}
+
 module "project_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
@@ -210,23 +227,6 @@ module "project_variables" {
   ]
 }
 
-module "okta_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
-  source  = "ksatirli/variable-set/tfe"
-  version = "1.0.0"
-
-  description  = "Okta-specific Variables."
-  name         = "Okta"
-  organization = tfe_organization.main.name
-
-  variables = local.okta_variables
-
-  workspace_ids = [
-    # needed for Okta configuration
-    tfe_workspace.users.id,
-  ]
-}
-
 module "pagerduty_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
@@ -241,6 +241,16 @@ module "pagerduty_variables" {
   workspace_ids = [
     tfe_workspace.services_configuration.id,
   ]
+}
+
+# set Regional Workspaces-specific version of Terraform
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
+resource "tfe_variable" "regional_workspaces_terraform_version" {
+  key          = "terraform_version"
+  value        = var.tfe_workspace_terraform_version
+  category     = "terraform"
+  description  = "Terraform version to use for Regional Workspaces."
+  workspace_id = tfe_workspace.regional_workspaces.id
 }
 
 module "terraform_cloud_oauth_variables" {
@@ -296,16 +306,6 @@ module "terraform_cloud_variables" {
     # needed for updating of Terraform Cloud Variable Sets
     tfe_workspace.services_deployment.id,
   ]
-}
-
-# set Regional Workspaces-specific version of Terraform
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "regional_workspaces_terraform_version" {
-  key          = "terraform_version"
-  value        = var.tfe_workspace_terraform_version
-  category     = "terraform"
-  description  = "Terraform version to use for Regional Workspaces."
-  workspace_id = tfe_workspace.regional_workspaces.id
 }
 
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
