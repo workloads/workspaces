@@ -10,6 +10,7 @@ output "variable_set_urls" {
     "${local.base_url}/settings/varsets/${module.auth0_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.datadog_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.gandi_variables.tfe_variable_set.id}",
+    "${local.base_url}/settings/varsets/${module.gitguardian_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.github_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.hcp_boundary_variables.tfe_variable_set.id}",
     "${local.base_url}/settings/varsets/${module.hcp_network_ids.tfe_variable_set.id}",

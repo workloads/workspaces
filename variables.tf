@@ -53,6 +53,18 @@ variable "gandi_sharing_id" {
   description = "This is the Gandi Sharing ID."
 }
 
+variable "gitguardian_user" {
+  type        = string
+  description = "GitGuardian Service Account User."
+  default     = "workloads-bot"
+}
+
+variable "gitguardian_token" {
+  type        = string
+  description = "GitGuardian Service Account Token."
+  sensitive   = true
+}
+
 variable "github_owner" {
   type        = string
   description = "This is the target GitHub organization or individual user account to manage."
@@ -401,6 +413,22 @@ locals {
       category    = "terraform"
       value       = var.gandi_sharing_id
       description = "Gandi Sharing ID."
+      sensitive   = true
+    },
+  ]
+
+  gitguardian_variables = [
+    {
+      key         = "gitguardian_user"
+      category    = "terraform"
+      value       = var.gitguardian_user
+      description = "GitGuardian Service Account User."
+      sensitive   = false
+      }, {
+      key         = "gitguardian_token"
+      category    = "terraform"
+      value       = var.gitguardian_token
+      description = "GitGuardian Service Account Token."
       sensitive   = true
     },
   ]

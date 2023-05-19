@@ -75,6 +75,23 @@ module "gandi_variables" {
   ]
 }
 
+module "gitguardian_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "GitGuardian-specific Variables. See https://dashboard.gitguardian.com/."
+  name         = "GitGuardian (Service Account: `${var.gitguardian_user}`)"
+  organization = tfe_organization.main.name
+
+  variables = local.gitguardian_variables
+
+  workspace_ids = [
+    # needed for Secrets Leak detection
+    tfe_workspace.repositories.id,
+  ]
+}
+
 module "github_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
