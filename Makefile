@@ -13,8 +13,6 @@ SHELL         := sh
 # see https://www.gnu.org/software/make/manual/html_node/One-Shell.html
 .ONESHELL     :
 
-COLOR_OFF    = $(shell tput sgr0)
-COLOR_BRIGHT = $(shell tput bold)
 OP_ACCOUNT   = workloads.1password.com
 OP_ENV_FILE  = terraform.op.env
 ARGS         =
@@ -24,9 +22,11 @@ define missing_command
 endef
 
 .SILENT .PHONY: help
-help: # Displays a list of all Make Targets
+help: # display a list of Make Targets                     Usage: `make` or `make help`
 	$(info )
-	$(info $(COLOR_BRIGHT)TERRAFORM SEED WORKSPACE$(COLOR_OFF))
+	$(info $(shell tput bold)TERRAFORM WORKSPACES SEEDER$(shell tput sgr0))
+	$(info )
+
 	grep \
 		--context=0 \
 		--devices=skip \
@@ -41,8 +41,8 @@ help: # Displays a list of all Make Targets
 	$(info )
 
 .SILENT .PHONY: print-secrets
-print-secrets: # Prints sanitized environment variables (requires the `envo` CLI application)
-# see https://developer.1password.com/docs/cli/reference/commands/run
+print-secrets: # print (sanitized) environment variables            Usage: `make print-secrets`
+	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
 		  --account="$(OP_ACCOUNT)" \
@@ -53,10 +53,10 @@ print-secrets: # Prints sanitized environment variables (requires the `envo` CLI
 			grep "TF_VAR_"
 
 .SILENT .PHONY: terraform
-terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
-# see https://developer.1password.com/docs/cli/reference/commands/run
+terraform: # execute `terraform` with a specific command        Usage `make terraform command=<plan, apply>`
 	$(if $(command),,$(call missing_command))
 
+	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
 			--account="$(OP_ACCOUNT)" \
@@ -65,8 +65,8 @@ terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, des
 			terraform $(command) $(ARGS)
 
 .SILENT .PHONY: import
-import: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
-# see https://developer.1password.com/docs/cli/reference/commands/run
+import: # execute `terraform import`                         Usage `make import`
+	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
 			--account="$(OP_ACCOUNT)" \
