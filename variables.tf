@@ -329,16 +329,6 @@ variable "tfe_workspace_terraform_version" {
 }
 
 locals {
-  aws_variables = [
-    {
-      key         = "management_region_aws"
-      category    = "terraform"
-      value       = var.management_region_aws
-      description = "AWS-specific Management Region Identifier."
-      sensitive   = false
-    },
-  ]
-
   auth0_variables = [
     {
       key         = "auth0_client_id"
@@ -357,6 +347,16 @@ locals {
       category    = "terraform"
       value       = var.auth0_domain
       description = "Auth0 Domain Name."
+      sensitive   = false
+    },
+  ]
+
+  aws_variables = [
+    {
+      key         = "management_region_aws"
+      category    = "terraform"
+      value       = var.management_region_aws
+      description = "AWS-specific Management Region Identifier."
       sensitive   = false
     },
   ]
