@@ -1,44 +1,20 @@
 # Makefile for Terraform Cloud Workspaces Seeding
 
-# see https://www.gnu.org/software/make/manual/html_node/Options_002fRecursion.html
-MAKEFLAGS      = --no-builtin-rules --silent --warn-undefined-variables
+include ../tooling/make/configs/shared.mk
 
-# see https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html
-SHELL         := sh
-.SHELLFLAGS   := -eu -c
+include ../tooling/make/functions/shared.mk
 
-# see https://www.gnu.org/software/make/manual/html_node/Goals.html
-.DEFAULT_GOAL := help
-
-# see https://www.gnu.org/software/make/manual/html_node/One-Shell.html
-.ONESHELL     :
-
-OP_ACCOUNT   = workloads.1password.com
+# configuration
+TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 OP_ENV_FILE  = terraform.op.env
 ARGS         =
 
-define missing_command
-	$(error Missing command for `terraform`. Specify with `make terraform command=plan`)
-endef
+# include Terraform-generated configuration data
+include ../assets/scripts/_config.mk
 
-.SILENT .PHONY: help
-help: # display a list of Make Targets                     Usage: `make` or `make help`
-	$(info )
-	$(info $(shell tput bold)TERRAFORM WORKSPACES SEEDER$(shell tput sgr0))
-	$(info )
+include ../tooling/make/functions/maintenance.mk
 
-	grep \
-		--context=0 \
-		--devices=skip \
-		--extended-regexp \
-		--no-filename \
-			"(^[a-z-]+):{1} ?(?:[a-z-])* #" $(MAKEFILE_LIST) | \
-	awk 'BEGIN {FS = ":.*?# "}; {printf "\033[1m%s\033[0m;%s\n", $$1, $$2}' | \
-	column \
-		-c2 \
-		-s ";" \
-		-t
-	$(info )
+include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
 print-secrets: # print (sanitized) environment variables            Usage: `make print-secrets`
@@ -53,8 +29,8 @@ print-secrets: # print (sanitized) environment variables            Usage: `make
 			grep "TF_VAR_"
 
 .SILENT .PHONY: terraform
-terraform: # execute `terraform` with a specific command        Usage `make terraform command=<plan, apply>`
-	$(if $(command),,$(call missing_command))
+terraform: # execute `terraform` with a specific command [Usage: `make terraform command=<plan, apply>`]
+	$(if $(command),,$(call missing_subcommand,terraform,command=init))
 
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
