@@ -222,14 +222,14 @@ variable "csp_configuration" {
 }
 
 variable "mondoo_space_id" {
-  type = string
+  type        = string
   description = "Mondoo Space Identifier."
 }
 
 variable "mondoo_credential" {
-  type = string
+  type        = string
   description = "Mondoo Credential."
-  sensitive = true
+  sensitive   = true
 }
 
 variable "okta_org_name" {

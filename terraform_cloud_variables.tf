@@ -38,6 +38,12 @@ module "aws_variables" {
 
     # needed for AWS IAM configuration
     tfe_workspace.users.id,
+
+    # needed for AWS Region configuration
+    tfe_workspace.web_assets.id,
+
+    # needed for AWS Region configuration
+    tfe_workspace.web_redirects.id,
   ]
 }
 
