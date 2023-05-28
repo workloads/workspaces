@@ -250,9 +250,11 @@ resource "tfe_workspace" "website" {
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_assets" {
-  assessments_enabled           = true
-  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  auto_apply                    = var.tfe_workspace_auto_apply
+  assessments_enabled = true
+  allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
+  auto_apply          = var.tfe_workspace_auto_apply
+
+  # TODO: switch to remote
   execution_mode                = "local"
   file_triggers_enabled         = true
   description                   = "Web Assets for `${var.project_identifier}`."
@@ -280,9 +282,11 @@ resource "tfe_workspace" "web_assets" {
 # may be imported like so: `terraform import tfe_workspace.web_redirects workloads/web_redirects`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_redirects" {
-  assessments_enabled           = true
-  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  auto_apply                    = var.tfe_workspace_auto_apply
+  assessments_enabled = true
+  allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
+  auto_apply          = var.tfe_workspace_auto_apply
+
+  # TODO: switch to remote
   execution_mode                = "local"
   file_triggers_enabled         = true
   description                   = "Short URLs for `${var.project_identifier}`."
