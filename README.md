@@ -1,6 +1,6 @@
 # Terraform Cloud Workspace `workspaces`
 
-> This directory manages the lifecycle of (other) Terraform Cloud Workspace configurations for [@workloads](https://github.com/workloads).
+> This directory manages Terraform Cloud Workspaces for [@workloads](https://github.com/workloads).
 
 ## Table of Contents
 
@@ -150,7 +150,13 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 ## Notes
 
-Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
+* Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
+
+* Colorized CLI output may be disabled by setting the `NO_COLOR` environment variable to any non-empty value.
+
+```shell
+export NO_COLOR=1 && make
+```
 
 ## Author Information
 
