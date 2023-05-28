@@ -1,23 +1,23 @@
 # Makefile for Terraform Cloud Workspaces Seeding
 
+# configuration
+TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
+OP_ENV_FILE  = workspaces.op.env
+ARGS         =
+
 include ../tooling/make/configs/shared.mk
 
 include ../tooling/make/functions/shared.mk
 
-# configuration
-TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
-OP_ENV_FILE  = terraform.op.env
-ARGS         =
-
 # include Terraform-generated configuration data
-include ../assets/scripts/_config.mk
+include ../tooling/make/configs/github.mk
 
 include ../tooling/make/functions/maintenance.mk
 
 include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
-print-secrets: # print (sanitized) environment variables            Usage: `make print-secrets`
+print-secrets: # print (sanitized) environment variables [Usage: `make print-secrets`]
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
@@ -29,8 +29,8 @@ print-secrets: # print (sanitized) environment variables            Usage: `make
 			grep "TF_VAR_"
 
 .SILENT .PHONY: terraform
-terraform: # execute `terraform` with a specific command [Usage: `make terraform command=<plan, apply>`]
-	$(if $(command),,$(call missing_subcommand,terraform,command=init))
+terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
+	$(if $(command),,$(call missing_argument,terraform,command=init))
 
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
@@ -41,11 +41,16 @@ terraform: # execute `terraform` with a specific command [Usage: `make terraform
 			terraform $(command) $(ARGS)
 
 .SILENT .PHONY: import
-import: # execute `terraform import`                         Usage `make import`
+import: # execute a Terraform Import [Usage: `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`]
+	$(if $(local),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+	$(if $(remote),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
 			--account="$(OP_ACCOUNT)" \
 			--env-file="$(OP_ENV_FILE)" \
 			-- \
-			terraform import '<Terraform Resource Identifier>' '<Remote API identifier>'
+			terraform \
+				import \
+					'$(local)' '$(remote)'

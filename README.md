@@ -20,11 +20,12 @@
 
 ## Requirements
 
-* HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in).
+* HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in)
 * Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.3.0` or [newer](https://developer.hashicorp.com/terraform/downloads).
-* 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/).
-* (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo).
+* Terraform `1.3.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
+* 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/)
+* `make` `3.8.0` or newer
+* (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo)
 
 ## Diagrams
 
@@ -72,12 +73,21 @@ The `workspaces` Terraform Cloud Workspace acts as a "starter" workspace. It pro
 
 To inject sensitive _"Secret Zero"_ type data, the [1Password CLI](https://1password.com/downloads/command-line/) is used to wrap common Terraform commands (`plan`, `apply`, `destroy`).
 
-This workflow is wrapped through a [Makefile](./Makefile). Running `make` without commands will print out a help text;
+This repository provides a workflow that is wrapped through a [Makefile](./Makefile).
+
+Running `make` without commands will print out the following help information:
 
 ```text
-help           Displays this help text
-print-secrets  Prints sanitized environment variables (requires the `envo` CLI application)
-terraform      Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
+🟣 TERRAFORM CLOUD WORKSPACES
+
+Target          Description                                   Usage
+print-secrets   print (sanitized) environment variables       `make print-secrets`
+terraform       execute Terraform with a specific command     `make terraform command=plan`
+import          execute a Terraform Import                    `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`
+help            display a list of Make Targets                `make help`
+_listincludes   list all included Makefiles and *.mk files    `make _listincludes`
+_selfcheck      lint Makefile                                 `make _selfcheck`
+
 ```
 
 The `terraform` target requires a command such as `plan` or `apply` and optionally supports arguments such as `-auto-approve`
