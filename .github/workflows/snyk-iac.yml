@@ -1,0 +1,70 @@
+# This is a Terraform-managed file; manual changes will be overwritten.
+# see https://github.com/workloads/github-organization/blob/main/templates/workflows/snyk-iac.tftpl.yml
+
+---
+
+name: "Security: Snyk IaC"
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+
+# see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions: read-all
+
+jobs:
+  workflow:
+    # only run if workflows are enabled
+    if: ${{ vars.ENABLE_WORKFLOWS == 'true' }}
+
+    # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+    concurrency:
+      group: "${{ github.workflow }}-${{ github.ref }}"
+      cancel-in-progress: true
+
+    name: Snyk IaC
+
+    # see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+    permissions:
+      security-events: write
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # see https://github.com/actions/checkout/releases/tag/v3.5.2
+      - name: Checkout Repository
+        uses: "actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab" # ref: `tags/v3.5.2`
+        with:
+          fetch-depth: 1
+
+      # see https://github.com/snyk/actions/releases/tag/0.4.0
+      - name: Lint Code with Snyk
+        uses: "snyk/actions@b98d498629f1c368650224d6d212bf7dfa89e4bf" # ref: `tags/0.4.0`
+        env:
+          SNYK_ORG: "${{ vars.SNYK_ORG }}"
+          SNYK_TOKEN: "${{ secrets.SNYK_TOKEN }}"
+        with:
+          # scan all code in the root of the repository
+          file: "./"
+          # see https://docs.snyk.io/products/snyk-infrastructure-as-code/snyk-cli-for-infrastructure-as-code/iac-ignores-using-the-.snyk-policy-file#policy-flags-and-policy-file-notes
+          args: "--policy-path='.snyk'"
+          sarif: true
+
+      # see https://github.com/github/codeql-action/releases/tag/codeql-bundle-20230524
+      - name: Upload Snyk IaC results to GitHub Code Scanning
+        uses: "github/codeql-action@1245696032ecf7d39f87d54daa406e22ddf769a8" # ref: `tags/codeql-bundle-20230524`
+        with:
+          sarif_file: "snyk.sarif"
+
+  workflow-inactive:
+    # only run if workflows are disabled
+    if: ${{ vars.ENABLE_WORKFLOWS != 'true' }}
+
+    name: Workflow Status
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Display Workflow Status
+        run: echo "::warning ::Workflow is not currently active. Check if `ENABLE_WORKFLOWS` is set to `true`."
