@@ -72,7 +72,7 @@ flowchart LR
 
 ## Usage
 
-The `workspaces` Terraform Cloud Workspace acts as a "starter" workspace. It provides lifecycle management of other, organization-specific Terraform Cloud Workspaces and GitHub Organization configurations.
+The `workspaces` Terraform Cloud Workspace acts as a _Seed_ Workspace. It provides lifecycle management of other, organization-specific Terraform Cloud Workspaces and GitHub Organization configurations.
 
 To inject sensitive _"Secret Zero"_ type data, the [1Password CLI](https://1password.com/downloads/command-line/) is used to wrap common Terraform commands (`plan`, `apply`, `destroy`).
 
@@ -86,7 +86,7 @@ Running `make` without commands will print out the following help information:
 Target          Description                                   Usage
 print-secrets   print (sanitized) environment variables       `make print-secrets`
 terraform       execute Terraform with a specific command     `make terraform command=plan`
-import          execute a Terraform Import                    `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`
+import          execute a Terraform Import                    `make import local="<Terraform Resource Identifier>" remote="<Remote API identifier>"`
 help            display a list of Make Targets                `make help`
 _listincludes   list all included Makefiles and *.mk files    `make _listincludes`
 _selfcheck      lint Makefile                                 `make _selfcheck`
