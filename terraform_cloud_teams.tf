@@ -9,6 +9,7 @@ resource "tfe_team" "owners" {
 
   # see https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions
   organization_access {
+    manage_membership       = true
     manage_policies         = true
     manage_policy_overrides = true
     manage_workspaces       = true
