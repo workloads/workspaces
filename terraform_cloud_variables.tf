@@ -401,7 +401,7 @@ resource "tfe_workspace_variable_set" "csp_configuration" {
   workspace_id    = each.key
 }
 
-# add CSP data  Workspaces-specific version of Terraform
+# add CSP configuration
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
 resource "tfe_variable" "csp_configuration" {
   key             = "csp_configuration"
