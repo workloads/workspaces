@@ -255,7 +255,7 @@ resource "tfe_workspace" "web_assets" {
   auto_apply          = var.tfe_workspace_auto_apply
 
   # TODO: switch to remote
-  execution_mode                = "local"
+  execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "Web Assets for `${var.project_identifier}`."
   name                          = "web-assets"
@@ -263,7 +263,7 @@ resource "tfe_workspace" "web_assets" {
   structured_run_output_enabled = true
 
   tag_names = [
-    var.tags.exec_local,
+    var.tags.exec_remote,
     "${var.tags.region_prefix}:${var.management_region_aws}",
     var.tags.service_aws,
     var.tags.type_provision,
@@ -287,7 +287,7 @@ resource "tfe_workspace" "web_redirects" {
   auto_apply          = var.tfe_workspace_auto_apply
 
   # TODO: switch to remote
-  execution_mode                = "local"
+  execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "Short URLs for `${var.project_identifier}`."
   name                          = "web-redirects"
@@ -295,7 +295,7 @@ resource "tfe_workspace" "web_redirects" {
   structured_run_output_enabled = true
 
   tag_names = [
-    var.tags.exec_local,
+    var.tags.exec_remote,
     "${var.tags.region_prefix}:${var.management_region_aws}",
     var.tags.service_aws,
     var.tags.type_provision,
