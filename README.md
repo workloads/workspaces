@@ -55,12 +55,15 @@ flowchart LR
         direction LR
 
         %% actual connections
-        terraform --> github-organization["TFC Workspace `repositories`"]
+        terraform --> community["TFC Workspace `community`"]
         terraform --> dns["TFC Workspace `dns`"]
         terraform --> networking["TFC Workspace `networking`"]
+        terraform --> regional-workspaces["TFC Workspace `regional-workspaces`"]
+        terraform --> github-organization["TFC Workspace `repositories`"]
         terraform --> services-configuration["TFC Workspace `services-configuration`"]
         terraform --> services-deployment["TFC Workspace `services-deployment`"]
-        terraform --> regional-workspaces["TFC Workspace `regional-workspaces`"]
+        terraform --> web_assets["TFC Workspace `web_assets`"]
+        terraform --> web_redirects["TFC Workspace `web_redirects`"]
         terraform --> website["TFC Workspace `website`"]
         terraform --> workspaces["TFC Workspace `workspaces`"]
         terraform --> users["TFC Workspace `users`"]
