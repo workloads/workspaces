@@ -37,6 +37,9 @@ endif
 terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
 	$(if $(command),,$(call missing_argument,terraform,command=init))
 
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+else
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
@@ -44,6 +47,7 @@ terraform: # execute Terraform with a specific command [Usage: `make terraform c
 			--env-file="$(OP_ENV_FILE)" \
 			-- \
 			terraform $(command) $(ARGS)
+endif
 
 .SILENT .PHONY: import
 import: # execute a Terraform Import [Usage: `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`]
