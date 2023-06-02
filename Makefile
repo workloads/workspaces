@@ -3,7 +3,6 @@
 # configuration
 TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 ARGS         =
-BINARY_ENVO  = $(call check_for_binary,envo)
 OP_ENV_FILE  = workspaces.op.env
 
 include ../tooling/make/configs/shared.mk
