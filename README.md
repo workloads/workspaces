@@ -22,14 +22,15 @@
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in)
 * Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.3.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
+* Terraform `1.4.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/)
+* a check-out of [@workloads/tooling](https://github.com/workloads/tooling)
 * `make` `3.8.0` or newer
 * (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo)
 
 ## Diagrams
 
-This section contains an overview of (simplified) diagrams, describing the physical connections of the _Edge Case_.
+This section contains an overview of (simplified) diagrams, describing the logical connections of the individual Terraform Cloud Workspaces.
 All diagrams are expressed in [Mermaid](https://mermaid.js.org) syntax.
 
 ### Terraform Cloud Workspace Structure

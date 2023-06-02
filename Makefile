@@ -2,8 +2,9 @@
 
 # configuration
 TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
-OP_ENV_FILE  = workspaces.op.env
 ARGS         =
+BINARY_ENVO  = $(call check_for_binary,envo)
+OP_ENV_FILE  = workspaces.op.env
 
 include ../tooling/make/configs/shared.mk
 
@@ -18,6 +19,9 @@ include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
 print-secrets: # print (sanitized) environment variables [Usage: `make print-secrets`]
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+else
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
@@ -27,6 +31,7 @@ print-secrets: # print (sanitized) environment variables [Usage: `make print-sec
 			-- \
 			envo --truncLength=3 | \
 			grep "TF_VAR_"
+endif
 
 .SILENT .PHONY: terraform
 terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
@@ -45,6 +50,9 @@ import: # execute a Terraform Import [Usage: `make import local=<Terraform Resou
 	$(if $(local),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
 	$(if $(remote),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
 
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+else
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
@@ -54,3 +62,4 @@ import: # execute a Terraform Import [Usage: `make import local=<Terraform Resou
 			terraform \
 				import \
 					'$(local)' '$(remote)'
+endif
