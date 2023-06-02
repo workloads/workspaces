@@ -1,8 +1,8 @@
 # Makefile for Terraform Cloud Workspaces Seeding
 
 # configuration
-TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 ARGS         =
+TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 OP_ENV_FILE  = workspaces.op.env
 
 include ../tooling/make/configs/shared.mk
