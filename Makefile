@@ -1,7 +1,7 @@
 # Makefile for Terraform Cloud Workspaces Seeding
 
 # configuration
-ARGS         =
+ARGS        :=
 TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 OP_ENV_FILE  = workspaces.op.env
 
