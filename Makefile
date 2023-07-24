@@ -22,15 +22,7 @@ ifeq ($(strip $(BINARY_OP)),)
 	$(error 🛑 Missing required 1Password CLI)
 endif
 
-	# see https://developer.1password.com/docs/cli/reference/commands/run
-	op \
-		run \
-		  --account="$(OP_ACCOUNT)" \
-			--env-file="$(OP_ENV_FILE)" \
-			--no-masking \
-			-- \
-			envo --truncLength=3 | \
-			grep "TF_VAR_"
+	$(call print_secrets,"TF_VAR")
 
 .SILENT .PHONY: terraform
 terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
