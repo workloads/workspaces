@@ -1,68 +1,60 @@
-# Make configuration
-MAKEFLAGS      = --no-builtin-rules --silent --warn-undefined-variables
-SHELL         := sh
+# Makefile for Terraform Cloud Workspaces Seeding
 
-.DEFAULT_GOAL := help
-.ONESHELL     :
-.SHELLFLAGS   := -eu -c
+# configuration
+ARGS        :=
+TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
+OP_ENV_FILE  = workspaces.op.env
 
-color_off    = $(shell tput sgr0)
-color_bright = $(shell tput bold)
-op_account   = workloads.1password.com
-op_env_file  = terraform.op.env
-args         =
+include ../tooling/make/configs/shared.mk
 
-define missing_command
-	$(error Missing command for `terraform`. Specify with `make terraform command=plan`)
-endef
+include ../tooling/make/functions/shared.mk
 
-.SILENT .PHONY: help
-help: # Displays this help text
-	$(info )
-	$(info $(color_bright)TERRAFORM SEED WORKSPACE$(color_off))
-	grep \
-		--context=0 \
-		--devices=skip \
-		--extended-regexp \
-		--no-filename \
-			"(^[a-z-]+):{1} ?(?:[a-z-])* #" $(MAKEFILE_LIST) | \
-	awk 'BEGIN {FS = ":.*?# "}; {printf "\033[1m%s\033[0m;%s\n", $$1, $$2}' | \
-	column \
-		-c2 \
-		-s ";" \
-		-t
-	$(info )
+# include Terraform-generated configuration data
+include ../tooling/make/configs/github.mk
+
+include ../tooling/make/functions/maintenance.mk
+
+include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
-print-secrets: # Prints sanitized environment variables (requires the `envo` CLI application)
-# see https://developer.1password.com/docs/cli/reference/commands/run
-	op \
-		run \
-		  --account="$(op_account)" \
-			--env-file="$(op_env_file)" \
-			--no-masking \
-			-- \
-			envo --truncLength=3 | \
-			grep "TF_VAR_"
+print-secrets: # print (sanitized) environment variables [Usage: `make print-secrets`]
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+endif
+
+	$(call print_secrets,"TF_VAR")
 
 .SILENT .PHONY: terraform
-terraform: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
-# see https://developer.1password.com/docs/cli/reference/commands/run
-	$(if $(command),,$(call missing_command))
+terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
+	$(if $(command),,$(call missing_argument,terraform,command=init))
 
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+endif
+
+	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
-			--account="$(op_account)" \
-			--env-file="$(op_env_file)" \
+			--account="$(OP_ACCOUNT)" \
+			--env-file="$(OP_ENV_FILE)" \
 			-- \
-			terraform $(command) $(args)
+			terraform $(command) $(ARGS)
 
 .SILENT .PHONY: import
-import: # Injects secrets from 1Password into a `terraform` {plan, apply, destroy, etc.} run
-# see https://developer.1password.com/docs/cli/reference/commands/run
+import: # execute a Terraform Import [Usage: `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`]
+	$(if $(local),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+	$(if $(remote),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+
+ifeq ($(strip $(BINARY_OP)),)
+	$(error 🛑 Missing required 1Password CLI)
+endif
+
+	# see https://developer.1password.com/docs/cli/reference/commands/run
 	op \
 		run \
-			--account="$(op_account)" \
-			--env-file="$(op_env_file)" \
+			--account="$(OP_ACCOUNT)" \
+			--env-file="$(OP_ENV_FILE)" \
 			-- \
-			terraform import '<Terraform Resource Identifier>' '<Remote API identifier>'
+			terraform \
+				import \
+					'$(local)' '$(remote)'

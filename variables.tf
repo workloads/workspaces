@@ -43,6 +43,37 @@ variable "datadog_app_key" {
   sensitive   = true
 }
 
+variable "discord_token" {
+  type        = string
+  description = "Discord API Token."
+  sensitive   = true
+}
+
+variable "docker_username" {
+  type        = string
+  description = "Docker Hub Username."
+  default     = "workloadsbot"
+}
+
+variable "docker_read_write_delete_token" {
+  type        = string
+  description = "Docker Hub Read / Write / Delete Token."
+  sensitive   = true
+}
+
+variable "docker_read_write_token" {
+  type        = string
+  description = "Docker Hub Read / Write Token."
+  sensitive   = true
+}
+
+variable "docker_read_token" {
+  type        = string
+  description = "Docker Hub Read Token."
+  sensitive   = true
+}
+
+
 variable "gandi_key" {
   type        = string
   description = "This is the Gandi API Key."
@@ -53,9 +84,22 @@ variable "gandi_sharing_id" {
   description = "This is the Gandi Sharing ID."
 }
 
+variable "gitguardian_user" {
+  type        = string
+  description = "GitGuardian Service Account User."
+  default     = "workloads-bot"
+}
+
+variable "gitguardian_token" {
+  type        = string
+  description = "GitGuardian Service Account Token."
+  sensitive   = true
+}
+
 variable "github_owner" {
   type        = string
   description = "This is the target GitHub organization or individual user account to manage."
+  default     = "workloads"
 }
 
 variable "github_token" {
@@ -177,9 +221,49 @@ variable "csp_configuration" {
   ]
 }
 
+variable "mondoo_space_id" {
+  type        = string
+  description = "Mondoo Space Identifier."
+}
+
+variable "mondoo_credential" {
+  type        = string
+  description = "Mondoo Credential."
+  sensitive   = true
+}
+
+variable "okta_org_name" {
+  type        = string
+  description = "Okta Organization Name."
+}
+
+variable "okta_api_token" {
+  type        = string
+  description = "Okta API Token."
+  sensitive   = true
+}
+
+variable "pagerduty_key_readwrite" {
+  type        = string
+  description = "PagerDuty Read-Write Key."
+  sensitive   = true
+}
+
+variable "pagerduty_key_read" {
+  type        = string
+  description = "PagerDuty Read-Only Key."
+  sensitive   = true
+}
+
+variable "pagerduty_subdomain" {
+  type        = string
+  description = "PagerDuty Subdomain"
+}
+
 variable "snyk_org" {
   type        = string
   description = "Snyk Organization Name."
+  default     = "workloads"
 }
 
 variable "snyk_runtask_hmac_key" {
@@ -216,6 +300,7 @@ variable "tags" {
     service_gcp     = "service:googlecloud"
     service_github  = "service:github"
     service_datadog = "service:datadog"
+    service_okta    = "service:okta"
     service_snyk    = "service:snyk"
 
     # Infrastructure Geo-Deployment Zones
@@ -245,15 +330,19 @@ variable "tfe_organization_email" {
 variable "tfe_organization_name" {
   type        = string
   description = "Name of the organization."
+  default     = "workloads"
 }
 
 variable "tfe_organization_owners" {
   type        = list(string)
   description = "List of Email Addresses of Terraform Cloud Organization Owners."
+
   default = [
-    "justin.defrank@hashicorp.com", # Justin DeFrank
-    "kerim@hashicorp.com",          # Kerim Satirli
-    "team@workloads.io",            # Service Account
+    # TODO: import
+    #"adrian.todorov@hashicorp.com", # Adrian Todorov / `atodorov-hashi`
+    "justin.defrank@hashicorp.com", # Justin DeFrank / `rizkybiz`
+    "kerim@hashicorp.com",          # Kerim Satirli / `ksatirli`
+    "team@workloads.io",            # Service Account / `workloads-bot`
   ]
 }
 
@@ -290,20 +379,10 @@ variable "tfe_workspace_auto_apply" {
 variable "tfe_workspace_terraform_version" {
   type        = string
   description = "Terraform version to use for this Workspace."
-  default     = "1.3.7"
+  default     = "1.5.3"
 }
 
 locals {
-  aws_variables = [
-    {
-      key         = "management_region_aws"
-      category    = "terraform"
-      value       = var.management_region_aws
-      description = "AWS-specific Management Region Identifier."
-      sensitive   = false
-    },
-  ]
-
   auth0_variables = [
     {
       key         = "auth0_client_id"
@@ -322,6 +401,16 @@ locals {
       category    = "terraform"
       value       = var.auth0_domain
       description = "Auth0 Domain Name."
+      sensitive   = false
+    },
+  ]
+
+  aws_variables = [
+    {
+      key         = "management_region_aws"
+      category    = "terraform"
+      value       = var.management_region_aws
+      description = "AWS-specific Management Region Identifier."
       sensitive   = false
     },
   ]
@@ -354,6 +443,47 @@ locals {
     },
   ]
 
+  discord_variables = [
+    {
+      key         = "discord_token"
+      category    = "terraform"
+      value       = var.discord_token
+      description = "Discord API Token."
+      sensitive   = true
+    },
+  ]
+
+  docker_variables = [
+    {
+      key         = "docker_username"
+      category    = "terraform"
+      value       = var.docker_username
+      description = "Docker Hub Username."
+      sensitive   = false
+    },
+    {
+      key         = "docker_read_write_delete_token"
+      category    = "terraform"
+      value       = var.docker_read_write_delete_token
+      description = "Docker Hub Read / Write / Delete Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_write_token"
+      category    = "terraform"
+      value       = var.docker_read_write_token
+      description = "Docker Hub Read / Write Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_token"
+      category    = "terraform"
+      value       = var.docker_read_token
+      description = "Docker Hub Read Token."
+      sensitive   = true
+    },
+  ]
+
   gandi_variables = [
     {
       key         = "gandi_key"
@@ -366,6 +496,22 @@ locals {
       category    = "terraform"
       value       = var.gandi_sharing_id
       description = "Gandi Sharing ID."
+      sensitive   = true
+    },
+  ]
+
+  gitguardian_variables = [
+    {
+      key         = "gitguardian_user"
+      category    = "terraform"
+      value       = var.gitguardian_user
+      description = "GitGuardian Service Account User."
+      sensitive   = false
+      }, {
+      key         = "gitguardian_token"
+      category    = "terraform"
+      value       = var.gitguardian_token
+      description = "GitGuardian Service Account Token."
       sensitive   = true
     },
   ]
@@ -437,6 +583,78 @@ locals {
     },
   ]
 
+  mondoo_variables = [
+    {
+      key         = "mondoo_space_id"
+      category    = "terraform"
+      value       = var.mondoo_space_id
+      description = "Mondoo Space Identifier."
+      sensitive   = false
+    },
+    {
+      key         = "mondoo_credential"
+      category    = "terraform"
+      value       = var.mondoo_credential
+      description = "Mondoo Credential."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_write_token"
+      category    = "terraform"
+      value       = var.docker_read_write_token
+      description = "Docker Hub Read / Write Token."
+      sensitive   = true
+    },
+    {
+      key         = "docker_read_token"
+      category    = "terraform"
+      value       = var.docker_read_token
+      description = "Docker Hub Read Token."
+      sensitive   = true
+    },
+  ]
+
+  okta_variables = [
+    {
+      key         = "okta_org_name"
+      category    = "terraform"
+      value       = var.okta_org_name
+      description = "Okta Organization Name."
+      sensitive   = false
+    },
+    {
+      key         = "okta_api_token"
+      category    = "terraform"
+      value       = var.okta_api_token
+      description = "Okta API Token."
+      sensitive   = true
+    },
+  ]
+
+  pagerduty_variables = [
+    {
+      key         = "key_rw"
+      category    = "terraform"
+      value       = var.pagerduty_key_readwrite
+      description = "PagerDuty Read-Write Key."
+      sensitive   = true
+    },
+    {
+      key         = "key_ro"
+      category    = "terraform"
+      value       = var.pagerduty_key_read
+      description = "PagerDuty Read-Only Key."
+      sensitive   = true
+    },
+    {
+      key         = "subdomain"
+      category    = "terraform"
+      value       = var.pagerduty_subdomain
+      description = "PagerDuty Subdomain."
+      sensitive   = false
+    },
+  ]
+
   project_variables = [
     {
       key         = "project_identifier"
@@ -449,10 +667,6 @@ locals {
 
   snyk_action_secrets = [
     {
-      secret_name     = "SNYK_ORG"
-      visibility      = "all"
-      plaintext_value = var.snyk_org
-      }, {
       secret_name     = "SNYK_TOKEN"
       visibility      = "all"
       plaintext_value = var.snyk_token

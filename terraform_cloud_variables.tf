@@ -1,3 +1,20 @@
+module "auth0_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Auth0-specific Variables. See https://manage.auth0.com/dashboard/."
+  name         = "Auth0"
+  organization = tfe_organization.main.name
+
+  variables = local.auth0_variables
+
+  workspace_ids = [
+    # needed for Auth0 Configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "aws_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
@@ -18,23 +35,15 @@ module "aws_variables" {
 
     # needed for Regional Workspace deployments
     tfe_workspace.regional_workspaces.id,
-  ]
-}
 
-module "auth0_variables" {
-  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
-  source  = "ksatirli/variable-set/tfe"
-  version = "1.0.0"
+    # needed for AWS IAM configuration
+    tfe_workspace.users.id,
 
-  description  = "Auth0-specific Variables. See https://manage.auth0.com/dashboard/ for more information."
-  name         = "Auth0"
-  organization = tfe_organization.main.name
+    # needed for AWS Region configuration
+    tfe_workspace.web_assets.id,
 
-  variables = local.auth0_variables
-
-  workspace_ids = [
-    # needed for Auth0 Configuration
-    tfe_workspace.services_configuration.id,
+    # needed for AWS Region configuration
+    tfe_workspace.web_redirects.id,
   ]
 }
 
@@ -43,7 +52,7 @@ module "datadog_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys for more information."
+  description  = "Datadog-specific Variables. See https://app.datadoghq.com/organization-settings/api-keys."
   name         = "Datadog"
   organization = tfe_organization.main.name
 
@@ -55,12 +64,45 @@ module "datadog_variables" {
   ]
 }
 
+module "discord_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Discord-specific Variables. See https://discord.com/developers/applications."
+  name         = "Discord"
+  organization = tfe_organization.main.name
+
+  variables = local.discord_variables
+
+  workspace_ids = [
+    # needed for Discord configuration
+    #tfe_workspace.community.id,
+  ]
+}
+
+module "docker_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Docker-specific Variables. See https://hub.docker.com/settings/general."
+  name         = "Docker"
+  organization = tfe_organization.main.name
+
+  variables = local.docker_variables
+
+  workspace_ids = [
+    # TODO
+  ]
+}
+
 module "gandi_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${tfe_organization.main.name}/security for more information."
+  description  = "Gandi-specific Variables. See https://account.gandi.net/en/users/${tfe_organization.main.name}/security."
   name         = "Gandi.net"
   organization = tfe_organization.main.name
 
@@ -69,6 +111,23 @@ module "gandi_variables" {
   workspace_ids = [
     # needed for DNS NS configuration
     tfe_workspace.dns.id,
+  ]
+}
+
+module "gitguardian_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "GitGuardian-specific Variables. See https://dashboard.gitguardian.com/."
+  name         = "GitGuardian (Service Account: `${var.gitguardian_user}`)"
+  organization = tfe_organization.main.name
+
+  variables = local.gitguardian_variables
+
+  workspace_ids = [
+    # needed for Secrets Leak detection
+    tfe_workspace.repositories.id,
   ]
 }
 
@@ -97,7 +156,7 @@ module "hcp_boundary_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Boundary-specific Variables. See https://portal.cloud.hashicorp.com/services/boundary/clusters/list for more information."
+  description  = "HCP Boundary-specific Variables. See https://portal.cloud.hashicorp.com/services/boundary/clusters/list."
   name         = "Boundary"
   organization = tfe_organization.main.name
 
@@ -160,7 +219,7 @@ module "hcp_vault_aws_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "HCP Vault-specific Variables. See https://portal.cloud.hashicorp.com/services/vault/clusters for more information."
+  description  = "HCP Vault-specific Variables. See https://portal.cloud.hashicorp.com/services/vault/clusters."
   name         = "Vault"
   organization = tfe_organization.main.name
 
@@ -172,7 +231,6 @@ module "hcp_vault_aws_variables" {
     tfe_workspace.services_configuration.id,
   ]
 }
-
 
 module "hcp_viewer_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
@@ -186,6 +244,39 @@ module "hcp_viewer_variables" {
   variables = local.hcp_viewer_variables
 
   workspace_ids = []
+}
+
+module "mondoo_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Mondoo-specific Variables. See https://console.mondoo.com/space/overview."
+  name         = "Mondoo"
+  organization = tfe_organization.main.name
+
+  variables = local.mondoo_variables
+
+  workspace_ids = [
+    # TODO
+  ]
+}
+
+module "okta_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Okta-specific Variables."
+  name         = "Okta"
+  organization = tfe_organization.main.name
+
+  variables = local.okta_variables
+
+  workspace_ids = [
+    # needed for Okta configuration
+    tfe_workspace.users.id,
+  ]
 }
 
 module "project_variables" {
@@ -204,7 +295,34 @@ module "project_variables" {
     tfe_workspace.networking.id,
     tfe_workspace.services_configuration.id,
     tfe_workspace.services_deployment.id,
+    tfe_workspace.users.id,
   ]
+}
+
+module "pagerduty_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "PagerDuty-specific Variables."
+  name         = "PagerDuty"
+  organization = tfe_organization.main.name
+
+  variables = local.pagerduty_variables
+
+  workspace_ids = [
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
+# set Regional Workspaces-specific version of Terraform
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
+resource "tfe_variable" "regional_workspaces_terraform_version" {
+  key          = "terraform_version"
+  value        = var.tfe_workspace_terraform_version
+  category     = "terraform"
+  description  = "Terraform version to use for Regional Workspaces."
+  workspace_id = tfe_workspace.regional_workspaces.id
 }
 
 module "terraform_cloud_oauth_variables" {
@@ -230,7 +348,7 @@ module "terraform_cloud_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens"
+  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens."
   name         = "Terraform Cloud"
   organization = tfe_organization.main.name
 
@@ -262,16 +380,6 @@ module "terraform_cloud_variables" {
   ]
 }
 
-# set Regional Workspaces-specific version of Terraform
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
-resource "tfe_variable" "regional_workspaces_terraform_version" {
-  key          = "terraform_version"
-  value        = var.tfe_workspace_terraform_version
-  category     = "terraform"
-  description  = "Terraform version to use for Regional Workspaces."
-  workspace_id = tfe_workspace.regional_workspaces.id
-}
-
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable_set
 resource "tfe_variable_set" "csp_configuration" {
   name         = "Cloud Service Providers"
@@ -293,7 +401,7 @@ resource "tfe_workspace_variable_set" "csp_configuration" {
   workspace_id    = each.key
 }
 
-# add CSP data  Workspaces-specific version of Terraform
+# add CSP configuration
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
 resource "tfe_variable" "csp_configuration" {
   key             = "csp_configuration"
