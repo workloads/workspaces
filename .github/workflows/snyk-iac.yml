@@ -32,9 +32,9 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      # see https://github.com/actions/checkout/releases/tag/v3.5.2
+      # see https://github.com/actions/checkout/releases/tag/v3.5.3
       - name: Checkout Repository
-        uses: "actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab" # ref: `tags/v3.5.2`
+        uses: "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9" # ref: `tags/v3.5.3`
         with:
           fetch-depth: 1
 
@@ -51,9 +51,9 @@ jobs:
           args: "--policy-path='.snyk'"
           sarif: true
 
-      # see https://github.com/github/codeql-action/releases/tag/codeql-bundle-20230524
+      # see https://github.com/github/codeql-action/releases/tag/codeql-bundle-v2.14.1
       - name: Upload Snyk IaC results to GitHub Code Scanning
-        uses: "github/codeql-action@1245696032ecf7d39f87d54daa406e22ddf769a8" # ref: `tags/codeql-bundle-20230524`
+        uses: "github/codeql-action@7b6664fa89524ee6e3c3e9749402d5afd69b3cd8" # ref: `tags/codeql-bundle-v2.14.1`
         with:
           sarif_file: "snyk.sarif"
 
