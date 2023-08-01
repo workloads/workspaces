@@ -1,10 +1,12 @@
 terraform {
   # see https://developer.hashicorp.com/terraform/language/settings/terraform-cloud
   cloud {
-    # see https://developer.hashicorp.com/terraform/cli/cloud/settings#organization
+    # see https://app.terraform.io/app/workloads/workspaces
+    # and https://developer.hashicorp.com/terraform/cli/cloud/settings#organization
     organization = "workloads"
 
-    # see https://developer.hashicorp.com/terraform/cli/cloud/settings#workspaces
+    # see https://app.terraform.io/app/workloads/workspaces
+    # and https://developer.hashicorp.com/terraform/cli/cloud/settings#workspaces
     workspaces {
       name = "workspaces"
     }
@@ -12,10 +14,10 @@ terraform {
 
   # see https://developer.hashicorp.com/terraform/language/settings#specifying-provider-requirements
   required_providers {
-    # see https://registry.terraform.io/providers/integrations/github/5.31.0/
+    # see https://registry.terraform.io/providers/integrations/github/5.32.0/
     github = {
       source  = "integrations/github"
-      version = ">= 5.31.0, < 6.0.0"
+      version = ">= 5.32.0, < 6.0.0"
     }
 
     # see https://registry.terraform.io/providers/hashicorp/tfe/0.47.0/
