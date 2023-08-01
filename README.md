@@ -14,6 +14,8 @@
     * [Inputs](#inputs)
     * [Outputs](#outputs)
   * [Notes](#notes)
+    * [Sensitive Data](#sensitive-data)
+    * [Colored Output](#colored-output)
   * [Author Information](#author-information)
   * [License](#license)
 <!-- TOC -->
@@ -22,7 +24,7 @@
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in)
 * Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.4.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
+* Terraform `1.5.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/)
 * a check-out of [@workloads/tooling](https://github.com/workloads/tooling)
 * `make` `3.8.0` or newer
@@ -164,9 +166,13 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 ## Notes
 
-* Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
+### Sensitive Data
 
-* Colorized CLI output may be disabled by setting the `NO_COLOR` environment variable to any non-empty value.
+Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
+
+### Colored Output
+
+Colorized CLI output may be disabled by setting the `NO_COLOR` environment variable to any non-empty value.
 
 ```shell
 export NO_COLOR=1 && make

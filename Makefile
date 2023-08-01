@@ -6,14 +6,9 @@ TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
 OP_ENV_FILE  = workspaces.op.env
 
 include ../tooling/make/configs/shared.mk
-
 include ../tooling/make/functions/shared.mk
-
-# include Terraform-generated configuration data
 include ../tooling/make/configs/github.mk
-
 include ../tooling/make/functions/maintenance.mk
-
 include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
