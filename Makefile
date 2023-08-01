@@ -21,7 +21,7 @@ endif
 
 .SILENT .PHONY: terraform
 terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
-	$(if $(command),,$(call missing_argument,terraform,command=init))
+	$(if $(command),,$(call missing_argument,command=init))
 
 ifeq ($(strip $(BINARY_OP)),)
 	$(error 🛑 Missing required 1Password CLI)
@@ -37,8 +37,8 @@ endif
 
 .SILENT .PHONY: import
 import: # execute a Terraform Import [Usage: `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`]
-	$(if $(local),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
-	$(if $(remote),,$(call missing_argument,import,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+	$(if $(local),,$(call missing_argument,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+	$(if $(remote),,$(call missing_argument,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
 
 ifeq ($(strip $(BINARY_OP)),)
 	$(error 🛑 Missing required 1Password CLI)
