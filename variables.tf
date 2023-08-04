@@ -121,6 +121,14 @@ variable "hcp_boundary_admin_password" {
   sensitive   = true
 }
 
+# TODO: replace with TF-managed value
+# see https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/boundary_cluster#username
+variable "hcp_boundary_admin_auth_method_id" {
+  type        = string
+  description = "HCP Boundary Cluster Admin Auth Method Identifier."
+  default     = "ampw_aXDkyl43Li"
+}
+
 # see https://cloud.hashicorp.com/docs/hcp/access-control/service-principals
 variable "hcp_contributor_id" {
   type        = string
@@ -545,6 +553,12 @@ locals {
       category    = "terraform"
       value       = var.hcp_boundary_admin_password
       description = "HCP Boundary Cluster Admin Password."
+      sensitive   = true
+    }, {
+      key         = "hcp_boundary_admin_auth_method_id"
+      category    = "terraform"
+      value       = var.hcp_boundary_admin_auth_method_id
+      description = "HCP Boundary Cluster Admin Auth Method Identifier."
       sensitive   = true
     },
   ]
