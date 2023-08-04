@@ -2,7 +2,7 @@
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "dns" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = true
+  assessments_enabled           = false
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "DNS Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
@@ -34,7 +34,7 @@ resource "tfe_workspace" "dns" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "networking" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = true
+  assessments_enabled           = false
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Networking Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
@@ -65,7 +65,7 @@ resource "tfe_workspace" "networking" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "regional_workspaces" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = true
+  assessments_enabled           = false
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Regional Workspaces Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
@@ -96,7 +96,7 @@ resource "tfe_workspace" "regional_workspaces" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "repositories" {
   allow_destroy_plan    = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled   = true
+  assessments_enabled   = false
   auto_apply            = var.tfe_workspace_auto_apply
   description           = "GitHub Configuration for `${var.project_identifier}`."
   execution_mode        = "remote"
@@ -134,16 +134,16 @@ resource "tfe_workspace" "repositories" {
 # may be imported like so: `terraform import tfe_workspace.services_configuration workloads/services-configuration`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_configuration" {
-  name                          = "services-configuration"
-  description                   = "Services Configuration for `${var.project_identifier}`."
-  assessments_enabled           = true
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = false
   auto_apply                    = var.tfe_workspace_auto_apply
+  description                   = "Services Configuration for `${var.project_identifier}`."
   execution_mode                = "remote"
   file_triggers_enabled         = true
-  structured_run_output_enabled = true
-  project_id                    = tfe_project.management.id
+  name                          = "services-configuration"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.management.id
+  structured_run_output_enabled = true
   terraform_version             = var.tfe_workspace_terraform_version
 
   tag_names = [
@@ -157,7 +157,7 @@ resource "tfe_workspace" "services_configuration" {
 # may be imported like so: `terraform import tfe_workspace.services_deployment workloads/services-deployment`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_deployment" {
-  assessments_enabled           = true
+  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Services Deployment for `${var.project_identifier}`."
@@ -187,7 +187,7 @@ resource "tfe_workspace" "services_deployment" {
 # may be imported like so: `terraform import tfe_workspace.website workloads/users`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "users" {
-  assessments_enabled           = true
+  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
@@ -218,7 +218,7 @@ resource "tfe_workspace" "users" {
 # may be imported like so: `terraform import tfe_workspace.website workloads/website`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "website" {
-  assessments_enabled           = true
+  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "local"
@@ -250,7 +250,7 @@ resource "tfe_workspace" "website" {
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_assets" {
-  assessments_enabled = true
+  assessments_enabled = false
   allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
   auto_apply          = var.tfe_workspace_auto_apply
 
@@ -282,7 +282,7 @@ resource "tfe_workspace" "web_assets" {
 # may be imported like so: `terraform import tfe_workspace.web_redirects workloads/web_redirects`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_redirects" {
-  assessments_enabled = true
+  assessments_enabled = false
   allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
   auto_apply          = var.tfe_workspace_auto_apply
 
@@ -314,11 +314,11 @@ resource "tfe_workspace" "web_redirects" {
 # may be imported like so: `terraform import tfe_workspace.workspaces workloads/workspaces`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "workspaces" {
-  #assessments_enabled           = false # explicitly disabled because of reasons
+  assessments_enabled           = false # explicitly disabled because of reasons
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  execution_mode                = "local"
   description                   = "Terraform Cloud Configuration for `${var.project_identifier}`."
+  execution_mode                = "local"
   file_triggers_enabled         = false
   name                          = "workspaces"
   organization                  = tfe_organization.main.name
