@@ -554,7 +554,7 @@ locals {
       value       = var.hcp_boundary_admin_password
       description = "HCP Boundary Cluster Admin Password."
       sensitive   = true
-    }, {
+      }, {
       key         = "hcp_boundary_admin_auth_method_id"
       category    = "terraform"
       value       = var.hcp_boundary_admin_auth_method_id
@@ -647,21 +647,21 @@ locals {
 
   pagerduty_variables = [
     {
-      key         = "key_rw"
+      key         = "pagerduty_key_rw"
       category    = "terraform"
       value       = var.pagerduty_key_readwrite
       description = "PagerDuty Read-Write Key."
       sensitive   = true
     },
     {
-      key         = "key_ro"
+      key         = "pagerduty_key_ro"
       category    = "terraform"
       value       = var.pagerduty_key_read
       description = "PagerDuty Read-Only Key."
       sensitive   = true
     },
     {
-      key         = "subdomain"
+      key         = "pagerduty_subdomain"
       category    = "terraform"
       value       = var.pagerduty_subdomain
       description = "PagerDuty Subdomain."
