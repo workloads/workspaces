@@ -212,7 +212,7 @@ variable "csp_configuration" {
       }, {
       name    = "Microsoft Azure"
       prefix  = "az"
-      enabled = false
+      enabled = true
       }, {
       name    = "Digital Ocean"
       prefix  = "do"
@@ -220,7 +220,7 @@ variable "csp_configuration" {
       }, {
       name    = "Google Cloud Platform"
       prefix  = "gcp"
-      enabled = false
+      enabled = true
       }, {
       name    = "Scaleway"
       prefix  = "scw"

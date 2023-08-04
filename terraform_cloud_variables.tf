@@ -408,6 +408,7 @@ resource "tfe_variable" "csp_configuration" {
   value           = jsonencode(var.csp_configuration)
   category        = "terraform"
   description     = "Project-wide List of Cloud Service Providers (CSPs)."
+  hcl             = true
   sensitive       = false
   variable_set_id = tfe_variable_set.csp_configuration.id
 }
