@@ -379,7 +379,7 @@ variable "tfe_workspace_auto_apply" {
 variable "tfe_workspace_terraform_version" {
   type        = string
   description = "Terraform version to use for this Workspace."
-  default     = "1.5.3"
+  default     = "1.5.4"
 }
 
 locals {
