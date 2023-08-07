@@ -75,7 +75,7 @@ flowchart LR
 
 ## Usage
 
-The `workspaces` Terraform Cloud Workspace acts as a _Seed_ Workspace. It provides lifecycle management of other, organization-specific Terraform Cloud Workspaces and GitHub Organization configurations.
+The `workspaces` Terraform Cloud Workspace acts as a _Seed_ Workspace. The repository provides lifecycle management of other, organization-specific Terraform Cloud Workspaces and GitHub Organization configurations.
 
 To inject sensitive _"Secret Zero"_ type data, the [1Password CLI](https://1password.com/downloads/command-line/) is used to wrap common Terraform commands (`plan`, `apply`, `destroy`).
 

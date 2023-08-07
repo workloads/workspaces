@@ -3,7 +3,7 @@
 # configuration
 ARGS        :=
 TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
-OP_ENV_FILE  = workspaces.op.env
+OP_ENV_FILE  = secrets.op.env
 
 include ../tooling/make/configs/shared.mk
 include ../tooling/make/functions/shared.mk
