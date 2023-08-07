@@ -201,8 +201,6 @@ module "hcp_contributor_variables" {
   variables = local.hcp_contributor_variables
 
   workspace_ids = [
-    tfe_workspace.workspaces.id,
-
     # needed for HVN provisioning
     tfe_workspace.networking.id,
 
@@ -211,6 +209,9 @@ module "hcp_contributor_variables" {
 
     # needed for HCP Boundary and Vault deployment
     tfe_workspace.services_deployment.id,
+
+    # needed for Workspaces deployments
+    tfe_workspace.workspaces.id,
   ]
 }
 
@@ -257,9 +258,7 @@ module "mondoo_variables" {
 
   variables = local.mondoo_variables
 
-  workspace_ids = [
-    # TODO
-  ]
+  workspace_ids = []
 }
 
 module "okta_variables" {
@@ -311,6 +310,7 @@ module "pagerduty_variables" {
   variables = local.pagerduty_variables
 
   workspace_ids = [
+    # TODO
     tfe_workspace.services_configuration.id,
   ]
 }
