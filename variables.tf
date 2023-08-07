@@ -316,7 +316,7 @@ variable "tags" {
     service_aws     = "service:aws"
     service_azure   = "service:azure"
     service_gandi   = "service:gandi"
-    service_gcp     = "service:googlecloud"
+    service_gcp     = "service:gcp"
     service_github  = "service:github"
     service_datadog = "service:datadog"
     service_okta    = "service:okta"

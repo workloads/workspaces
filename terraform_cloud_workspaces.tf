@@ -79,6 +79,8 @@ resource "tfe_workspace" "regional_workspaces" {
     var.tags.exec_remote,
     "${var.tags.region_prefix}:${var.management_region_aws}",
     var.tags.service_aws,
+    var.tags.service_azure,
+    var.tags.service_gcp,
     var.tags.type_provision,
   ]
 
