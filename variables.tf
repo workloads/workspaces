@@ -434,6 +434,10 @@ locals {
     },
   ]
 
+  azure_variables = [
+
+  ]
+
   datadog_variables = [
     {
       key         = "datadog_api_key"

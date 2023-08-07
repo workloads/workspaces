@@ -47,6 +47,26 @@ module "aws_variables" {
   ]
 }
 
+module "azure_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Azure-specific Variables."
+  name         = "Azure"
+  organization = tfe_organization.main.name
+
+  variables = local.azure_variables
+
+  workspace_ids = [
+    # needed for Regional Workspaces configuration
+    tfe_workspace.regional_workspaces.id,
+
+    # needed for HCP Vault configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "datadog_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
