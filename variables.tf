@@ -557,6 +557,13 @@ locals {
 
   google_variables = [
     {
+      key         = "google_project_id"
+      category    = "terraform"
+      value       = var.google_project_id
+      description = "Google Cloud-specific Project ID."
+      sensitive   = false
+    },
+    {
       key         = "management_region_google"
       category    = "terraform"
       value       = var.management_region_google
