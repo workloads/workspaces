@@ -108,6 +108,11 @@ variable "github_token" {
   sensitive   = true
 }
 
+variable "google_project_id" {
+  type        = string
+  description = "The Project ID to use for authenticating with GCP."
+}
+
 # see https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/boundary_cluster#username
 variable "hcp_boundary_admin_username" {
   type        = string
@@ -175,6 +180,12 @@ variable "management_region_aws" {
   type        = string
   description = "AWS-specific `Management` Region Identifier."
   default     = "us-west-2"
+}
+
+variable "management_region_google" {
+  type        = string
+  description = "Google-specific `Management` Region Identifier."
+  default     = "us-central1"
 }
 
 variable "project_identifier" {
@@ -537,6 +548,16 @@ locals {
       value       = var.github_token
       description = "GitHub Access Token."
       sensitive   = true
+    },
+  ]
+
+  google_variables = [
+    {
+      key         = "management_region_google"
+      category    = "terraform"
+      value       = var.management_region_google
+      description = "Google Cloud-specific Management Region Identifier."
+      sensitive   = false
     },
   ]
 

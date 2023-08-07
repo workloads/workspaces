@@ -118,6 +118,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
 | gitguardian_token | GitGuardian Service Account Token. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |
+| google_project_id | The Project ID to use for authenticating with GCP. | `string` | yes |
 | hcp_boundary_admin_password | HCP Boundary Cluster Admin Password. | `string` | yes |
 | hcp_boundary_admin_username | HCP Boundary Cluster Admin Username. | `string` | yes |
 | hcp_contributor_id | HashiCorp Cloud Platform ID for `contributor` Role. | `string` | yes |
@@ -145,6 +146,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | github_owner | This is the target GitHub organization or individual user account to manage. | `string` | no |
 | hcp_boundary_admin_auth_method_id | HCP Boundary Cluster Admin Auth Method Identifier. | `string` | no |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
+| management_region_google | Google-specific `Management` Region Identifier. | `string` | no |
 | project_identifier | Human-readable Project Identifier. | `string` | no |
 | snyk_org | Snyk Organization Name. | `string` | no |
 | tags | Object containing pre-defined Tags. | `map(string)` | no |

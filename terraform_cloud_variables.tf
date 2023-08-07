@@ -151,6 +151,26 @@ module "github_variables" {
   ]
 }
 
+module "google_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Google Cloud-specific Variables."
+  name         = "Google Cloud (Project ID: `${var.google_project_id}`)"
+  organization = tfe_organization.main.name
+
+  variables = local.google_variables
+
+  workspace_ids = [
+    # needed for Regional Workspaces configuration
+    tfe_workspace.regional_workspaces.id,
+
+    # needed for HCP Vault configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "hcp_boundary_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
