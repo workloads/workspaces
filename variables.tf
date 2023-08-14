@@ -182,7 +182,7 @@ variable "management_region_aws" {
   default     = "us-west-2"
 }
 
-variable "management_region_google" {
+variable "management_region_gcp" {
   type        = string
   description = "Google-specific `Management` Region Identifier."
   default     = "us-central1"
@@ -564,9 +564,9 @@ locals {
       sensitive   = false
     },
     {
-      key         = "management_region_google"
+      key         = "management_region_gcp"
       category    = "terraform"
-      value       = var.management_region_google
+      value       = var.management_region_gcp
       description = "Google Cloud-specific Management Region Identifier."
       sensitive   = false
     },
