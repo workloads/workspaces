@@ -315,10 +315,11 @@ variable "tags" {
     # Infrastructure and Platform Providers
     service_aws     = "service:aws"
     service_azure   = "service:azure"
+    service_datadog = "service:datadog"
+    service_discord = "service:discord"
     service_gandi   = "service:gandi"
     service_gcp     = "service:gcp"
     service_github  = "service:github"
-    service_datadog = "service:datadog"
     service_okta    = "service:okta"
     service_snyk    = "service:snyk"
 
