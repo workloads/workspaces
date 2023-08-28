@@ -1,3 +1,33 @@
+# may be imported like so: `terraform import tfe_workspace.dns workloads/community`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "community" {
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = false
+  auto_apply                    = var.tfe_workspace_auto_apply
+  description                   = "Community Tooling for `${var.project_identifier}`."
+  execution_mode                = "remote"
+  file_triggers_enabled         = true
+  name                          = "community"
+  organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.management.id
+  structured_run_output_enabled = true
+
+  tag_names = [
+    var.tags.exec_remote,
+    var.tags.service_discord,
+    var.tags.type_provision,
+  ]
+
+  terraform_version = var.tfe_workspace_terraform_version
+
+  # TODO: re-enable when appropriate
+  #  vcs_repo {
+  #    branch         = "main"
+  #    identifier     = local.repository_slugs.dns
+  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  #  }
+}
+
 # may be imported like so: `terraform import tfe_workspace.dns workloads/dns`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "dns" {
