@@ -330,6 +330,7 @@ module "project_variables" {
   variables = local.project_variables
 
   workspace_ids = [
+    tfe_workspace.community.id,
     tfe_workspace.dns.id,
     tfe_workspace.networking.id,
     tfe_workspace.services_configuration.id,
