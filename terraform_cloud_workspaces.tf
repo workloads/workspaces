@@ -9,7 +9,7 @@ resource "tfe_workspace" "community" {
   file_triggers_enabled         = true
   name                          = "community"
   organization                  = tfe_organization.main.name
-  project_id                    = tfe_project.management.id
+  project_id                    = tfe_project.auxiliary.id
   structured_run_output_enabled = true
 
   tag_names = [
@@ -216,7 +216,7 @@ resource "tfe_workspace" "services_deployment" {
   #  }
 }
 
-# may be imported like so: `terraform import tfe_workspace.website workloads/users`
+# may be imported like so: `terraform import tfe_workspace.users workloads/users`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "users" {
   assessments_enabled           = false
@@ -258,6 +258,7 @@ resource "tfe_workspace" "website" {
   description                   = "Website for `${var.project_identifier}`."
   name                          = "website"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.auxiliary.id
   structured_run_output_enabled = true
 
   tag_names = [
@@ -292,6 +293,7 @@ resource "tfe_workspace" "web_assets" {
   description                   = "Web Assets for `${var.project_identifier}`."
   name                          = "web-assets"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.auxiliary.id
   structured_run_output_enabled = true
 
   tag_names = [
@@ -324,6 +326,7 @@ resource "tfe_workspace" "web_redirects" {
   description                   = "Short URLs for `${var.project_identifier}`."
   name                          = "web-redirects"
   organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.auxiliary.id
   structured_run_output_enabled = true
 
   tag_names = [

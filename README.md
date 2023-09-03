@@ -153,7 +153,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | tfe_organization_name | Name of the organization. | `string` | no |
 | tfe_organization_owners | List of Email Addresses of Terraform Cloud Organization Owners. | `list(string)` | no |
 | tfe_organization_token_force_regenerate | Whether to forcefully regenerate and replace TFE Organization Token. | `bool` | no |
-| tfe_project_names | Object containing TFE Project Names. | <pre>object({<br>    management = string<br>  })</pre> | no |
+| tfe_project_names | Object containing TFE Project Names. | <pre>object({<br>    auxiliary  = string<br>    management = string<br>  })</pre> | no |
 | tfe_workspace_allow_destroy_plan | Whether destroy plans can be queued on the workspace. | `bool` | no |
 | tfe_workspace_auto_apply | Whether to automatically apply changes when a Terraform plan is successful. | `bool` | no |
 | tfe_workspace_terraform_version | Terraform version to use for this Workspace. | `string` | no |
