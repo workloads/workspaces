@@ -283,11 +283,9 @@ resource "tfe_workspace" "website" {
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_assets" {
-  assessments_enabled = false
-  allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
-  auto_apply          = var.tfe_workspace_auto_apply
-
-  # TODO: switch to remote
+  assessments_enabled           = false
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "Web Assets for `${var.project_identifier}`."
@@ -313,14 +311,36 @@ resource "tfe_workspace" "web_assets" {
   #  }
 }
 
+# may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
+resource "tfe_workspace" "web_assets_sync" {
+  assessments_enabled           = false
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
+  execution_mode                = "local"
+  file_triggers_enabled         = true
+  description                   = "Web Assets Syncing for `${var.project_identifier}`."
+  name                          = "web-assets-sync"
+  organization                  = tfe_organization.main.name
+  project_id                    = tfe_project.auxiliary.id
+  structured_run_output_enabled = true
+
+  tag_names = [
+    var.tags.exec_local,
+    "${var.tags.region_prefix}:${var.management_region_aws}",
+    var.tags.service_aws,
+    var.tags.type_provision,
+  ]
+
+  terraform_version = var.tfe_workspace_terraform_version
+}
+
 # may be imported like so: `terraform import tfe_workspace.web_redirects workloads/web_redirects`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_redirects" {
-  assessments_enabled = false
-  allow_destroy_plan  = var.tfe_workspace_allow_destroy_plan
-  auto_apply          = var.tfe_workspace_auto_apply
-
-  # TODO: switch to remote
+  assessments_enabled           = false
+  allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "Short URLs for `${var.project_identifier}`."
