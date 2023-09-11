@@ -130,7 +130,7 @@ variable "hcp_boundary_admin_password" {
 variable "hcp_boundary_admin_auth_method_id" {
   type        = string
   description = "HCP Boundary Cluster Admin Auth Method Identifier."
-  default     = "ampw_aXDkyl43Li"
+  default     = "ampw_bgowbD2UNw"
 }
 
 # see https://cloud.hashicorp.com/docs/hcp/access-control/service-principals

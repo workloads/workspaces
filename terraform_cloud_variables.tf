@@ -36,6 +36,9 @@ module "aws_variables" {
     # needed for Regional Workspace deployments
     tfe_workspace.regional_workspaces.id,
 
+    # needed for Vault configuration
+    tfe_workspace.services_configuration.id,
+
     # needed for AWS IAM configuration
     tfe_workspace.users.id,
 
@@ -352,7 +355,6 @@ module "pagerduty_variables" {
 
   workspace_ids = [
     # TODO
-    tfe_workspace.services_configuration.id,
   ]
 }
 
