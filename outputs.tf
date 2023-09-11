@@ -7,69 +7,72 @@ output "variable_set_urls" {
 
   value = [
     {
-      name = module.aws_variables.tfe_variable_set.name,
-      url  = "${local.base_url}/settings/varsets/${module.aws_variables.tfe_variable_set.id}",
-    },
-    {
       name = module.auth0_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.auth0_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
+      name = module.aws_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.aws_variables.tfe_variable_set.id}",
+      }, {
+      name = module.aws_administrator_credentials.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.aws_administrator_credentials.tfe_variable_set.id}",
+      }, {
+      name = module.azure_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.azure_variables.tfe_variable_set.id}",
+      }, {
       name = module.datadog_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.datadog_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
+      name = module.discord_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.discord_variables.tfe_variable_set.id}",
+      }, {
+      name = module.docker_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.docker_variables.tfe_variable_set.id}",
+      }, {
       name = module.gandi_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.gandi_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.gitguardian_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.gitguardian_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.github_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.github_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
+      name = module.google_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.google_variables.tfe_variable_set.id}",
+      }, {
       name = module.hcp_boundary_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.hcp_boundary_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.hcp_network_ids.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.hcp_network_ids.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.hcp_contributor_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.hcp_contributor_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.hcp_vault_aws_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.hcp_vault_aws_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.hcp_viewer_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.hcp_viewer_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
+      name = module.mondoo_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.mondoo_variables.tfe_variable_set.id}",
+      }, {
       name = module.okta_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.okta_variables.tfe_variable_set.id}",
-    },
-    {
-      name = module.pagerduty_variables.tfe_variable_set.name,
-      url  = "${local.base_url}/settings/varsets/${module.pagerduty_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.project_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.project_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
+      name = module.pagerduty_variables.tfe_variable_set.name,
+      url  = "${local.base_url}/settings/varsets/${module.pagerduty_variables.tfe_variable_set.id}",
+      }, {
       name = module.terraform_cloud_oauth_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.terraform_cloud_oauth_variables.tfe_variable_set.id}",
-    },
-    {
+      }, {
       name = module.terraform_cloud_variables.tfe_variable_set.name,
       url  = "${local.base_url}/settings/varsets/${module.terraform_cloud_variables.tfe_variable_set.id}",
-    },
+    }
   ]
 }
 
@@ -100,4 +103,3 @@ output "github_urls" {
     "https://github.com/organizations/${var.github_owner}/settings/secrets/actions",
   ]
 }
-
