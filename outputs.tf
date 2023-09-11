@@ -77,13 +77,17 @@ output "workspace_urls" {
   description = "Workspace URLs."
 
   value = [
+    "${local.base_url}/workspaces/${tfe_workspace.community.name}",
     "${local.base_url}/workspaces/${tfe_workspace.dns.name}",
     "${local.base_url}/workspaces/${tfe_workspace.networking.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.regional_workspaces.name}",
     "${local.base_url}/workspaces/${tfe_workspace.repositories.name}",
     "${local.base_url}/workspaces/${tfe_workspace.services_configuration.name}",
     "${local.base_url}/workspaces/${tfe_workspace.services_deployment.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.users.name}",
     "${local.base_url}/workspaces/${tfe_workspace.website.name}",
     "${local.base_url}/workspaces/${tfe_workspace.web_assets.name}",
+    "${local.base_url}/workspaces/${tfe_workspace.web_assets_sync.name}",
     "${local.base_url}/workspaces/${tfe_workspace.web_redirects.name}",
     "${local.base_url}/workspaces/${tfe_workspace.workspaces.name}",
   ]

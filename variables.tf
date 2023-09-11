@@ -1,4 +1,3 @@
-
 # see https://registry.terraform.io/providers/auth0/auth0/latest/docs#client_id
 variable "auth0_client_id" {
   type        = string
