@@ -50,6 +50,24 @@ module "aws_variables" {
   ]
 }
 
+module "aws_administrator_credentials" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "Manually updated, Administrator Credentials for AWS."
+  name         = "AWS (Administrator Credentials)"
+  organization = tfe_organization.main.name
+
+  # ⚠️ Value(s) are set manually in the corresponding Terraform Cloud Variable Set.
+  variables = []
+
+  workspace_ids = [
+    # needed for Vault configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "azure_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"

@@ -144,7 +144,6 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | docker_username | Docker Hub Username. | `string` | no |
 | gitguardian_user | GitGuardian Service Account User. | `string` | no |
 | github_owner | This is the target GitHub organization or individual user account to manage. | `string` | no |
-| hcp_boundary_admin_auth_method_id | HCP Boundary Cluster Admin Auth Method Identifier. | `string` | no |
 | management_region_aws | AWS-specific `Management` Region Identifier. | `string` | no |
 | management_region_gcp | Google-specific `Management` Region Identifier. | `string` | no |
 | project_identifier | Human-readable Project Identifier. | `string` | no |
