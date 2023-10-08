@@ -308,6 +308,7 @@ variable "tags" {
     service_azure   = "service:azure"
     service_datadog = "service:datadog"
     service_discord = "service:discord"
+    service_do      = "service:digitalocean"
     service_gandi   = "service:gandi"
     service_gcp     = "service:gcp"
     service_github  = "service:github"
