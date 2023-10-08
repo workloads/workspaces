@@ -214,7 +214,7 @@ variable "csp_configuration" {
       }, {
       name    = "Microsoft Azure"
       prefix  = "az"
-      enabled = true
+      enabled = false
       }, {
       name    = "Digital Ocean"
       prefix  = "do"
@@ -222,7 +222,7 @@ variable "csp_configuration" {
       }, {
       name    = "Google Cloud Platform"
       prefix  = "gcp"
-      enabled = true
+      enabled = false
       }, {
       name    = "Scaleway"
       prefix  = "scw"
@@ -394,7 +394,7 @@ variable "tfe_workspace_terraform_version" {
   description = "Terraform version to use for this Workspace."
 
   # see https://releases.hashicorp.com/terraform/
-  default = "1.5.7"
+  default = "1.6.0"
 }
 
 locals {
