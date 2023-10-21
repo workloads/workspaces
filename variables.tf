@@ -319,7 +319,7 @@ variable "tags" {
     region_global = "region:global"
     region_prefix = "region"
 
-    # Infrastructure Mission Objective(s)
+    # Infrastructure Mission Objectives
     type_connect   = "type:connect"
     type_provision = "type:provision"
     type_run       = "type:run"

@@ -59,7 +59,7 @@ module "aws_administrator_credentials" {
   name         = "AWS (Administrator Credentials)"
   organization = tfe_organization.main.name
 
-  # ⚠️ Value(s) are set manually in the corresponding Terraform Cloud Variable Set.
+  # ⚠️ Values are set manually in the corresponding Terraform Cloud Variable Set.
   variables = []
 
   workspace_ids = [
