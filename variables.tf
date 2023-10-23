@@ -395,7 +395,7 @@ variable "tfe_workspace_terraform_version" {
   description = "Terraform version to use for this Workspace."
 
   # see https://releases.hashicorp.com/terraform/
-  default = "1.6.0"
+  default = "1.6.2"
 }
 
 locals {
