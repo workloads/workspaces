@@ -80,8 +80,8 @@ module "aws_directory_variables" {
   variables = local.aws_directory_variables
 
   workspace_ids = [
-    # needed for Directory configuration
-    tfe_workspace.services_configuration.id,
+    # needed for Directory deployment
+    tfe_workspace.services_deployment.id,
   ]
 }
 
