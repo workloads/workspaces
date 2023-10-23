@@ -444,13 +444,13 @@ locals {
 
   aws_directory_variables = [
     {
-      key         = "aws_directory_username"
+      key         = "aws_directory_admin_username"
       category    = "terraform"
       value       = var.aws_directory_admin_username
       description = "AWS Directory Service Admin Username."
       sensitive   = false
     }, {
-      key         = "aws_directory_password"
+      key         = "aws_directory_admin_password"
       category    = "terraform"
       value       = var.aws_directory_admin_password
       description = "AWS Directory Service Admin Password."
