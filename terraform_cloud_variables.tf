@@ -68,6 +68,23 @@ module "aws_administrator_credentials" {
   ]
 }
 
+module "aws_directory_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "AWS User Directory specific Variables."
+  name         = "AWS Directory"
+  organization = tfe_organization.main.name
+
+  variables = local.aws_directory_variables
+
+  workspace_ids = [
+    # needed for Directory configuration
+    tfe_workspace.services_configuration.id,
+  ]
+}
+
 module "azure_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
@@ -166,10 +183,7 @@ module "gitguardian_variables" {
 
   variables = local.gitguardian_variables
 
-  workspace_ids = [
-    # needed for Secrets Leak detection
-    tfe_workspace.repositories.id,
-  ]
+  workspace_ids = []
 }
 
 module "github_variables" {

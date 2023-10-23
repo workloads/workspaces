@@ -16,6 +16,17 @@ variable "auth0_domain" {
   description = "Auth0 Domain Name."
 }
 
+variable "aws_directory_admin_username" {
+  type        = string
+  description = "AWS Directory Service Admin Username."
+}
+
+variable "aws_directory_admin_password" {
+  type        = string
+  description = "AWS Directory Service Admin Password."
+  sensitive   = true
+}
+
 # see https://registry.terraform.io/providers/DataDog/datadog/latest/docs#api_key
 variable "datadog_api_key" {
   type        = string
@@ -429,6 +440,22 @@ locals {
       description = "AWS-specific Management Region Identifier."
       sensitive   = false
     },
+  ]
+
+  aws_directory_variables = [
+    {
+      key         = "aws_directory_username"
+      category    = "terraform"
+      value       = var.aws_directory_admin_username
+      description = "AWS Directory Service Admin Username."
+      sensitive   = false
+    }, {
+      key         = "aws_directory_password"
+      category    = "terraform"
+      value       = var.aws_directory_admin_password
+      description = "AWS Directory Service Admin Password."
+      sensitive   = true
+    }
   ]
 
   azure_variables = [
