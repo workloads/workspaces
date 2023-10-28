@@ -36,6 +36,9 @@ module "aws_variables" {
     # needed for Regional Workspace deployments
     tfe_workspace.regional_workspaces.id,
 
+    # needed for AWS Directory configuration
+    tfe_workspace.services_deployment.id,
+
     # needed for Vault configuration
     tfe_workspace.services_configuration.id,
 
