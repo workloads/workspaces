@@ -243,7 +243,7 @@ resource "tfe_workspace" "users" {
   # TODO: re-enable when appropriate
   #  vcs_repo {
   #    branch         = "main"
-  #    identifier     = local.repository_slugs.website
+  #    identifier     = local.repository_slugs.users
   #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   #  }
 }
@@ -302,12 +302,11 @@ resource "tfe_workspace" "web_assets" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
-  # TODO: re-enable when appropriate
-  #  vcs_repo {
-  #    branch         = "main"
-  #    identifier     = local.repository_slugs.web_assets
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs["web-assets"]
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
@@ -357,12 +356,11 @@ resource "tfe_workspace" "web_redirects" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
-  # TODO: re-enable when appropriate
-  #  vcs_repo {
-  #    branch         = "main"
-  #    identifier     = local.repository_slugs.web_redirects
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs["web-redirects"]
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.workspaces workloads/workspaces`
