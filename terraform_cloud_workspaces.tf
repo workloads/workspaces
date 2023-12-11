@@ -240,12 +240,11 @@ resource "tfe_workspace" "users" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
-  # TODO: re-enable when appropriate
-  #  vcs_repo {
-  #    branch         = "main"
-  #    identifier     = local.repository_slugs.users
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs.users
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.website workloads/website`
