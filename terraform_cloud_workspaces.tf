@@ -254,7 +254,7 @@ resource "tfe_workspace" "website_deployment" {
   assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  execution_mode                = "local"
+  execution_mode                = "remote"
   file_triggers_enabled         = true
   description                   = "Website Deployment for `${var.project_identifier}`."
   name                          = "website-deployment"
@@ -273,12 +273,11 @@ resource "tfe_workspace" "website_deployment" {
 
   terraform_version = var.tfe_workspace_terraform_version
 
-  # TODO: re-enable when appropriate
-  #  vcs_repo {
-  #    branch         = "main"
-  #    identifier     = local.repository_slugs.website
-  #    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
-  #  }
+  vcs_repo {
+    branch         = "main"
+    identifier     = local.repository_slugs["website-deployment"]
+    oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+  }
 }
 
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
