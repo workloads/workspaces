@@ -406,7 +406,7 @@ variable "tfe_workspace_terraform_version" {
   description = "Terraform version to use for this Workspace."
 
   # see https://releases.hashicorp.com/terraform/
-  default = "1.6.3"
+  default = "1.6.5"
 }
 
 locals {
@@ -449,7 +449,7 @@ locals {
       value       = var.aws_directory_admin_username
       description = "AWS Directory Service Admin Username."
       sensitive   = false
-    }, {
+      }, {
       key         = "aws_directory_admin_password"
       category    = "terraform"
       value       = var.aws_directory_admin_password
