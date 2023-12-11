@@ -205,7 +205,7 @@ module "github_variables" {
     tfe_workspace.repositories.id,
 
     # needed for GitHub API data retrieval
-    tfe_workspace.website.id,
+    tfe_workspace.website_deployment.id,
   ]
 }
 

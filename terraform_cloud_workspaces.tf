@@ -250,14 +250,14 @@ resource "tfe_workspace" "users" {
 
 # may be imported like so: `terraform import tfe_workspace.website workloads/website`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
-resource "tfe_workspace" "website" {
+resource "tfe_workspace" "website_deployment" {
   assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
   execution_mode                = "local"
   file_triggers_enabled         = true
-  description                   = "Website for `${var.project_identifier}`."
-  name                          = "website"
+  description                   = "Website Deployment for `${var.project_identifier}`."
+  name                          = "website-deployment"
   organization                  = tfe_organization.main.name
   project_id                    = tfe_project.auxiliary.id
   structured_run_output_enabled = true
