@@ -263,12 +263,11 @@ resource "tfe_workspace" "website_deployment" {
   structured_run_output_enabled = true
 
   tag_names = [
-    var.tags.exec_local,
+    var.tags.exec_remote,
     "${var.tags.region_prefix}:${var.management_region_aws}",
     var.tags.service_aws,
     var.tags.service_github,
     var.tags.type_provision,
-    var.tags.type_run,
   ]
 
   terraform_version = var.tfe_workspace_terraform_version
