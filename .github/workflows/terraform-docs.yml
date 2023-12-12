@@ -34,14 +34,14 @@ jobs:
     steps:
       # see https://github.com/actions/checkout/releases/tag/v4.1.1
       - name: Checkout Repository
-        uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11" # ref: `tags/v4.1.1`
+        uses: "actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11"  # ref: `tags/v4.1.1`
         with:
           ref: "${{ github.event.pull_request.head.ref }}"
           fetch-depth: 1
 
       # see https://github.com/terraform-docs/gh-actions/releases/tag/v1.0.0
       - name: Render documentation for repository and push changes back to branch
-        uses: "terraform-docs/gh-actions@f6d59f89a280fa0a3febf55ef68f146784b20ba0" # ref: `tags/v1.0.0`
+        uses: "terraform-docs/gh-actions@f6d59f89a280fa0a3febf55ef68f146784b20ba0"  # ref: `tags/v1.0.0`
         with:
           config-file: ".terraform-docs.yml"
           output-file: "README.md"
