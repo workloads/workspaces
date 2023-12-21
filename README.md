@@ -8,6 +8,7 @@
 * [Terraform Cloud Workspace `workspaces`](#terraform-cloud-workspace-workspaces)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
+    * [Development](#development)
   * [Diagrams](#diagrams)
     * [Terraform Cloud Workspace Structure](#terraform-cloud-workspace-structure)
   * [Usage](#usage)
@@ -23,12 +24,17 @@
 ## Requirements
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in)
-* Terraform Cloud [Account](https://app.terraform.io/session)
-* Terraform `1.5.0` or [newer](https://developer.hashicorp.com/terraform/downloads)
+* HashiCorp Terraform Cloud [Account](https://app.terraform.io/session)
+* HashiCorp Terraform `1.6.x` or [newer](https://developer.hashicorp.com/terraform/downloads)
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/)
-* a check-out of [@workloads/tooling](https://github.com/workloads/tooling)
-* `make` `3.8.0` or newer
 * (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo)
+* a copy of [@workloads/tooling](https://github.com/workloads/tooling)
+
+### Development
+
+For development and testing of this repository:
+
+* `terraform-docs` `0.17.0` or [newer](https://terraform-docs.io/user-guide/installation/)
 
 ## Diagrams
 
