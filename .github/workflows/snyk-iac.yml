@@ -51,9 +51,9 @@ jobs:
           args: "--policy-path='.snyk'"
           sarif: true
 
-      # see https://github.com/github/codeql-action/releases/tag/codeql-bundle-v2.15.3
+      # see https://github.com/github/codeql-action/releases/tag/codeql-bundle-v2.15.5
       - name: Upload Snyk IaC results to GitHub Code Scanning
-        uses: "github/codeql-action@4b6aa0b07da05d6e43d0e5f9c8596a6532ce1c85"  # ref: `tags/codeql-bundle-v2.15.3`
+        uses: "github/codeql-action@7e187e1c529d80bac7b87a16e7a792427f65cf02"  # ref: `tags/codeql-bundle-v2.15.5`
         with:
           sarif_file: "snyk.sarif"
 
