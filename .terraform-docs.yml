@@ -38,4 +38,4 @@ sections:
     - outputs
 
 # see https://terraform-docs.io/user-guide/configuration/version/
-version: ">= 0.16.0, < 1.0.0"
+version: ">= 0.17.0, < 1.0.0"
