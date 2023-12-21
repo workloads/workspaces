@@ -15,8 +15,8 @@
     * [Outputs](#outputs)
   * [Notes](#notes)
     * [Sensitive Data](#sensitive-data)
-    * [Colored Output](#colored-output)
-  * [Author Information](#author-information)
+    * [Colorized Output](#colorized-output)
+  * [Contributors](#contributors)
   * [License](#license)
 <!-- TOC -->
 
@@ -79,7 +79,7 @@ The `workspaces` Terraform Cloud Workspace acts as a _Seed_ Workspace. The repos
 
 To inject sensitive _"Secret Zero"_ type data, the [1Password CLI](https://1password.com/downloads/command-line/) is used to wrap common Terraform commands (`plan`, `apply`, `destroy`).
 
-This repository provides a workflow that is wrapped through a [Makefile](./Makefile).
+This repository provides a [Makefile](./Makefile)-based workflow.
 
 Running `make` without commands will print out the following help information:
 
@@ -174,7 +174,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
 
-### Colored Output
+### Colorized Output
 
 Colorized CLI output may be disabled by setting the `NO_COLOR` environment variable to any non-empty value.
 
@@ -182,16 +182,14 @@ Colorized CLI output may be disabled by setting the `NO_COLOR` environment varia
 export NO_COLOR=1 && make
 ```
 
-## Author Information
+## Contributors
 
-This repository is maintained by the contributors listed on [GitHub](https://github.com/workloads/workspaces/graphs/contributors).
+For a list of current (and past) contributors to this repository, see [GitHub](https://github.com/workloads/workspaces/graphs/contributors).
 
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License").
 
-You may obtain a copy of the License at [apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an _"AS IS"_ basis, without WARRANTIES or conditions of any kind, either express or implied.
+You may download a copy of the License at [apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 See the License for the specific language governing permissions and limitations under the License.
