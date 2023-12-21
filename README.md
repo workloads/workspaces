@@ -1,6 +1,6 @@
 # Terraform Cloud Workspace `workspaces`
 
-> This directory manages Terraform Cloud Workspaces for [@workloads](https://github.com/workloads).
+> This repository manages Terraform Cloud Workspaces for [@workloads](https://github.com/workloads).
 
 ## Table of Contents
 
