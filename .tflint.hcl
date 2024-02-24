@@ -9,7 +9,7 @@ config {
 # see https://github.com/terraform-linters/tflint-ruleset-aws
 plugin "aws" {
   enabled = true
-  version = "0.27.0"
+  version = "0.30.0"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
 }
 
@@ -23,13 +23,15 @@ plugin "azurerm" {
 # see https://github.com/terraform-linters/tflint-ruleset-google
 plugin "google" {
   enabled = true
-  version = "0.25.0"
+  version = "0.27.1"
   source  = "github.com/terraform-linters/tflint-ruleset-google"
 }
 
 plugin "terraform" {
   enabled = true
   preset  = "recommended"
+  version = "0.6.0"
+  source  = "github.com/terraform-linters/tflint-ruleset-terraform"
 }
 
 # see https://github.com/terraform-linters/tflint-ruleset-terraform/blob/main/docs/rules/terraform_comment_syntax.md
