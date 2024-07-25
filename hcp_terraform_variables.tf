@@ -62,7 +62,7 @@ module "aws_administrator_credentials" {
   name         = "AWS (Administrator Credentials)"
   organization = tfe_organization.main.name
 
-  # ⚠️ Values are set manually in the corresponding Terraform Cloud Variable Set.
+  # ⚠️ Values are set manually in the corresponding HCP Terraform Variable Set.
   variables = []
 
   workspace_ids = [
@@ -408,26 +408,26 @@ module "terraform_cloud_oauth_variables" {
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Terraform Cloud-specific OAuth Variables."
-  name         = "Terraform Cloud OAuth"
+  description  = "HCP Terraform-specific OAuth Variables."
+  name         = "HCP Terraform OAuth"
   organization = tfe_organization.main.name
 
   variables = local.tfe_oauth_variables
 
   workspace_ids = [
-    # needed for Terraform Cloud VCS Repository configuration
+    # needed for HCP Terraform VCS Repository configuration
     tfe_workspace.regional_workspaces.id,
   ]
 }
 
-# assign TFE Organization Token to Terraform Cloud Workspaces that require access to it.
+# assign TFE Organization Token to HCP Terraform Workspaces that require access to it.
 module "terraform_cloud_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
   version = "1.0.0"
 
-  description  = "Terraform Cloud API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens."
-  name         = "Terraform Cloud"
+  description  = "HCP Terraform API Token. See https://app.terraform.io/app/${tfe_organization.main.name}/settings/authentication-tokens."
+  name         = "HCP Terraform"
   organization = tfe_organization.main.name
 
   variables = [
@@ -435,14 +435,14 @@ module "terraform_cloud_variables" {
       key         = "tfe_organization"
       category    = "terraform"
       value       = tfe_organization.main.name
-      description = "Terraform Cloud Organization Name."
+      description = "HCP Terraform Organization Name."
       sensitive   = false
     },
     {
       key         = "TFE_TOKEN"
       category    = "env"
       value       = tfe_organization_token.organization.token
-      description = "Terraform Cloud Organization Token."
+      description = "HCP Terraform Organization Token."
       sensitive   = true
   }]
 
@@ -453,7 +453,7 @@ module "terraform_cloud_variables" {
     # needed for Regional Workspace lifecycle management
     tfe_workspace.regional_workspaces.id,
 
-    # needed for updating of Terraform Cloud Variable Sets
+    # needed for updating of HCP Terraform Variable Sets
     tfe_workspace.services_deployment.id,
   ]
 }
