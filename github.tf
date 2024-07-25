@@ -16,7 +16,7 @@ resource "github_actions_organization_variable" "terraform_version" {
   value         = var.tfe_workspace_terraform_version
 }
 
-# set Terraform Cloud Token as GitHub Organization Secret to allow for
+# set HCP Terraform Token as GitHub Organization Secret to allow for
 # easier re-use and maintainability across GitHub Actions Workflows
 # see https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_organization_secret
 resource "github_actions_organization_secret" "terraform_cloud_token" {

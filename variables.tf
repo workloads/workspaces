@@ -84,7 +84,7 @@ variable "docker_read_token" {
 }
 
 
-variable "gandi_key" {
+variable "gandi_personal_access_token" {
   type        = string
   description = "This is the Gandi API Key."
 }
@@ -196,7 +196,7 @@ variable "project_identifier" {
   default     = "workloads"
 
   # `project_identifier` is widely used across this TFC Organization to identify
-  # Terraform Cloud and HashiCorp Cloud Platform resources, so certain limits apply.
+  # HCP Terraform and HashiCorp Cloud Platform resources, so certain limits apply.
   validation {
     condition     = length(var.project_identifier) >= 3 && length(var.project_identifier) <= 24
     error_message = "`project_identifier` must be at least 3 and at most 24 characters."
@@ -309,7 +309,7 @@ variable "tags" {
   description = "Object containing pre-defined Tags."
 
   default = {
-    # Terraform Cloud Execution Methods
+    # HCP Terraform Execution Methods
     exec_agent  = "exec:agent"
     exec_local  = "exec:local"
     exec_remote = "exec:remote"
@@ -358,11 +358,11 @@ variable "tfe_organization_name" {
 
 variable "tfe_organization_owners" {
   type        = list(string)
-  description = "List of Email Addresses of Terraform Cloud Organization Owners."
+  description = "List of Email Addresses of HCP Terraform Organization Owners."
 
   default = [
     # TODO: import
-    #"adrian.todorov@hashicorp.com", # Adrian Todorov / `atodorov-hashi`
+    "adrian.todorov@hashicorp.com", # Adrian Todorov / `atodorov-hashi`
     "justin.defrank@hashicorp.com", # Justin DeFrank / `rizkybiz`
     "kerim@hashicorp.com",          # Kerim Satirli / `ksatirli`
     "team@workloads.io",            # Service Account / `workloads-bot`
@@ -406,7 +406,7 @@ variable "tfe_workspace_terraform_version" {
   description = "Terraform version to use for this Workspace."
 
   # see https://releases.hashicorp.com/terraform/
-  default = "1.7.4"
+  default = "~> 1.9.0"
 }
 
 locals {
@@ -537,9 +537,9 @@ locals {
 
   gandi_variables = [
     {
-      key         = "gandi_key"
+      key         = "gandi_personal_access_token"
       category    = "terraform"
-      value       = var.gandi_key
+      value       = var.gandi_personal_access_token
       description = "Gandi API Key."
       sensitive   = true
       }, {
@@ -741,13 +741,13 @@ locals {
     },
   ]
 
-  # Terraform Cloud-specific oAuth Variables for VCS Repository Connections
+  # HCP Terraform-specific oAuth Variables for VCS Repository Connections
   tfe_oauth_variables = [
     {
       key         = "tfe_oauth_client_id"
       category    = "terraform"
       value       = data.tfe_oauth_client.client.oauth_token_id
-      description = "Terraform Cloud OAuth Client Token ID."
+      description = "HCP Terraform OAuth Client Token ID."
       sensitive   = true
     },
   ]

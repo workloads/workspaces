@@ -368,7 +368,7 @@ resource "tfe_workspace" "workspaces" {
   assessments_enabled           = false # explicitly disabled because of reasons
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
   auto_apply                    = var.tfe_workspace_auto_apply
-  description                   = "Terraform Cloud Configuration for `${var.project_identifier}`."
+  description                   = "HCP Terraform Configuration for `${var.project_identifier}`."
   execution_mode                = "local"
   file_triggers_enabled         = false
   name                          = "workspaces"

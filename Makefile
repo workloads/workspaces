@@ -1,9 +1,8 @@
-# Makefile for Terraform Cloud Workspaces Seeding
+# Makefile for HCP Terraform Workspaces Seeding
 
 # configuration
-ARGS        :=
-TITLE        = 🟣 TERRAFORM CLOUD WORKSPACES
-OP_ENV_FILE  = secrets.op.env
+ARGS  :=
+MAKEFILE_TITLE = 🟣 HCP TERRAFORM WORKSPACES
 
 include ../tooling/make/configs/shared.mk
 include ../tooling/make/functions/shared.mk
