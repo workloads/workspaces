@@ -1,16 +1,16 @@
-# Terraform Cloud Workspace `workspaces`
+# HCP Terraform Workspace `workspaces`
 
-> This repository manages Terraform Cloud Workspaces for [@workloads](https://github.com/workloads).
+> This repository manages HCP Terraform Workspaces for [@workloads](https://github.com/workloads).
 
 ## Table of Contents
 
 <!-- TOC -->
-* [Terraform Cloud Workspace `workspaces`](#terraform-cloud-workspace-workspaces)
+* [HCP Terraform Workspace `workspaces`](#hcp-terraform-workspace-workspaces)
   * [Table of Contents](#table-of-contents)
   * [Requirements](#requirements)
     * [Development](#development)
   * [Diagrams](#diagrams)
-    * [Terraform Cloud Workspace Structure](#terraform-cloud-workspace-structure)
+    * [HCP Terraform Workspace Structure](#hcp-terraform-workspace-structure)
   * [Usage](#usage)
     * [Inputs](#inputs)
     * [Outputs](#outputs)
@@ -24,10 +24,9 @@
 ## Requirements
 
 * HashiCorp Cloud Platform (HCP) [Account](https://portal.cloud.hashicorp.com/sign-in)
-* HashiCorp Terraform Cloud [Account](https://app.terraform.io/session)
-* HashiCorp Terraform `1.6.x` or [newer](https://developer.hashicorp.com/terraform/downloads)
+* HashiCorp HCP Terraform [Account](https://app.terraform.io/session)
+* HashiCorp Terraform `1.9.x` or [newer](https://developer.hashicorp.com/terraform/downloads)
 * 1Password CLI `2.0.0` or [newer](https://1password.com/downloads/command-line/)
-* (optionally) `envo` `1.0.0` or [newer](https://github.com/im2nguyen/envo)
 * a copy of [@workloads/tooling](https://github.com/workloads/tooling)
 
 ### Development
@@ -38,12 +37,12 @@ For development and testing of this repository:
 
 ## Diagrams
 
-This section contains an overview of (simplified) diagrams, describing the logical connections of the individual Terraform Cloud Workspaces.
+This section contains an overview of (simplified) diagrams, describing the logical connections of the individual HCP Terraform Workspaces.
 All diagrams are expressed in [Mermaid](https://mermaid.js.org) syntax.
 
-### Terraform Cloud Workspace Structure
+### HCP Terraform Workspace Structure
 
-This diagram describes the [Terraform Cloud Workspaces](https://developer.hashicorp.com/terraform/cloud-docs/workspaces) structure:
+This diagram describes the [HCP Terraform Workspaces](https://developer.hashicorp.com/terraform/cloud-docs/workspaces) structure:
 
 ```mermaid
 flowchart LR
@@ -60,7 +59,7 @@ flowchart LR
         makefile -.- opcli -.- terraform
     end
 
-    subgraph remote["remote, in Terraform Cloud"]
+    subgraph remote["remote, in HCP Terraform"]
         direction LR
 
         %% actual connections
@@ -81,7 +80,7 @@ flowchart LR
 
 ## Usage
 
-The `workspaces` Terraform Cloud Workspace acts as a _Seed_ Workspace. The repository provides lifecycle management of other, organization-specific Terraform Cloud Workspaces and GitHub Organization configurations.
+The `workspaces` HCP Terraform Workspace acts as a _Seed_ Workspace. The repository provides lifecycle management of other, organization-specific HCP Terraform Workspaces and GitHub Organization configurations.
 
 To inject sensitive _"Secret Zero"_ type data, the [1Password CLI](https://1password.com/downloads/command-line/) is used to wrap common Terraform commands (`plan`, `apply`, `destroy`).
 
@@ -90,7 +89,7 @@ This repository provides a [Makefile](./Makefile)-based workflow.
 Running `make` without commands will print out the following help information:
 
 ```text
-🟣 TERRAFORM CLOUD WORKSPACES
+🟣 HCP Terraform WORKSPACES
 
 Target          Description                                   Usage
 print-secrets   print (sanitized) environment variables       `make print-secrets`
@@ -99,7 +98,6 @@ import          execute a Terraform Import                    `make import local
 help            display a list of Make Targets                `make help`
 _listincludes   list all included Makefiles and *.mk files    `make _listincludes`
 _selfcheck      lint Makefile                                 `make _selfcheck`
-
 ```
 
 The `terraform` target requires a command such as `plan` or `apply` and optionally supports arguments such as `-auto-approve`
@@ -122,7 +120,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | docker_read_token | Docker Hub Read Token. | `string` | yes |
 | docker_read_write_delete_token | Docker Hub Read / Write / Delete Token. | `string` | yes |
 | docker_read_write_token | Docker Hub Read / Write Token. | `string` | yes |
-| gandi_key | This is the Gandi API Key. | `string` | yes |
+| gandi_personal_access_token | This is the Gandi API Key. | `string` | yes |
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
 | gitguardian_token | GitGuardian Service Account Token. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |
@@ -158,7 +156,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | snyk_org | Snyk Organization Name. | `string` | no |
 | tags | Object containing pre-defined Tags. | `map(string)` | no |
 | tfe_organization_name | Name of the organization. | `string` | no |
-| tfe_organization_owners | List of Email Addresses of Terraform Cloud Organization Owners. | `list(string)` | no |
+| tfe_organization_owners | List of Email Addresses of HCP Terraform Organization Owners. | `list(string)` | no |
 | tfe_organization_token_force_regenerate | Whether to forcefully regenerate and replace TFE Organization Token. | `bool` | no |
 | tfe_project_names | Object containing TFE Project Names. | <pre>object({<br>    auxiliary  = string<br>    management = string<br>  })</pre> | no |
 | tfe_workspace_allow_destroy_plan | Whether destroy plans can be queued on the workspace. | `bool` | no |
@@ -178,7 +176,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 
 ### Sensitive Data
 
-Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [Terraform Cloud](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
+Terraform state may contain [sensitive data](https://developer.hashicorp.com/terraform/language/state/sensitive-data). This workspace uses [HCP Terraform](https://developer.hashicorp.com/terraform/cloud-docs) to safely store state, and encrypt the data at rest.
 
 ### Colorized Output
 

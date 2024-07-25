@@ -10,6 +10,6 @@ data "tfe_outputs" "repositories" {
 }
 
 locals {
-  # map outputs from `repositories` Terraform Cloud Workspace for easier usage:
+  # map outputs from `repositories` HCP Terraform Workspace for easier usage:
   repository_slugs = data.tfe_outputs.repositories.values.github_repository_slugs
 }
