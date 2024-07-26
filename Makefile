@@ -7,7 +7,7 @@ MAKEFILE_TITLE = 🟣 HCP TERRAFORM WORKSPACES
 include ../tooling/make/configs/shared.mk
 include ../tooling/make/functions/shared.mk
 include ../tooling/make/configs/github.mk
-include ../tooling/make/functions/maintenance.mk
+include ../tooling/make/functions/terraform.mk
 include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
