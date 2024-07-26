@@ -5,35 +5,29 @@ resource "tfe_team" "owners" {
   organization = var.tfe_organization_name
 
   # owners are generally kept secret as they present an attack vector
+  # (this setting is made, despite the code repository itself being public)
   visibility = "secret"
 
   # see https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/permissions#organization-permissions
   organization_access {
-    manage_membership       = true
-    manage_policies         = true
-    manage_policy_overrides = true
-    manage_workspaces       = true
-    manage_vcs_settings     = true
-    manage_providers        = true
-    manage_modules          = true
-    manage_run_tasks        = true
-    manage_projects         = true
+    access_secret_teams = true
+
+    manage_agent_pools         = true
+    manage_membership          = true
+    manage_organization_access = true
+    manage_policies            = true
+    manage_policy_overrides    = true
+    manage_teams               = true
+    manage_workspaces          = true
+    manage_vcs_settings        = true
+    manage_providers           = true
+    manage_modules             = true
+    manage_run_tasks           = true
+    manage_projects            = true
 
     read_projects   = true
     read_workspaces = true
   }
-}
-
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_member
-resource "tfe_team_member" "owners" {
-  # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
-  for_each = {
-    for user in tfe_organization_membership.owners :
-    user.username => user
-  }
-
-  team_id  = tfe_team.owners.id
-  username = each.value.username
 }
 
 # The `owners` team is a pre-existing resource and must be imported before it can be used through the `tfe` provider.
@@ -57,4 +51,25 @@ resource "tfe_team" "viewers" {
     read_projects   = true
     read_workspaces = true
   }
+}
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership
+resource "tfe_organization_membership" "owners" {
+  # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
+  for_each = toset(var.tfe_organization_owner_humans)
+
+  email        = each.key
+  organization = tfe_organization.main.name
+}
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_organization_member
+resource "tfe_team_organization_member" "owners" {
+  # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
+  for_each = {
+    # see https://developer.hashicorp.com/terraform/language/expressions/for
+    for membership in tfe_organization_membership.owners : membership.email => membership
+  }
+
+  team_id = tfe_team.owners.id
+  organization_membership_id = each.value.id
 }

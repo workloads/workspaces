@@ -12,19 +12,11 @@ include ../tooling/make/targets/shared.mk
 
 .SILENT .PHONY: print-secrets
 print-secrets: # print (sanitized) environment variables [Usage: `make print-secrets`]
-ifeq ($(strip $(BINARY_OP)),)
-	$(error 🛑 Missing required 1Password CLI)
-endif
-
 	$(call print_secrets,"TF_VAR")
 
 .SILENT .PHONY: terraform
 terraform: # execute Terraform with a specific command [Usage: `make terraform command=plan`]
 	$(if $(command),,$(call missing_argument,command=init))
-
-ifeq ($(strip $(BINARY_OP)),)
-	$(error 🛑 Missing required 1Password CLI)
-endif
 
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	$(BINARY_OP) \
@@ -39,10 +31,6 @@ import: # execute a Terraform Import [Usage: `make import local=<Terraform Resou
 	$(if $(local),,$(call missing_argument,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
 	$(if $(remote),,$(call missing_argument,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
 
-ifeq ($(strip $(BINARY_OP)),)
-	$(error 🛑 Missing required 1Password CLI)
-endif
-
 	# see https://developer.1password.com/docs/cli/reference/commands/run
 	$(BINARY_OP) \
 		run \
@@ -52,3 +40,18 @@ endif
 			$(BINARY_TERRAFORM) \
 				import \
 					'$(local)' '$(remote)'
+
+.SILENT .PHONY: state-rm
+state-rm: # execute a Terraform State Deletion [Usage: `make state-rm item=<Terraform Resource Identifier>`]
+		$(if $(item),,$(call missing_argument,local=<Terraform Resource Identifier> remote=<Remote API Identifier>))
+
+	# see https://developer.1password.com/docs/cli/reference/commands/run
+	$(BINARY_OP) \
+		run \
+			--account="$(ONEPASSWORD_ACCOUNT)" \
+			--env-file="$(ONEPASSWORD_SECRETS_FILE)" \
+			-- \
+			$(BINARY_TERRAFORM) \
+				state \
+					rm \
+					'$(item)'

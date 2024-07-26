@@ -83,15 +83,9 @@ variable "docker_read_token" {
   sensitive   = true
 }
 
-
 variable "gandi_api_key" {
   type        = string
   description = "This is the Gandi API Key."
-}
-
-variable "gandi_sharing_id" {
-  type        = string
-  description = "This is the Gandi Sharing ID."
 }
 
 variable "gitguardian_user" {
@@ -356,16 +350,23 @@ variable "tfe_organization_name" {
   default     = "workloads"
 }
 
-variable "tfe_organization_owners" {
+variable "tfe_organization_owner_humans" {
   type        = list(string)
-  description = "List of Email Addresses of HCP Terraform Organization Owners."
+  description = "List of Human-operated Email Addresses of HCP Terraform Organization Owners."
 
   default = [
-    # TODO: import
     "adrian.todorov@hashicorp.com", # Adrian Todorov / `atodorov-hashi`
     "justin.defrank@hashicorp.com", # Justin DeFrank / `rizkybiz`
     "kerim@hashicorp.com",          # Kerim Satirli / `ksatirli`
-    "team@workloads.io",            # Service Account / `workloads-bot`
+  ]
+}
+
+variable "tfe_organization_owner_robots" {
+  type        = list(string)
+  description = "List of Robot-operated Email Addresses of HCP Terraform Organization Owners."
+
+  default = [
+    "team@workloads.io", # Service Account / `workloads-bot`
   ]
 }
 
@@ -406,7 +407,7 @@ variable "tfe_workspace_terraform_version" {
   description = "Terraform version to use for this Workspace."
 
   # see https://releases.hashicorp.com/terraform/
-  default = "~> 1.9.0"
+  default = "~>1.9.0"
 }
 
 locals {
@@ -542,7 +543,7 @@ locals {
       value       = var.gandi_api_key
       description = "Gandi API Key."
       sensitive   = true
-      }
+    }
   ]
 
   gitguardian_variables = [

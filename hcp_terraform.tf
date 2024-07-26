@@ -9,15 +9,6 @@ resource "tfe_organization" "main" {
   session_timeout_minutes  = 10080 # 7 days
 }
 
-# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership
-resource "tfe_organization_membership" "owners" {
-  # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each
-  for_each = toset(var.tfe_organization_owners)
-
-  email        = each.key
-  organization = tfe_organization.main.name
-}
-
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_token
 resource "tfe_organization_token" "organization" {
   force_regenerate = var.tfe_organization_token_force_regenerate
