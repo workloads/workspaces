@@ -120,7 +120,7 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | docker_read_token | Docker Hub Read Token. | `string` | yes |
 | docker_read_write_delete_token | Docker Hub Read / Write / Delete Token. | `string` | yes |
 | docker_read_write_token | Docker Hub Read / Write Token. | `string` | yes |
-| gandi_personal_access_token | This is the Gandi API Key. | `string` | yes |
+| gandi_api_key | This is the Gandi API Key. | `string` | yes |
 | gandi_sharing_id | This is the Gandi Sharing ID. | `string` | yes |
 | gitguardian_token | GitGuardian Service Account Token. | `string` | yes |
 | github_token | A GitHub OAuth / Personal Access Token. | `string` | yes |

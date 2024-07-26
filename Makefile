@@ -27,12 +27,12 @@ ifeq ($(strip $(BINARY_OP)),)
 endif
 
 	# see https://developer.1password.com/docs/cli/reference/commands/run
-	op \
+	$(BINARY_OP) \
 		run \
-			--account="$(OP_ACCOUNT)" \
-			--env-file="$(OP_ENV_FILE)" \
+			--account="$(ONEPASSWORD_ACCOUNT)" \
+			--env-file="$(ONEPASSWORD_SECRETS_FILE)" \
 			-- \
-			terraform $(command) $(ARGS)
+			$(BINARY_TERRAFORM) $(command) $(ARGS)
 
 .SILENT .PHONY: import
 import: # execute a Terraform Import [Usage: `make import local=<Terraform Resource Identifier> remote=<Remote API identifier>`]
@@ -44,11 +44,11 @@ ifeq ($(strip $(BINARY_OP)),)
 endif
 
 	# see https://developer.1password.com/docs/cli/reference/commands/run
-	op \
+	$(BINARY_OP) \
 		run \
-			--account="$(OP_ACCOUNT)" \
-			--env-file="$(OP_ENV_FILE)" \
+			--account="$(ONEPASSWORD_ACCOUNT)" \
+			--env-file="$(ONEPASSWORD_SECRETS_FILE)" \
 			-- \
-			terraform \
+			$(BINARY_TERRAFORM) \
 				import \
 					'$(local)' '$(remote)'

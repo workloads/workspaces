@@ -84,7 +84,7 @@ variable "docker_read_token" {
 }
 
 
-variable "gandi_personal_access_token" {
+variable "gandi_api_key" {
   type        = string
   description = "This is the Gandi API Key."
 }
@@ -537,18 +537,12 @@ locals {
 
   gandi_variables = [
     {
-      key         = "gandi_personal_access_token"
+      key         = "gandi_api_key"
       category    = "terraform"
-      value       = var.gandi_personal_access_token
+      value       = var.gandi_api_key
       description = "Gandi API Key."
       sensitive   = true
-      }, {
-      key         = "gandi_sharing_id"
-      category    = "terraform"
-      value       = var.gandi_sharing_id
-      description = "Gandi Sharing ID."
-      sensitive   = true
-    },
+      }
   ]
 
   gitguardian_variables = [

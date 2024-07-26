@@ -17,7 +17,7 @@ terraform {
     # see https://registry.terraform.io/providers/integrations/github/6.2.3
     github = {
       source  = "integrations/github"
-      version = ">= 6.2.3, < 6.0.0"
+      version = ">= 6.2.3, < 7.0.0"
     }
 
     # see https://registry.terraform.io/providers/hashicorp/tfe/0.57.0
