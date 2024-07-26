@@ -37,7 +37,7 @@ resource "tfe_workspace_settings" "community" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "dns" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = false
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "DNS Configuration for `${var.project_identifier}`."
   file_triggers_enabled         = true
@@ -74,7 +74,7 @@ resource "tfe_workspace_settings" "dns" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "networking" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = false
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Networking Configuration for `${var.project_identifier}`."
   file_triggers_enabled         = true
@@ -193,7 +193,7 @@ resource "tfe_workspace_settings" "repositories" {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_configuration" {
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
-  assessments_enabled           = false
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Services Configuration for `${var.project_identifier}`."
   file_triggers_enabled         = true
@@ -220,8 +220,8 @@ resource "tfe_workspace_settings" "services_configuration" {
 # may be imported like so: `terraform import tfe_workspace.services_deployment workloads/services-deployment`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "services_deployment" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "Services Deployment for `${var.project_identifier}`."
   file_triggers_enabled         = true
@@ -255,8 +255,8 @@ resource "tfe_workspace_settings" "services_deployment" {
 # may be imported like so: `terraform import tfe_workspace.users workloads/users`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "users" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   file_triggers_enabled         = true
   description                   = "User Directory Management for `${var.project_identifier}`."
@@ -290,8 +290,8 @@ resource "tfe_workspace_settings" "users" {
 # may be imported like so: `terraform import tfe_workspace.website workloads/website`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "website_deployment" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   file_triggers_enabled         = true
   description                   = "Website Deployment for `${var.project_identifier}`."
@@ -326,8 +326,8 @@ resource "tfe_workspace_settings" "website_deployment" {
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_assets" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   file_triggers_enabled         = true
   description                   = "Web Assets for `${var.project_identifier}`."
@@ -361,8 +361,8 @@ resource "tfe_workspace_settings" "web_assets" {
 # may be imported like so: `terraform import tfe_workspace.web_assets workloads/web_assets`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_assets_sync" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = false # disabled because of reasons
   auto_apply                    = var.tfe_workspace_auto_apply
   file_triggers_enabled         = true
   description                   = "Web Assets Syncing for `${var.project_identifier}`."
@@ -390,8 +390,8 @@ resource "tfe_workspace_settings" "web_assets_sync" {
 # may be imported like so: `terraform import tfe_workspace.web_redirects workloads/web_redirects`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "web_redirects" {
-  assessments_enabled           = false
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = true
   auto_apply                    = var.tfe_workspace_auto_apply
   file_triggers_enabled         = true
   description                   = "Short URLs for `${var.project_identifier}`."
@@ -425,8 +425,8 @@ resource "tfe_workspace_settings" "web_redirects" {
 # may be imported like so: `terraform import tfe_workspace.workspaces workloads/workspaces`
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/workspace
 resource "tfe_workspace" "workspaces" {
-  assessments_enabled           = false # explicitly disabled because of reasons
   allow_destroy_plan            = var.tfe_workspace_allow_destroy_plan
+  assessments_enabled           = false # explicitly disabled because of reasons
   auto_apply                    = var.tfe_workspace_auto_apply
   description                   = "HCP Terraform configuration for `${var.project_identifier}`."
   file_triggers_enabled         = false

@@ -50,6 +50,9 @@ module "aws_variables" {
 
     # needed for AWS Region configuration
     tfe_workspace.web_redirects.id,
+
+    # needed for AWS Region configuration
+    tfe_workspace.website_deployment.id,
   ]
 }
 
