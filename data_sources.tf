@@ -13,3 +13,9 @@ locals {
   # map outputs from `repositories` HCP Terraform Workspace for easier usage:
   repository_slugs = data.tfe_outputs.repositories.values.github_repository_slugs
 }
+
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/workspace
+data "tfe_workspace" "main" {
+  name         = "workspaces"
+  organization = "workloads"
+}
