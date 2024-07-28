@@ -53,6 +53,11 @@ resource "tfe_team" "viewers" {
   }
 }
 
+# see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_token
+resource "tfe_team_token" "viewers" {
+  team_id = tfe_team.viewers.id
+}
+
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_membership
 resource "tfe_organization_membership" "owners" {
   # see https://developer.hashicorp.com/terraform/language/meta-arguments/for_each

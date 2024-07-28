@@ -641,6 +641,17 @@ locals {
     },
   ]
 
+  # HCP Terraform-specific Configuration Variables for `viewer` users
+  hcp_terraform_viewer_variables = [
+    {
+      key         = "tfe_team_token_viewers"
+      category    = "terraform"
+      value       = tfe_team_token.viewers.token
+      description = "TFE Token for API operations."
+      sensitive   = true
+    },
+  ]
+
   # HCP-specific Configuration Variables for `viewer` users
   hcp_viewer_variables = [
     {

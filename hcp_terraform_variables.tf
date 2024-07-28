@@ -296,6 +296,19 @@ module "hcp_contributor_variables" {
   ]
 }
 
+module "hcp_terraform_viewer_variables" {
+  # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
+  source  = "ksatirli/variable-set/tfe"
+  version = "1.0.0"
+
+  description  = "HCP Terraform-specific Variables for `viewer` users."
+  global       = true
+  name         = "HCP Terraform Credentials (type: `viewer`)"
+  organization = tfe_organization.main.name
+
+  variables = local.hcp_terraform_viewer_variables
+}
+
 module "hcp_vault_aws_variables" {
   # see https://registry.terraform.io/modules/ksatirli/variable-set/tfe/latest
   source  = "ksatirli/variable-set/tfe"
