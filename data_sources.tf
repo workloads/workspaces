@@ -17,5 +17,5 @@ locals {
 # see https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/workspace
 data "tfe_workspace" "main" {
   name         = "workspaces"
-  organization = "workloads"
+  organization = var.tfe_organization_name
 }
