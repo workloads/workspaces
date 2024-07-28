@@ -70,6 +70,6 @@ resource "tfe_team_organization_member" "owners" {
     for membership in tfe_organization_membership.owners : membership.email => membership
   }
 
-  team_id = tfe_team.owners.id
+  team_id                    = tfe_team.owners.id
   organization_membership_id = each.value.id
 }
