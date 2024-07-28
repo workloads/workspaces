@@ -137,6 +137,8 @@ The `terraform` target requires a command such as `plan` or `apply` and optional
 | mondoo_space_id | Mondoo Space Identifier. | `string` | yes |
 | okta_api_token | Okta API Token. | `string` | yes |
 | okta_org_name | Okta Organization Name. | `string` | yes |
+| okta_social_login_github_client_id | Okta Social Login GitHub Client ID. | `string` | yes |
+| okta_social_login_github_client_secret | Okta Social Login GitHub Client Secret. | `string` | yes |
 | pagerduty_key_read | PagerDuty Read-Only Key. | `string` | yes |
 | pagerduty_key_readwrite | PagerDuty Read-Write Key. | `string` | yes |
 | pagerduty_subdomain | PagerDuty Subdomain | `string` | yes |

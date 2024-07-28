@@ -258,6 +258,18 @@ variable "okta_api_token" {
   sensitive   = true
 }
 
+variable "okta_social_login_github_client_id" {
+  type        = string
+  description = "Okta Social Login GitHub Client ID."
+  sensitive   = true
+}
+
+variable "okta_social_login_github_client_secret" {
+  type        = string
+  description = "Okta Social Login GitHub Client Secret."
+  sensitive   = true
+}
+
 variable "pagerduty_key_readwrite" {
   type        = string
   description = "PagerDuty Read-Write Key."
@@ -690,6 +702,18 @@ locals {
       category    = "terraform"
       value       = var.okta_api_token
       description = "Okta API Token."
+      sensitive   = true
+    }, {
+      key         = "okta_social_login_github_client_id"
+      category    = "terraform"
+      value       = var.okta_social_login_github_client_id
+      description = "Okta Social Login GitHub Client ID."
+      sensitive   = true
+    }, {
+      key         = "okta_social_login_github_client_secret"
+      category    = "terraform"
+      value       = var.okta_social_login_github_client_secret
+      description = "Okta Social Login GitHub Client Secret."
       sensitive   = true
     },
   ]
