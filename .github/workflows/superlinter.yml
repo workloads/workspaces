@@ -41,7 +41,7 @@ jobs:
 
       # see https://github.com/super-linter/super-linter/releases/tag/v7.4.0
       - name: Lint Code with Super-Linter
-        uses: "super-linter/super-linter@12150456a73e248bdc94d0794898f94e23127c88"  # ref: `tags/v7.4.0`
+        uses: "super-linter/super-linter@7bba2eeb89d01dc9bfd93c497477a57e72c83240"  # ref: `tags/v7.4.0`
         env:
           # see https://github.com/github/super-linter#environment-variables
           CSS_FILE_NAME: ".stylelintrc.json"
